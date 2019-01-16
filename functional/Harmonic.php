@@ -1,6 +1,6 @@
 <?php
 include('../Utility/utility.php');
-$n = readInt();
+$n = Utility::readInt();
 if(!$n==0){
     $res = 0;
     for($i=1;$i<=$n;$i++){

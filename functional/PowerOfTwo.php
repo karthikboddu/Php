@@ -1,6 +1,6 @@
 <?php
 include('../Utility/utility.php');
-$n = readInt();
+$n = Utility::readInt();
 echo "enter the n value "."\n";
 
 $pow = pow(2,$n);

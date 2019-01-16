@@ -1,6 +1,6 @@
 <?php
     include('../Utility/utility.php');
-    $str = readString();
+    $str = Utility::readString();
 
     $inputStr = "Hello <<UserName>>, How are you?";
     $str1 = substr($inputStr,6,12);

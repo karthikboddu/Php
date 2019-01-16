@@ -1,6 +1,6 @@
 <?php
 include('../Utility/utility.php');
-$range = readInt();
+$range = Utility::readInt();
 $couponNo = array();
 $totalDistinct = 0;
 for($i=0;$i<$range;$i++){
