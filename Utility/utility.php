@@ -60,6 +60,7 @@ static public function primeFactors($n){
 }
 
 static public function primeNumberUpto($n){
+    $prime = array();
     for($i=2;$i<$n;$i++){
         $flag = TRUE;
         for($j=2;$j<$i/2;$j++){

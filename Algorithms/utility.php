@@ -1,5 +1,6 @@
 <?php
 class Utility{
+    /**function to read string */
 static public function readString(){
     $var = readline("");
     while(is_numeric($var)){
@@ -7,8 +8,9 @@ static public function readString(){
         fscanf(STDIN,"%s",$var);
 
     }
-return $var;
+    return $var;
 }
+/**function to read integer */
 static public function readInt(){
     $i = readline("");
     // if(is_string($i)){
@@ -22,7 +24,7 @@ static public function readInt(){
     }
     return $i;
 }
-
+/**function to find prime factors of n */
 static public function primeFactors($n){
     echo "prime factors are : \n";
     for($num=2;$num<=$n;$num++){ // prime num start from 2
@@ -44,7 +46,7 @@ static public function primeFactors($n){
         }
     }
 }
-
+/**function to find prime number upto n */
 static public function primeNumberUpto($n){
     for($i=2;$i<$n;$i++){
         $flag = TRUE;
@@ -68,7 +70,7 @@ static public function primeNumberUpto($n){
         echo $primeno[$k];
     }
 }
-
+/**function to check anagram */
 static public function checkAnagram($str1,$str2){
     if(strlen($str1)==strlen($str2)){ //check length of two string are equal
         $str1Arr = str_split($str1);// split to array
@@ -92,36 +94,76 @@ static public function checkAnagram($str1,$str2){
     
     }
 }
+/**function to print prime number of size n */
 static public function primeNumberArr($n){
     $prime = 2;
     $primeArr =array();
+    $count = 0;
     while($prime<$n){
         $flag = TRUE;
-        $count = 0;
-        for($i=2;$i<=$prime/2;$i++){
-            if($prime%$i==0){
-                $flag = FALSE;
-                break;
-            }
-            if($flag==TRUE){
-                echo $prime;
-                $count++;
-            }
-            $prime++;
-        }
         
+        for($i=2;$i<=$prime/2;$i++)
+        if($prime%$i==0){
+            $flag = FALSE;
+            break;
+        }
+        if($flag==TRUE){
+            $primeArr[$count] = $prime;   
+            $count++;
+        }
+        $prime++;
     }
-    // for($k=0;$k<sizeof($primeArr);$k++){
-    //     echo $primeArr[$k]." ";
-    // }
-}
-
-// static public function printPrimeAnagram($prime){
     
-//     for($i=0;$i<)
-// }
 
-static public function binarySearch($arr,$key){
+    return $primeArr;
+}
+/**function to print prime anagram of prime array */
+static public function printPrimeAnagram($prime){
+    $primeAnagram = array();
+    $count = 0;
+    for($i=0;$i<sizeof($prime);$i++){
+        for($j=$i+1;$j<sizeof($prime);$j++){
+            if(Utility::isPrimeAnagram("$prime[$i]","$prime[$j]")==TRUE){
+                $primeAnagram[$count] = $prime[$i];
+                $count++;
+                $primeAnagram[$count++] = $prime[$j];
+            }
+        }
+    }
+echo "anagrm \n";
+    for($k=0;$k<sizeof($primeAnagram);$k++){
+        echo $primeAnagram[$k]."  ";
+    }
+}
+/**function to check two string are prime anagram in array */
+static public function isPrimeAnagram($str1,$str2){
+    $tempStr1 = str_split($str1);
+    $tempStr2 = str_split($str2);
+    asort($tempStr1);
+    asort($tempStr2);
+    if(sizeof($tempStr1) == sizeof($tempStr2)){
+        $anaStr1 = implode("",$tempStr1);
+        $anaStr2 = implode("",$tempStr2);
+        // echo $anaStr1;
+        // echo $anaStr2;
+        if($anaStr1 == $anaStr2){
+           return TRUE;
+        }
+    }else{
+        return FALSE;
+    }
+}
+/**function to find element in using binarysearch */
+static public function  binarySearch($n){
+    $start = Utility::startTime();
+    $arr = array();
+    echo "enter element \n";
+    for($i=0;$i<$n;$i++){
+        $arr[$i] = Utility::readInt();
+    }
+    asort($arr);
+    echo "enter element to search ";
+    $key = Utility::readInt();
     $beg = 0;/**intial size of array */
     $end = sizeof($arr)-1;/**length of array */
     
@@ -137,10 +179,26 @@ static public function binarySearch($arr,$key){
         }
        
     }
-    
+    if($beg>$end){
+        echo "element not found";
+    }
+    $stop = Utility::stopTime();
+    $elapsed = Utility::elapsedTime($start,$stop);
+    echo $elapsed." sec elasped\n";
+    return $elapsed;
 }
-
-static public function binarySearchString($arr,$key){
+/**function to find element in using binarysearch with string */
+static public function binarySearchString($n){
+    echo "binarysearch string \n";
+    $start = Utility::startTime();
+    $arr = array();
+    echo "enter element in string\n";
+    for($i=0;$i<$n;$i++){
+        $arr[$i] = Utility::readString();
+    }
+    asort($arr);
+    echo "enter element to search ";
+    $key = Utility::readString();
     $beg = 0 ;
     $end = sizeof($arr)-1;
     while($beg<=$end){
@@ -155,13 +213,24 @@ static public function binarySearchString($arr,$key){
         }
     }
     if($beg>$end){
-        echo "element not present";
+        echo "element not found";
     } 
+
+    $stop = Utility::stopTime();
+    $elapsed = Utility::elapsedTime($start,$stop);
+    echo $elapsed." sec elasped\n";
+    return $elapsed;
 }
-
-static public function insertionSort($arr){
+/**function to sort integers using insertion sort */
+static public function insertionSort($n){
+    echo "insrtion sort \n";
+    $start = Utility::startTime();
+    $arr = array();
+    echo "enter element \n";
+    for($i=0;$i<$n;$i++){
+        $arr[$i] = Utility::readInt();
+    }
     $len = sizeof($arr);
-
     for($i=1;$i<$len;$i++){
         $key = $arr[$i];
         $j = $i-1;
@@ -175,9 +244,21 @@ static public function insertionSort($arr){
     for($i=0;$i<$len;$i++){
         echo $arr[$i]." ";
     }
-
+    $stop = Utility::stopTime();
+    $elapsed = Utility::elapsedTime($start,$stop);
+    echo $elapsed." sec elasped\n";
+    return $elapsed;
 }
-static public function insertionSortString($arr){
+/**function to sort integers using insertion sort for strings */
+static public function insertionSortString($n){
+    echo "insrtion sort string \n";
+    $start = Utility::startTime();
+    $arr = array();
+    echo "enter element in string\n";
+    for($i=0;$i<$n;$i++){
+        $arr[$i] = Utility::readString();
+    }
+  
     $len = sizeof($arr);
     for($i=1;$i<$len;$i++){
         $key = $arr[$i];
@@ -196,9 +277,20 @@ static public function insertionSortString($arr){
     for($i=0;$i<$len;$i++){
         echo $arr[$i]." ";
     }
+    $stop = Utility::stopTime();
+    $elapsed = Utility::elapsedTime($start,$stop);
+    echo $elapsed." sec elasped\n";
+    return $elapsed;
 }
-
-static public function bubbleSort($arr){
+/**function to sort using bubblesort */
+static public function bubbleSort($n){
+    echo "bubble sort \n";
+    $start = Utility::startTime();
+    $arr = array();
+    echo "enter element \n";
+    for($i=0;$i<$n;$i++){
+        $arr[$i] = Utility::readInt();
+    }
     $len = sizeof($arr);
     for($i=0;$i<$len;$i++){
         for($j=$i+1;$j<$len;$j++){
@@ -213,12 +305,21 @@ static public function bubbleSort($arr){
     for($i=0;$i<$len;$i++){
         echo $arr[$i]." ";
     }
-
+    $stop = Utility::stopTime();
+    $elapsed = Utility::elapsedTime($start,$stop);
+    echo $elapsed." sec elasped\n";
+    return $elapsed;
 }
-
-static public function bubbleSortString($arr){
+/**function to sort using bubblesort for strings */
+static public function bubbleSortString($n){
+    echo "bubble sort string\n";
+    $start = Utility::startTime();
+    $arr = array();
+    echo "enter element in string\n";
+    for($i=0;$i<$n;$i++){
+        $arr[$i] = Utility::readString();
+    }
     $len = sizeof($arr);
-
     for($i=0;$i<$len;$i++){
         for($j=$i+1;$j<$len;$j++){
             if(strcmp($arr[$i],$arr[$j])>0){
@@ -231,7 +332,106 @@ static public function bubbleSortString($arr){
     for($i=0;$i<$len;$i++){
         echo $arr[$i]." ";
     }
+    $stop = Utility::stopTime();
+    $elapsed = Utility::elapsedTime($start,$stop);
+    echo $elapsed." sec elasped\n";
+    return $elapsed;
+}
 
+public static function startTime(){
+    return $start = time();
+}
+public static function stopTime(){
+    return $stop = time();
+}
+public static function elapsedTime($start,$stop){
+    return $elapsed = $stop - $start;
+}
+
+public static function binarySearchFile($arr){
+   
+    asort($arr);
+    echo "enter element to search ";
+    $key = Utility::readString();
+    $beg = 0 ;
+    $end = sizeof($arr)-1;
+    while($beg<=$end){
+        $mid = round(($beg+$end)/2);
+        if(strcmp($arr[$mid],$key)==0){
+            echo "found at ".$mid;
+            break;
+        }else if(strcmp($arr[$mid],$key)<0){
+            $end = $mid-1;
+        }else if(strcmp($arr[$mid],$key)>0){
+            $beg = $mid+1;
+        }
+    }
+    if($beg>$end){
+        echo "element not found";
+    } 
+}
+
+public static function insertionSortFile($arr){
+    for($i=1;$i<sizeof($arr);$i++){
+        $key = $arr[$i];
+        $j =$i-1;
+        while($j>=0){
+            if(strcmp($arr[$j],$key)>0){
+                break;
+            }
+            $arr[$j+1] = $arr[$j];
+            $j--;
+        }
+        $arr[$j+1] = $key;
+    }
+    echo "after sorting \n";
+    for($i=0;$i<sizeof($arr);$i++){
+        echo $arr[$i]." ";
+    }
+}
+
+public static function bubbleSortFile($arr){
+    for($i=0;$i<sizeof($arr);$i++){
+        for($j=$i+1;$j<sizeof($arr);$j++){
+            if($arr[$i]>$arr[$j]){
+                $temp = $arr[$i];
+                $arr[$i] = $arr[$j];
+                $arr[$j] = $temp;
+            }
+        }
+    }
+    echo "after sorting \n";
+    for($k=0;$k<sizeof($arr);$k++){
+        echo $arr[$k]." ";
+    }
+}
+
+public static function vendingMachine($arr,$amount){
+    $tempamount = $amount;
+    $flag = FALSE;
+    for($i=0;$i<sizeof($arr);$i++){
+        while(($tempamount/$arr[$i])>0){
+            $notes = $amount/$arr[$i];
+            $tempamount = $amount%$arr[$i];
+            echo $notes."hbv";
+            $flag =TRUE;
+            break;
+        }
+      
+
+    }
+    if(flag){
+        Utility::vendingMachine($arr,$tempamount);
+    }
+}
+/**function to calculate day for year and date */
+public static function calculateDay($date,$yr,$m){
+    $year =abs( $yr -(14-$m)/12);
+    $x = abs( $year +($year/4)-($year/100)+($year/400));
+    $month = abs( $m +12*((14-$m)/12)-2);
+    $d0 = abs(($date+$x+(31*$month)/12)%7);
+
+    return $d0;
 }
 
 

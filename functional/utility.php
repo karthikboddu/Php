@@ -37,7 +37,7 @@ static public function checkLeapYear($yr){
     return $flag;
 }
 
-static public function primeFactors($n){
+static public function primeFactor($n){
     echo "prime factors are : \n";
     for($num=2;$num<=$n;$num++){ // prime num start from 2
         $flag = TRUE;
@@ -48,9 +48,7 @@ static public function primeFactors($n){
             }
         }
         if($flag==TRUE){
-            echo $num."prime \n";
             while($n%$num==0){
-                
                 echo $num." \n"; // prime numbers divided by inputs
                 $n=$n/$num; 
             }
