@@ -59,15 +59,15 @@ static public function primeNumberUpto($n){
             }
         }
  
-            if($flag==TRUE){
-               array_push($primeno,$i);
+            if($flag==TRUE){  //prime numbers 
+               array_push($primeno,$i); //storing in a array
                 // echo $i;
 
         }
     }
-
-    for($k=0;$k<sizeof($primeno);$k++){
-        echo $primeno[$k];
+    echo "\n prime upto ".$n ."are\n";
+    for($k=0;$k<sizeof($primeno);$k++){ //printing the prime array
+        echo $primeno[$k]; 
     }
 }
 /**function to check anagram */
@@ -119,19 +119,19 @@ static public function primeNumberArr($n){
 }
 /**function to print prime anagram of prime array */
 static public function printPrimeAnagram($prime){
-    $primeAnagram = array();
+    $primeAnagram = array(); // intit array
     $count = 0;
     for($i=0;$i<sizeof($prime);$i++){
         for($j=$i+1;$j<sizeof($prime);$j++){
-            if(Utility::isPrimeAnagram("$prime[$i]","$prime[$j]")==TRUE){
-                $primeAnagram[$count] = $prime[$i];
+            if(Utility::isPrimeAnagram("$prime[$i]","$prime[$j]")==TRUE){ //check two index are anagram
+                $primeAnagram[$count] = $prime[$i]; // if true then add to array
                 $count++;
                 $primeAnagram[$count++] = $prime[$j];
             }
         }
     }
-echo "anagrm \n";
-    for($k=0;$k<sizeof($primeAnagram);$k++){
+echo "\n prime anagram number are \n";
+    for($k=0;$k<sizeof($primeAnagram);$k++){ //printing the anagram array
         echo $primeAnagram[$k]."  ";
     }
 }
@@ -153,6 +153,31 @@ static public function isPrimeAnagram($str1,$str2){
         return FALSE;
     }
 }
+/**function check whether prime numbers are palindrome */
+public static function printPrimePalindrome($arr){
+    $palindrome =array();
+    $count = 0;
+    for($i=0;$i<sizeof($arr);$i++){
+        if(Utility::isPalindrome("$arr[$i]")){
+            $palindrome[$count] = $arr[$i];
+            $count++;
+        }
+    }
+    echo "\n prime palindrome number are \n";
+    for($k=0;$k<sizeof($palindrome);$k++){
+        echo $palindrome[$k]." ";
+        }
+}
+
+public static function isPalindrome($arr1){
+    $arr2 = strrev($arr1);
+    if($arr1==$arr2){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
 /**function to find element in using binarysearch */
 static public function  binarySearch($n){
     $start = Utility::startTime();
@@ -426,14 +451,31 @@ public static function vendingMachine($arr,$amount){
 }
 /**function to calculate day for year and date */
 public static function calculateDay($date,$yr,$m){
-    $year =abs( $yr -(14-$m)/12);
-    $x = abs( $year +($year/4)-($year/100)+($year/400));
-    $month = abs( $m +12*((14-$m)/12)-2);
-    $d0 = abs(($date+$x+(31*$month)/12)%7);
+    $year =floor( $yr -(14-$m)/12);
+    $x = floor($year +($year/4)-($year/100)+($year/400));
+    $month =  $m + 12*((14-$m)/12)-2;
+    $d0 = floor(($date+$x+(31*$month)/12)%7);
 
     return $d0;
 }
 
+/**function to convert number to binary */
+public static function toBinary(){
+    $str=array();
+    $i=0;
+    $num = 21;      
+    while($num>0){
+        $rem = $num%2;
+        array_push($str,$i);
+        $num = round($num/2);
+        echo $num;
+        $i++;
+    }
+    // echo sizeof($str);
+    // for($i=0;$i<sizeof($str);$i++){
+    //     echo $str[$i]." ";
+    // }
+}
 
 
 }

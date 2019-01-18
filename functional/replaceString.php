@@ -1,12 +1,15 @@
 <?php
-    include('../Utility/utility.php');
+/**
+     * Program to replace string with the given string
+     * To replace
+     * @author karthik
+     * @version 1.0   
+     * @since 16-01-2019
+ */
+    include('utility.php');
+    echo "enter the string \n";
     $str = Utility::readString();
-
-    $inputStr = "Hello <<UserName>>, How are you?";
-    $str1 = substr($inputStr,6,12);
-    $str2 = str_replace($str1,$str,$inputStr);
-    echo $str2;
-    
+    Utility::stringReplace($str);
     // $str1 = str_replace("<<","",$inputStr);
     // $str2 = str_replace(">>","",$str1);
     // $str3 = str_replace("UserName","karthik",$str2);

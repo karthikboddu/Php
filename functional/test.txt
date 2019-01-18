@@ -1,0 +1,100 @@
+/To get Strings
+public static function getString(){
+fscanf(STDIN,"%s\n",$val);
+while(!is_string($val)){
+echo "Invalid input Try again: ";
+fscanf(STDIN,"%s\n",$val);
+}
+return $val;
+} 
+//To get Strings array
+public static function getArrayString(){
+return trim(fgets(STDIN));
+} 
+
+public static function getBoolean(){
+fscanf(STDIN,"%s\n",$val);
+while($val!=='t' && $val!=='f'){
+echo "ivalid input try again\n";
+fscanf(STDIN," %s\n ",$val);
+}
+return $val;
+}
+
+// To get double value
+public static function getDouble(){
+fscanf(STDIN,"%f\n",$val);
+while(!is_float($val)){
+echo "ivalid input try again\n";
+fscanf(STDIN," %f\n ",$val);
+}
+return $val;
+}
+
+
+
+//To get Float Value
+public static function getFloat(){
+fscanf(STDIN,"%f\n",$val);
+while(!is_float($val)){
+echo "ivalid input try again\n";
+fscanf(STDIN," %f\n ",$val);
+}
+return $val;
+}
+
+//To take integer
+public static function getInt(){
+fscanf(STDIN,"%s\n",$val);
+if($val==0){
+while( !is_numeric($val)){
+echo "ivalid input try again\n";
+fscanf(STDIN," %s\n ",$val);
+}
+return $val;
+}
+else{
+while( !is_numeric($val) || $val/(int)$val>1){
+echo "ivalid input try again\n";
+fscanf(STDIN," %s\n ",$val);
+}
+return (int)$val;
+}
+}
+
+function gamble(){
+        echo "stack should be less than goal\n";
+        echo "Enter stack ";
+        $stack = Utility::getInt();
+        echo "enter goal ";
+        $goal = Utility::getInt();
+        if($stack>$goal){
+            echo "Stack is greater than goal\n";
+            die(); 
+        }
+        echo "enter times to play ";
+        $times = Utility::getInt();
+        $bets = 0 ;
+        $wins = 0 ;
+        //loop to gamble no of time given by user
+        for($i = 0 ; $i < $times ; $i++){
+            $cash = $stack ;
+            //lopp till player got broke or win
+            while($cash>0&&$cash<$goal){
+                $bets++;
+                if(rand(0,1)==0){
+                    $cash++;
+                }
+                else{
+                    $cash--;
+                }
+                if($cash==$goal){
+                    $wins++;
+                }
+            }
+        }
+        // display results of gamble
+        echo $wins." wins out of ".$times;
+        echo "\ntotal bets : ".$bets."\n" ;
+        echo "wins % is ".($wins/$times * 100)."%\n";
+    }

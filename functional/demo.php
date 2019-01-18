@@ -1,5 +1,8 @@
 <?php
-include('../Utility/utility.php');
-$int =readInt();
-echo "$int  ";
+
+echo "hello  ";
+$alpha ="a";
+for($i=0;$i<5;$i++){
+    echo $alpha++;
+}
 ?>

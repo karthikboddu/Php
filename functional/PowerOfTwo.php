@@ -1,11 +1,14 @@
 <?php
-include('../Utility/utility.php');
-$n = Utility::readInt();
-echo "enter the n value "."\n";
+/**
+     * This program takes a input N and prints a table of the powers of 2 that are less than or equal to 2^N.
+     * prints a table of the powers of 2s
+     * @author karthik
+     * @version 1.0   
+     * @since 16-01-2019
+ */
 
-$pow = pow(2,$n);
-$res = 0;
-for($i=0;$i<=$n;$i++){
-    echo pow(2,$i)."\n";
-}
+    include('utility.php');
+    echo "enter the n value "."\n";
+    $n = Utility::readInt();
+    Utility::powerOfTwo($n);
 ?>

@@ -1,24 +1,17 @@
 <?php
-include('../Utility/utility.php');
-
-echo "enter number of time to flip";
-$tails = 0;
-$heads = 0;
-$flipNo = Utility::readInt();
-
-for($i=0;$i<$flipNo;$i++)
-{
-    $random = rand(0,1);
-    if($random<0.5){
-    
-        $tails++;
+/**
+     * program to take number of time to flip coin and print percentage of heads and tails 
+     * To print percentages of heads and tails
+     * @author karthik
+     * @version 1.0   
+     * @since 16-01-2019
+ */
+    include('utility.php');
+    echo "enter number of time to flip \n";
+    $flipNo = Utility::readInt();
+    if($flipNo<1){
+        echo "flip times must be greater than zero";
     }else{
-        $heads++;
-}
-echo "random no ".$random.PHP_EOL;
-}
-$tailPercent = ($tails/$flipNo)*100;
-$headsPercent = 100-$tailPercent;
-print "tails percentage".$tailPercent.PHP_EOL;
-print "heads percentage".$headsPercent.PHP_EOL;
+        Utility::coinFlip($flipNo);
+    }
 ?>

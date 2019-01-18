@@ -1,4 +1,12 @@
 <?php
+/**
+     * Reads in integers prints them in sorted order using Bubble Sort
+     * Purpose: Print sorted list from the file using bubble sort
+     * 
+     * @author karthik
+     * @version 1.0   
+     * @since 17-01-2019
+ */ 
     require('utility.php');
     $path = "wordsInt.txt";/**path of file */
     $file = fopen($path,"r") or die("file not found");//**reading from file */

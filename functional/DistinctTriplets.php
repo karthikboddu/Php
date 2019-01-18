@@ -1,23 +1,14 @@
 <?php
-include('../Utility/utility.php');
-echo "enter the number of elements ";
-$n = Utility::readInt();//read int
-$arr = array();//create array
+/**
+     * Read in N integers and counts the number of triples that sum to exactly 0
+     * purpose : Sum of three Integer adds to ZERO
+     * @author karthik
+     * @version 1.0   
+     * @since 16-01-2019
+ */
+    include('utility.php');
+    echo "enter the number of elements ";
+    $n = Utility::readInt();//read int
 
-for($i=0;$i<$n;$i++){
-    $arr[$i] = Utility::readInt();//assign values
-}
-$noOfTriplets = 0;
-for($i=0;$i<sizeof($arr);$i++){
-    for($j=$i+1;$j<sizeof($arr);$j++){
-        for($k=$j+1;$j<sizeof($arr);$k++){
-            if(($arr[$i]+$arr[$j]+$arr[$k])==0){
-                echo $arr[$i]." ",$arr[$j]." ".$arr[$k];
-                $noOfTriplets++;
-            }
-        }
-    }
-}
-echo "Number of triplets : ".$noOfTriplets;
 
 ?>
