@@ -7,11 +7,8 @@
  * @since 15-01-2019
  */
 include 'utility.php';
-echo "enter number of time to flip \n";
-$flipNo = Utility::readInt();
-if ($flipNo < 1) {
-    echo "flip times must be greater than zero";
-} else {
-    Utility::coinFlip($flipNo);
-}
+echo "enter the choice 1:celcuis to farenheit 2:Fahrenheit to Celsius \n";
+$c = Utility::readInt();
+Utility::tempConverstation($c);
+
 ?>

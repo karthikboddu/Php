@@ -8,7 +8,7 @@
  */ 
 
     include('utility.php');
-    $path = "wordsInt.txt";
+    $path = "wordsString.txt";
     $file = fopen($path,"r") or die("file not found");
     // echo fgets($file);
     $fileString = fgets($file);

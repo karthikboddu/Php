@@ -98,3 +98,12 @@ function gamble(){
         echo "\ntotal bets : ".$bets."\n" ;
         echo "wins % is ".($wins/$times * 100)."%\n";
     }
+
+        static function sqrt($c){
+        $t = $c ;
+        $epsilon = 1e-15 ;
+        while(abs($t-($c/$t))>$epsilon*$t){
+            $t = ($c/$t + $t)/2 ;
+        }
+        return $t ;
+    }

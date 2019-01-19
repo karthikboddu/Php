@@ -7,9 +7,16 @@
      * @since 16-01-2019
      */
     include('utility.php'); 
+    
     $arr = array('1000','500','100','50','10','5','2','1');
-    echo "enter the amount";
+    echo "enter the amount\n";
+   
     $amount = Utility::readInt();
-    Utility::vendingMachine($arr,$amount);
-
+    while($amount<1){
+        echo "enter amount greater than zero \n";
+        $amount = Utility::readInt();
+    }
+   Utility::vendingMachine($arr,$amount);
+   
+   
 ?>
