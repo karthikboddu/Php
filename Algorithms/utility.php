@@ -113,7 +113,7 @@ return trim(fgets(STDIN));
 /**function to check anagram */
     public static function checkAnagram($str1, $str2)
     {
-        if (strlen($str1) == strlen($str2)) { //check length of two string are equal
+        if (count($str1) == count($str2)) { //check length of two string are equal
             $str1Arr = str_split($str1); // split to array
             $str2Arr = str_split($str2); //split to array
             asort($str1Arr); //sort array by values
@@ -261,7 +261,9 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        echo ($elapsed/1000) . " sec elasped\n";
+        $sec = $elapsed/1000;
+        $min = $sec/60;
+        echo ($sec) . " sec elasped".$min."minutes\n";
         return $elapsed;
     }
 /**function to find element in using binarysearch with string */
@@ -297,7 +299,9 @@ return trim(fgets(STDIN));
 
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        echo ($elapsed/1000) . " sec elasped\n";
+        $sec = $elapsed/1000;
+        $min = $sec/60;
+        echo ($sec) . " sec elasped".$min."minutes\n";
         return $elapsed;
     }
 /**function to sort integers using insertion sort */
@@ -327,7 +331,9 @@ return trim(fgets(STDIN));
         echo "\n";
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        echo ($elapsed/1000). " sec elasped\n";
+        $sec = $elapsed/1000;
+        $min = $sec/60;
+        echo ($sec) . " sec elasped".$min."minutes\n";
         return $elapsed;
     }
 /**function to sort integers using insertion sort for strings */
@@ -361,7 +367,9 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        echo ($elapsed/1000) . " sec elasped\n";
+        $sec = $elapsed/1000;
+        $min = $sec/60;
+        echo ($sec) . " sec elasped".$min."minutes\n";
         return $elapsed;
     }
 /**function to sort using bubblesort */
@@ -390,7 +398,9 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        echo ($elapsed/1000) . " sec elasped\n";
+        $sec = $elapsed/1000;
+        $min = $sec/60;
+        echo ($sec) . " sec elasped".$min."minutes\n";
         return $elapsed;
     }
 /**function to sort using bubblesort for strings */
@@ -418,20 +428,20 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        echo ($elapsed/1000) . " sec elasped\n";
+        $sec = $elapsed/1000;
+        $min = $sec/60;
+        echo ($sec) . " sec elasped".$min."minutes\n";
         return $elapsed;
     }
 
     public static function startTime()
     {
-        $start = round(microtime(true) * 1000);
-        echo $start . "\n";
+        $start = round(microtime(true) * 1000);   
         return $start;
     }
     public static function stopTime()
     {
         $stop = round(microtime(true) * 1000);
-        echo $stop . "\n";
         return $stop;
     }
     public static function elapsedTime($start, $stop)
@@ -573,7 +583,7 @@ return trim(fgets(STDIN));
   /**binary nibbles */  
 public static function binaryNibbles($binaryArr){
     $strBinary = implode("",$binaryArr);
-        $len = 8 - strlen($strBinary) ;
+        $len = 8 - count($strBinary) ;
         for($i=0;$i<$len;$i++){
             $strBinary = "0".$strBinary;
         }
@@ -620,6 +630,41 @@ public static function paymentMonthly($p,$y,$R){
     $n = 12*$y;
     $payment = ($p*$r)/(1-pow(1+$r,-$n));
     echo "monthly payment :". $payment."\n";
+}
+/**program to perform mergersort on strings */
+public static function mergeSort($input){
+
+  
+    $len = count($input);
+    if(count($input) == 1 ) return $input;
+	$mid = floor(count($input) / 2);
+    $left = array_slice($input, 0, $mid);
+    $right = array_slice($input, $mid,$len-1);
+	$left = Utility::mergeSort($left);
+	$right = Utility::mergeSort($right);
+	return Utility::merge($left, $right);
+}
+/**to perform merge operation */
+public static function merge($left,$right){
+    $res = array();
+	while (count($left) > 0 && count($right) > 0){
+		if($left[0] > $right[0]){
+			$res[] = $right[0];
+			$right = array_slice($right , 1);
+		}else{
+			$res[] = $left[0];
+			$left = array_slice($left, 1);
+		}
+	}
+	while (count($left) > 0){
+		$res[] = $left[0];
+		$left = array_slice($left, 1);
+	}
+	while (count($right) > 0){
+		$res[] = $right[0];
+		$right = array_slice($right, 1);
+	}
+	return $res;
 }
 
 

@@ -401,14 +401,19 @@ class Utility
     }
 
  /**string permutation */
-public static function stringPermutation($str){
+ public static function stringPermutation($str){
     echo "permution words are \n";
-    Utility::permuation("",$str);  
+    $str1=trim($str);
+    if(!empty($str)){
+        Utility::permuation("",$str1);  
+    }else{
+        echo "enter alteast one character \n";
+    }
 }
 
 public static function permuation($perm,$word){
     if(empty($word)){
-        echo $perm.$word."\n";
+        echo $perm.$word."\n"; /** */
     }else{
         for($i=0;$i<strlen($word);$i++){
             Utility::permuation($perm.$word{$i},substr($word,0,$i).substr($word,$i+1,strlen($word)));
@@ -422,12 +427,12 @@ public static function findNumber($number){
     while($start<=$end){
         $mid =( $start + $end )/2;
         echo "your number is ".$mid."  yes or no \n";
-        $str = true;
+        $str = "yes";
         $ans = Utility::readString();
-        if($ans == $str{1}){
+        if($ans{0} == $str{0}){
             return $mid;
         }else{
-            $end = $mid +1;
+            echo "number present between".$start."and".$mid."\n";
         }
     }
 }
