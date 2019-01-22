@@ -61,7 +61,10 @@ public static function readFloat()
 /**To get Strings array */
 public static function getStringArray(){
 return trim(fgets(STDIN));
-}     
+}
+
+
+
 
 }
 

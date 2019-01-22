@@ -1,4 +1,11 @@
-<?php 
+<?php
+/**
+     * Create Utility Class having following static methods binary search and string,inserion sort with string,bubble sort and string
+     * Purpose: Print sorted list from the file 
+     * @author karthik
+     * @version 1.0   
+     * @since 17-01-2019
+ */ 
     include('utility.php');
     echo "enter the size of array";
     $n = Utility::readInt();

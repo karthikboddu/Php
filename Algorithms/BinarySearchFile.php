@@ -1,10 +1,11 @@
 <?php
 /**
-     * Create Utility Class having bubblesort int string ,binary search int string,insertion int string  
-     * Purpose: Print elapsed time for each sort and search techniques 
+     * Read in a list of words from File. Then prompt the user to enter a word to
+     *  search the list. The program reports if the search word is found in the list.  
+     * Purpose: Print the result if the word is found or not
      * @author karthik
      * @version 1.0   
-     * @since 17-01-2019
+     * @since 18-01-2019
  */ 
 
     include('utility.php');

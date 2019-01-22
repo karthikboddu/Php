@@ -2,7 +2,6 @@
 /**
      * Reads in integers prints them in sorted order using Bubble Sort
      * Purpose: Print sorted list from the file using bubble sort
-     * 
      * @author karthik
      * @version 1.0   
      * @since 17-01-2019
