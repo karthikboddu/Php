@@ -179,10 +179,17 @@ class Utility
             echo "Nth harmonic value \n";
             for ($i = 1; $i <= $num; $i++) {/** nth harmonic upto guven input */
                 $res = $res + 1 / $i;
-                echo 1 / $i . "+";
+                echo "1"."/" .$i;
+
+                if($i>=$num){
+                    echo "";
+                }else{
+                    echo "+";
+                }
+                
             }
             echo " = ";
-            echo $res;
+            echo $res."\n";
         } else {
             echo "enter n value > 0";
         }
@@ -257,7 +264,7 @@ class Utility
         }
         for ($i = 0; $i < $rows; $i++) { /**print the array */
             for ($j = 0; $j < $cols; $j++) {
-                print $twoDArr[$i][$j] . " ";
+                print $twoDArr[$i][$j] . "    ";
             }
             echo "\n";
         }
@@ -421,20 +428,6 @@ public static function permuation($perm,$word){
     }
 }
 
-public static function findNumber($number){
-    $start = 0;
-    $end = $number-1;
-    while($start<=$end){
-        $mid =( $start + $end )/2;
-        echo "your number is ".$mid."  yes or no \n";
-        $str = "yes";
-        $ans = Utility::readString();
-        if($ans{0} == $str{0}){
-            return $mid;
-        }else{
-            echo "number present between".$start."and".$mid."\n";
-        }
-    }
-}
+
 
 }

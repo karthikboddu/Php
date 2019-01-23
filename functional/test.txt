@@ -1,109 +1,72 @@
-/To get Strings
-public static function getString(){
-fscanf(STDIN,"%s\n",$val);
-while(!is_string($val)){
-echo "Invalid input Try again: ";
-fscanf(STDIN,"%s\n",$val);
-}
-return $val;
-} 
-//To get Strings array
-public static function getArrayString(){
-return trim(fgets(STDIN));
-} 
 
-public static function getBoolean(){
-fscanf(STDIN,"%s\n",$val);
-while($val!=='t' && $val!=='f'){
-echo "ivalid input try again\n";
-fscanf(STDIN," %s\n ",$val);
-}
-return $val;
-}
+{
 
-// To get double value
-public static function getDouble(){
-fscanf(STDIN,"%f\n",$val);
-while(!is_float($val)){
-echo "ivalid input try again\n";
-fscanf(STDIN," %f\n ",$val);
-}
-return $val;
-}
+/**
+  *@param args : it takes string array as arguments 
+ **/
+	
+	public static void main(String[] args) 
+	
+	{
+		//creating main object for Queue using linkedlist class  
+		QueueUsingLinkedList<QueueUsingLinkedList<Integer>> queue = new QueueUsingLinkedList<QueueUsingLinkedList<Integer>>();
+		//creating sub  object for Queue using linkedlist class to store week days  
+		QueueUsingLinkedList<Integer> qll = new QueueUsingLinkedList<Integer>();
+		System.out.println("enter month");
+		// calling method to take month from user
+		final int MONTH = Utility.scanInt();
+		System.out.println("enter year");
+		// calling method to take year from user
+		final int YEAR = Utility.scanInt();
+		//validating year and month 
+		if ((MONTH<=12&&MONTH>=1)&&(YEAR>=1000&&YEAR<=9999))
+		{
+			//calling getday method to find the starting day of month
+			final int START_DAY = Utility.getDay(MONTH, YEAR);
+			// storing number of days containing in each month
+			final int MONTH_ARR[] = {31,28,30,31,30,31,31,31,30,31,30,31};
+			System.out.println("sun"+"\t"+"mon"+"\t"+"tue"+"\t"+"wed"+"\t"+"thus"+"\t"+"fri"+"\t"+"sat");
+			// condition for checking year is a leap year are not
+			if(YEAR%4==0 && YEAR%100!= 0 || YEAR%400==0)
+				
+			{
+				MONTH_ARR[1]=29;
+			}
+			/*this for is to store days to sub queues and storing sub queues in main queue*/
+			for (int i = 1; i <= MONTH_ARR[MONTH-1]; i++) 
+			{
+				qll.insert(i);//calling insert method to insert elements in to object
+				//condition to create new sub queue
+				if (((i + START_DAY) % 7 == 0 || i==MONTH_ARR[MONTH-1]) ) 
+				{
+					queue.insert(qll);// inserting subqueue to main queue 
+					qll=new QueueUsingLinkedList<Integer>(); // creating new sub queue
+				
+               }
+			
+			}
+			/*for to print space where there is no day falls*/
+			for (int i=0;i<START_DAY;i++)
+			{
+				System.out.print("\t");
+			}
+			/*for loop to print all subqueues in main queue*/
+			for (int i=0;i<queue.size;i++)
+			{
+				//removing top queue from main queue and coping it to variable
+				QueueUsingLinkedList<Integer> week= queue.remove();
+				//for loop to print ekements in sub queue
+				for (int j=0;j<week.size;j++)
+				{
+					//printing sub object elements
+					System.out.print(week.remove()+"\t");
+				}
+				System.out.println();
+			}
+		}
+		else
+		{
+			System.err.println("please enter valid date and month");
+		}
+	}
 
-
-
-//To get Float Value
-public static function getFloat(){
-fscanf(STDIN,"%f\n",$val);
-while(!is_float($val)){
-echo "ivalid input try again\n";
-fscanf(STDIN," %f\n ",$val);
-}
-return $val;
-}
-
-//To take integer
-public static function getInt(){
-fscanf(STDIN,"%s\n",$val);
-if($val==0){
-while( !is_numeric($val)){
-echo "ivalid input try again\n";
-fscanf(STDIN," %s\n ",$val);
-}
-return $val;
-}
-else{
-while( !is_numeric($val) || $val/(int)$val>1){
-echo "ivalid input try again\n";
-fscanf(STDIN," %s\n ",$val);
-}
-return (int)$val;
-}
-}
-
-function gamble(){
-        echo "stack should be less than goal\n";
-        echo "Enter stack ";
-        $stack = Utility::getInt();
-        echo "enter goal ";
-        $goal = Utility::getInt();
-        if($stack>$goal){
-            echo "Stack is greater than goal\n";
-            die(); 
-        }
-        echo "enter times to play ";
-        $times = Utility::getInt();
-        $bets = 0 ;
-        $wins = 0 ;
-        //loop to gamble no of time given by user
-        for($i = 0 ; $i < $times ; $i++){
-            $cash = $stack ;
-            //lopp till player got broke or win
-            while($cash>0&&$cash<$goal){
-                $bets++;
-                if(rand(0,1)==0){
-                    $cash++;
-                }
-                else{
-                    $cash--;
-                }
-                if($cash==$goal){
-                    $wins++;
-                }
-            }
-        }
-        // display results of gamble
-        echo $wins." wins out of ".$times;
-        echo "\ntotal bets : ".$bets."\n" ;
-        echo "wins % is ".($wins/$times * 100)."%\n";
-    }
-
-        static function sqrt($c){
-        $t = $c ;
-        $epsilon = 1e-15 ;
-        while(abs($t-($c/$t))>$epsilon*$t){
-            $t = ($c/$t + $t)/2 ;
-        }
-        return $t ;
-    }

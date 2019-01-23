@@ -45,6 +45,9 @@ class Queue{
     }
     public function display(){
         $temp = $this->front;
+        if($temp == null){
+            echo "underflow\n";
+        }
         while($temp!=null){
             echo $temp->data ." ";
             $temp = $temp->next;
@@ -61,17 +64,26 @@ class Queue{
         return $str;
     }
 }
-// $queue = new Queue;
-// $queue->enqueue("karthik");
-// $queue->enqueue(20);
-// $queue->enqueue(30);
-// $queue->enqueue(40);
+$queue = new Queue;
+$queue->enqueue("karthik");
+$queue->enqueue(20);
+$queue->enqueue(30);
+$queue->enqueue(40);
 
-// $queue->display();
-// echo "\n";
-// echo $queue->dequeue();
-// $queue->display();
-// echo $queue->size();
-// echo "data \n";
-// echo $queue->getData();
+$queue->display();
+echo "\n";
+echo $queue->dequeue();
+$queue->display();
+echo $queue->size();
+echo "data \n";
+echo $queue->getData();
+$queue->dequeue();
+echo "\n";
+$queue->display();
+echo "\n";
+$queue->dequeue();
+$queue->display();
+$queue->dequeue();
+echo "\n";
+$queue->display();
 ?>

@@ -28,13 +28,23 @@ class Deque{
         }
         else{
             $this->tail->prev->next = null;
+            
         }
+        $val = $this->tail->data;
         $this->tail = $this->tail->prev;
         $temp->prev = null;
 
+        return $val;
     }   
     public function addRear($item){
-
+        $new_node = new Node($item);
+        if(!$this->isEmpty()){
+            $this->tail->next = $new_node;
+        }else{
+            $this->head = $new_node;
+        }
+        $new_node->prev = $this->tail;
+        $this->tail = $new_node;
     } 
     public function removeFront(){
         $temp = $this->head;
@@ -59,6 +69,9 @@ class Deque{
 
     public function displayForward(){
         $temp = $this->head;
+        if($temp == null){
+            echo "underflow\n";
+        }
         while($temp!=null){
             echo $temp->data." ";
             $temp = $temp->next;
@@ -73,14 +86,19 @@ class Deque{
     }
     
 }
-$deque = new Deque;
-$deque->addFront("a");
-$deque->addFront("b");
-$deque->addFront("c");
-$deque->displayForward();
-echo "\n";
-$deque->removeRear();
-$deque->displayForward();
-
+// $deque = new Deque;
+// $deque->addFront("a");
+// $deque->addFront("b");
+// $deque->addFront("c");
+// $deque->displayForward();
+// echo "\n";
+// $deque->removeRear();
+// $deque->displayForward();
+// echo "\n";
+// $deque->addRear("f");
+// $deque->displayForward();
+// echo "\n";
+// $deque->addFront("g");
+// $deque->displayForward();
 
 ?>

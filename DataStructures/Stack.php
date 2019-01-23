@@ -26,6 +26,7 @@ class Stack{
     public function pop(){
         if($this->top == null){
             echo "stack underflow \n";
+            exit;
         }
         $val = $this->top->data;
         $this->top = $this->top->next;
@@ -37,6 +38,7 @@ class Stack{
         $current = $this->top;
         if($current == null){
             echo "stack is empty\n";
+            exit;
         }
         while($current!=null){
             echo $current->data ." ";
@@ -60,22 +62,24 @@ class Stack{
         }
     }
 }
-$obj = new Stack;
-$obj->push(10);
-$obj->push(20);
-$obj->push(40);
-$obj->display();
-echo "\n";
-$obj->push(50);
-echo "\n";
-$obj->display();
-$data= $obj->pop();
-echo "das ".$data;
-$obj->display();
-echo "\npeek ".$obj->peek();
-echo "\nsize ".$obj->size();
+// $obj = new Stack;
+// $obj->push(10);
+// $obj->push(20);
+// $obj->push(40);
+// $obj->display();
+// echo "\n";
+// $obj->push(50);
+// echo "\n";
+// $obj->display();
+// $data= $obj->pop();
+// echo "das ".$data;
+// $obj->display();
+// echo "\npeek ".$obj->peek();
+// echo "\nsize ".$obj->size();
+// $obj->pop();
+// $obj->pop();
 
-
+// $obj->display();
 
 
 ?>

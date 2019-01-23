@@ -15,9 +15,23 @@ echo "enter the string \n";
 $str = Utility::readString();
 $str1 = str_split($str);
 print_r($str1);
-for($i=0;sizeof($str1);$i++){
-    $dequeu->addFront($str1[$i]);
+for($i=0;$i<sizeof($str1);$i++){
+    $dequeu->addRear($str1[$i]);
 }
 
-// $dequeu->displayForward();
+$dequeu->displayForward();
+echo "\n";
+$string ="";
+for($i=0;$i<sizeof($str1);$i++){
+    $string=$string.$dequeu->removeRear();
+}
+echo $string."\n";
+
+if($str==$string){
+    echo "true";
+}else{
+    echo "false";
+}
+
+
 ?>

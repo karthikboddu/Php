@@ -1,1 +1,29 @@
 java,is,an,oops,language
+
+    function search(){
+        $low = 0 ;
+        $high = 10;
+        for($i = 0 ;$i < 10 ;$i++){
+            while($low<=$high){
+                $mid = round(($low + $high)/2);
+                echo "If your no is bw ".$low." and ".$mid." press 1\n";
+                echo "If your no is bw ".$mid." and ".$high." press 2\n";
+                //get user no for choice
+                $s=utility::getInt();
+                /**
+                 * user enters 2 and 1 according to output
+                 */
+                 //if low is high then the no is found
+                if($high == $mid){
+                    echo "your no is ".$high;
+                    return $high ;
+                }
+                else if($s!=1){
+                    $low = $mid;
+                }
+                else{
+                    $high = $mid;
+                }
+            }
+        } 
+    }

@@ -265,7 +265,7 @@ return trim(fgets(STDIN));
         $elapsed = Utility::elapsedTime($start, $stop);
         $sec = $elapsed/1000;
         $min = $sec/60;
-        echo ($sec) . " sec elasped".$min."minutes\n";
+        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
         return $elapsed;
     }
 /**function to find element in using binarysearch with string */
@@ -303,7 +303,7 @@ return trim(fgets(STDIN));
         $elapsed = Utility::elapsedTime($start, $stop);
         $sec = $elapsed/1000;
         $min = $sec/60;
-        echo ($sec) . " sec elasped".$min."minutes\n";
+        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
         return $elapsed;
     }
 /**function to sort integers using insertion sort 
@@ -337,7 +337,7 @@ return trim(fgets(STDIN));
         $elapsed = Utility::elapsedTime($start, $stop);
         $sec = $elapsed/1000;
         $min = $sec/60;
-        echo ($sec) . " sec elasped".$min."minutes\n";
+        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
         return $elapsed;
     }
 /**function to sort integers using insertion sort for strings 
@@ -375,7 +375,7 @@ return trim(fgets(STDIN));
         $elapsed = Utility::elapsedTime($start, $stop);
         $sec = $elapsed/1000;
         $min = $sec/60;
-        echo ($sec) . " sec elasped".$min."minutes\n";
+        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
         return $elapsed;
     }
 /**function to sort using bubblesort
@@ -408,7 +408,7 @@ return trim(fgets(STDIN));
         $elapsed = Utility::elapsedTime($start, $stop);
         $sec = $elapsed/1000;
         $min = $sec/60;
-        echo ($sec) . " sec elasped".$min."minutes\n";
+        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
         return $elapsed;
     }
 /**function to sort using bubblesort for strings 
@@ -440,7 +440,7 @@ return trim(fgets(STDIN));
         $elapsed = Utility::elapsedTime($start, $stop);
         $sec = $elapsed/1000;
         $min = $sec/60;
-        echo ($sec) . " sec elasped".$min."minutes\n";
+        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
         return $elapsed;
     }
 
@@ -693,6 +693,31 @@ public static function merge($left,$right){
 		$right = array_slice($right, 1);
 	}
 	return $res; /**return the sorted array */
+}
+/**program to guess the number  */
+public static function findNumber($arr,$start,$end){
+  
+    if($start-$end==0){
+        return $arr[$start];
+    }else{
+        $mid =floor(($start + $end )/2);
+        echo "your number is ".$mid."\n";
+        if($arr[$start]==$mid){
+            echo "number is ".$start."\n";
+        }else{
+            echo "your number is between".$start." and ".$mid."\n";
+
+            $ans = Utility::readString();
+            trim($ans);
+            strtolower($ans);
+            if($ans == "no"||$ans=="n"){
+                Utility::findNumber($arr,$mid,$end);
+            }else if($ans =="yes"||$ans=="y"){
+                Utility::findNumber($arr,$start,$mid);
+            }
+        }
+    }
+
 }
 
 
