@@ -131,7 +131,7 @@ public static function printCalender(){
     // print_r($days);
     for($i=0;$i<6;$i++){
         for($j=0;$j<7;$j++){
-            $calender[$i][$j]= "-1";
+            $calender[$i][$j]= -10;
         }
     }
     echo "\t\t\t\t".$months[$m-1]." ".$y."\n";
@@ -170,6 +170,103 @@ public static function printCalender(){
 }
 
 
+
+/**function to print prime number of size n */
+    public static function primeNumberArr($n)
+    {
+        $prime = 2;
+        $primeArr = array();
+        $count = 0;
+        while ($prime < $n) {
+            $flag = true;
+
+            for ($i = 2; $i <= $prime / 2; $i++) {
+                if ($prime % $i == 0) {
+                    $flag = false;
+                    break;
+                }
+            }
+
+            if ($flag == true) {
+                $primeArr[$count] = $prime;
+                $count++;
+            }
+            $prime++;
+        }
+
+        return $primeArr;
+    }
+/**function to print prime anagram of prime array */
+    public static function printPrimeAnagram($prime)
+    {
+        $primeAnagram = array(); // intit array
+        $count = 0;
+        for ($i = 0; $i < sizeof($prime); $i++) {
+            for ($j = $i + 1; $j < sizeof($prime); $j++) {
+                if (Utility::isPrimeAnagram("$prime[$i]", "$prime[$j]") == true) { //check two index are anagram
+                    $primeAnagram[$count] = $prime[$i]; // if true then add to array
+                    $count++;
+                     $primeAnagram[$count++] = $prime[$j];
+                }
+            }
+        }
+        // echo "\n prime anagram number are \n";
+        // for ($k = 0; $k < sizeof($primeAnagram); $k++) { //printing the anagram array
+        //     echo $primeAnagram[$k] . "  ";
+        // }
+       $temp = array_unique($primeAnagram);
+       $new_array = array_values($temp);
+       
+        return $new_array;
+    }
+/**function to check two string are prime anagram in array */
+    public static function isPrimeAnagram($str1, $str2)
+    {
+        $tempStr1 = str_split($str1);
+        $tempStr2 = str_split($str2);
+        asort($tempStr1);
+        asort($tempStr2);
+        if (sizeof($tempStr1) == sizeof($tempStr2)) {
+            $anaStr1 = implode("", $tempStr1);
+            $anaStr2 = implode("", $tempStr2);
+            // echo $anaStr1;
+            // echo $anaStr2;
+            if ($anaStr1 == $anaStr2) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+/**function check whether prime numbers are palindrome */
+    public static function printPrimePalindrome($arr)
+    {
+        $palindrome = array();
+        $count = 0;
+        for ($i = 0; $i < sizeof($arr); $i++) {
+            if (Utility::isPalindrome("$arr[$i]")) {/**check each array value is palindrome */
+                $palindrome[$count] = $arr[$i]; //it is palidnrome then addd to array
+                $count++;
+            }
+        }
+        echo "\n prime palindrome number are \n";
+        for ($k = 0; $k < sizeof($palindrome); $k++) { /**print prime palindrome */
+            echo $palindrome[$k] . " ";
+        }
+    }
+
+    public static function isPalindrome($arr1)
+    {
+        $arr2 = strrev($arr1);/**reverse number is equal to original then palindrome */
+        if ($arr1 == $arr2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
+
 
 ?>

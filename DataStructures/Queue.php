@@ -10,7 +10,7 @@ class Node{
 class Queue{
     public $front;
     public $rear;
-    private static $size =0;
+    public static $size =0;
     public function enqueue($item){
         $new_node = new Node($item);
         if($this->isEmpty()){
@@ -31,14 +31,15 @@ class Queue{
         if(!$this->isEmpty()){
             $val = $this->front->data;
             $this->front = $this->front->next;
+            return $val;
         }else{
-            echo "underflow\n";
+            
         }
         if($this->front == null){
             $rear = null;
         }
         self::$size--;
-        return $val;
+        
     }
     public function size(){
         return self::$size;

@@ -1,6 +1,6 @@
 <?php
 
-class Node
+class QNode
 {
     public $data;
     public $next;
@@ -15,13 +15,13 @@ class LinkedList{
     public $head;
     public function add($data){
         if($this->head == null){
-           $this->head = new Node($data);
+           $this->head = new QNode($data);
         }else{
             $n = $this->head; 
             while($n->next!=null){
                 $n = $n->next;
             }
-            $n->next = new Node($data);
+            $n->next = new QNode($data);
             
         }
         self::$size++;
@@ -55,7 +55,7 @@ class LinkedList{
         $current = $current->next;
     }
 
-    // For the first node
+    // For the first QNode
     if ($current == $previous) {
         $this->head = $current->next;
     }
@@ -117,6 +117,19 @@ class LinkedList{
             $current = $current->next;
         }
         return $str;
+    }
+    public function llToArr(){
+        $arr = array();
+        $temp = $this->head;
+        while($temp!=null){
+            for($i=0;$i<self::$size;$i++){
+                $arr[$i] = $temp->data;
+                $temp = $temp->next;
+            }    
+            
+
+        }
+        return $arr;
     }
  
 
