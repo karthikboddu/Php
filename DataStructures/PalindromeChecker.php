@@ -1,12 +1,11 @@
 <?php 
 /**
-     * Read a List of Numbers from a file and arrange it ascending Order in a
-     *      Linked List. Take user input for a number, if found then pop the number out of the
-     *      list else insert the number in appropriate position
-     * Purpose: Read from file the list of Numbers and take user input for a new number
+     * A palindrome is a string that reads the same forward and backward We would like to 
+     *       construct an algorithm to input a string of characters and check whether it is a palindrome
+     * Purpose: check whether the string is a palindrome
      * @author karthik
      * @version 1.0   
-     * @since 21-01-2019
+     * @since 23-01-2019
  */ 
 require('utility.php');
 require('DEque.php');

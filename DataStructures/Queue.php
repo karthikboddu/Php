@@ -6,19 +6,20 @@ class Node{
         $this->data = $d;
         $this->next = null;
     }
+
 }
 class Queue{
     public $front;
     public $rear;
     public static $size =0;
     public function enqueue($item){
-        $new_node = new Node($item);
+        $new_QNode = new Node($item);
         if($this->isEmpty()){
-            $this->front = $new_node;
+            $this->front = $new_QNode;
         }else{
-            $this->rear->next = $new_node;
+            $this->rear->next = $new_QNode;
         }
-        $this->rear = $new_node;
+        $this->rear = $new_QNode;
         self::$size++;
     }
     public function isEmpty(){
@@ -55,6 +56,10 @@ class Queue{
         }
     }
 
+    public function peek(){
+        return $this->front->data;
+    }
+
     public function getData(){
         $str = "";
         $current = $this->front;
@@ -65,26 +70,32 @@ class Queue{
         return $str;
     }
 }
-$queue = new Queue;
-$queue->enqueue("karthik");
-$queue->enqueue(20);
-$queue->enqueue(30);
-$queue->enqueue(40);
+// $queue = new Queue();
+// $queu11e = new Queue();
+// $queue->enqueue("karthik");
+// $queue->enqueue(20);
+// $queue->enqueue(30);
+// $queue->enqueue(40);
+// $queue->display();
 
-$queue->display();
-echo "\n";
-echo $queue->dequeue();
-$queue->display();
-echo $queue->size();
-echo "data \n";
-echo $queue->getData();
-$queue->dequeue();
-echo "\n";
-$queue->display();
-echo "\n";
-$queue->dequeue();
-$queue->display();
-$queue->dequeue();
-echo "\n";
-$queue->display();
+// echo $queue->peek();
+// // $queue->display();
+// echo "\n";
+// echo $queue->dequeue();
+// // $queue->display();
+// echo $queue->size();
+// echo "data \n";
+// echo $queue->getData();
+
+// echo "\n";
+// // $queue->display();
+// echo "\n";
+
+// // $queue->display();
+// $queue->dequeue();
+// echo "\n";
+// $queue->display();
+// $queu11e->enqueue(100);
+// $queu11e->enqueue(200);
+// $queu11e->display();
 ?>

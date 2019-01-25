@@ -8,14 +8,16 @@
      * @version 1.0   
      * @since 21-01-2019
  */ 
-require('utility.php');
-echo "enter the number of nodes \n";
-$num = Utility::readInt();
-$fact = Utility::factorial($num);
-$numerator = Utility::factorial(2*$num);
-$denomirator = Utility::factorial($num+1)* Utility::factorial($num);
+require ('LinkedList.php');
 
-$Bst = floor($numerator/$denomirator);
+$arr = array('190','211','21','38');
+$linked = new LinkedList();
+for($i=0;$i<sizeof($arr);$i++){
+    $a = floor($arr[$i] % 11);
+    $linked->insertAt($a,$arr[$i]);
+    
+}
 
-echo "number of Bst are possible are ".$Bst."\n";
+$linked->display();
+
 ?>

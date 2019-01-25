@@ -1,4 +1,12 @@
 <?php 
+/**
+     * store only the numbers in that range that are Anagrams in the 0 to 1000 range.
+     *   Further store in a 2D Array the numbers that are Anagram and numbers that are not Anagram
+     * Purpose: Store the prime anagram and not anagram in the 2d array
+     * @author karthik
+     * @version 1.0   
+     * @since 24-01-2019
+ */ 
 require ('utility.php');
 require ('LinkedList.php');
 echo "enter the number \n";
@@ -14,13 +22,14 @@ for($i=0;$i<$linkedList1->size();$i++){
     $j=0;
     if($linkedList1->search($primeAna[$i])){
         $linkedList1->remove($primeAna[$i]);
-        $j++;
+      
     }else{
-        $j--;
+        
     }
-    
+   
 }
-// $linkedList1->display();
+ $linkedList1->display();
+ echo "\n";
 $arr = $linkedList1->llToArr();//convering linkedlist to array
 for($i=0;$i<2;$i++){
     for($j=0;$j<170;$j++){
@@ -46,6 +55,7 @@ for($i=0;$i<2;$i++){
         }
         
     }
+
     echo "\n";
 }
 

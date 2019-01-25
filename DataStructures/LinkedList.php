@@ -131,6 +131,38 @@ class LinkedList{
         }
         return $arr;
     }
+
+    public function insertAt($position,$data){
+
+        $newNode = new QNode($data); //create a new node
+        $newNode->next = null;
+       
+        if($this->head == null &&  $position != 0) { //if head is null and position is zero skip it.
+          return;
+        } else if( $this.head == null && $position == 0) { // if head null and position is zero set at the head.
+          $this->head = $newNode;
+        }
+       
+        if($position == 0) { // if position is zero then new node set at the head.
+          $newNode->next = $this->head;
+          $this->head = $newNode;
+        }
+       
+        $current = $this->head;
+        $previous = null;
+        $i = 0;
+       
+        while($i < $position) { //loop until find the given position.
+          $previous = $current;
+          $current = $current->$nextNode;
+          if($current == null)
+            break;
+            $i++;
+          }
+       
+          $newNode->next = current; //get the new node and linked the remaining nodes in the list.
+          $previous->next = $newNode; 
+    }
  
 
 }

@@ -1,4 +1,12 @@
 <?php 
+/**
+     * Add the Prime Numbers that are Anagram in the Range of 0 ­ 1000 in a Queue using
+     *   the Linked List 
+     * Purpose: Print the Anagrams from the Queue
+     * @author karthik
+     * @version 1.0   
+     * @since 24-01-2019
+ */ 
 require ('utility.php');
 require ('Queue.php');
 echo "enter the number \n";

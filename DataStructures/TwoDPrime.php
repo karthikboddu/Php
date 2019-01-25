@@ -1,4 +1,12 @@
-<?php
+<?php 
+/**
+     * store the prime numbers in a 2D Array, the first dimension represents the range 0­-s100,
+     *       100-­200, and so on.
+     * Purpose: store prime number 2d array of 0-100 ,100-200 so on..
+     * @author karthik
+     * @version 1.0   
+     * @since 25-01-2019
+ */ 
 
 require ('utility.php');
 echo "enter the number \n";
