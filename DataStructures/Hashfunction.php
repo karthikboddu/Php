@@ -11,10 +11,18 @@
 require ('LinkedList.php');
 
 $arr = array('190','211','21','38');
+
+for($i=0;$i<sizeof($arr);$i++){
+
+    $hash[$i] = new LinkedList;
+}
+
+
 $linked = new LinkedList();
 for($i=0;$i<sizeof($arr);$i++){
     $a = floor($arr[$i] % 11);
-    $linked->insertAt($a,$arr[$i]);
+    $linked->add(
+        $arr[$i]);
     
 }
 

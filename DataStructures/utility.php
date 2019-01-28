@@ -1,4 +1,5 @@
 <?php
+
 class Utility
 {
  
@@ -7,7 +8,9 @@ class Utility
 public static function readString()
 {
     $var = readline("");
-    while (is_numeric($var)) { /**if input is numeric then throw error */
+
+    /**if input is numeric then throw error */
+    while (is_numeric($var)) { 
         echo "enter valid input ";
         fscanf(STDIN, "%s", $var);
     }
@@ -18,17 +21,9 @@ public static function readString()
 public static function readInt()
 {
     fscanf(STDIN, "%s", $i);
-// if(is_string($i)){
-    //     echo "enter valid  ";
-    // }else if(is_numeric($i)){
-    //     return $i;
-    // }
 
-// while(!is_numeric($i)){
-    //     echo "enter valid input"."\n";
-    //     fscanf(STDIN,"%d",$i);
-    // }
-    while (!is_numeric($i) || $i > (int) $i) { /**if input is numeric or decimal  */
+     /**if input is numeric or decimal  */
+    while (!is_numeric($i) || $i > (int) $i) {
         echo "enter valid input";
         fscanf(STDIN, "%s", $i);
     }
@@ -62,7 +57,7 @@ public static function readFloat()
 public static function getStringArray(){
 return trim(fgets(STDIN));
 }
-
+/**function to find factorail of a number */
 public static function factorial($n){
     $fact = 1;
 
@@ -90,13 +85,16 @@ public static function calculateDay($d, $m, $y)
  */
     public static function checkLeapYear($yr)
     {
-        while ($yr < 999 && $yr < 10000) { /**year must 4 digits */
+
+        /**year must 4 digits */
+        while ($yr < 999 && $yr < 10000) { 
             echo "enter valid year must be 4 digit \n";
             $yr = Utility::readInt();
             Utility::checkLeapYear($yr);
         }
         $flag = false;
-        if ($yr % 400 == 0) { /**divided by 400 or 4 then it is leap year else not  */
+
+        if ($yr % 400 == 0) { 
             $flag = true;
         } else if ($yr % 100 == 0) {
             $flag = false;
@@ -113,22 +111,33 @@ public static function calculateDay($d, $m, $y)
 
 /**print calender */
 public static function printCalender(){
-
     echo "enter the month \n";
+
+    /** read month*/
     $m = Utility::readInt();
-    
     $date = 1;
-    echo "enter the year\n";
+
+    /**input year */
+    echo "enter the year\n"; 
     $y = Utility::readInt();
-    $d0 = Utility::calculateDay($date,$m,$y);
+
+    $d0 = Utility::calculateDay($date,$m,$y); 
     $calender = array();
     $days =array('31','28','31','30','31','30','31','31','30','31','30','31');
     $months =array('jan','feb','march','april','may','june','july','aug','sep','oct','nov','dev');
     $week = array('Sun','M','T','Wed','Th','F','Sat');
-    if(Utility::checkLeapYear($y)){
+
+
+    if(($m<=12&&$m>=1)&&($y>=1000&&$y<=9999)){
+
+    /**check it is a leap year */
+    if(Utility::checkLeapYear($y)){ 
         $days[1]=29;
     }
+    
     // print_r($days);
+
+    /**fill the array  */
     for($i=0;$i<6;$i++){
         for($j=0;$j<7;$j++){
             $calender[$i][$j]= -10;
@@ -139,34 +148,44 @@ public static function printCalender(){
     
     $dateinc = 1;
     for($i=$d0;$i<7;$i++){
-        $calender[0][$i] = $dateinc++;
+
+        /** adding values to row1 starts with index d0*/
+        $calender[0][$i] = $dateinc++; 
     }
 
-    for($i=1;$i<6;$i++){
-        for($j=0;$j<7;$j++){
+    for($i=1;$i<sizeof($calender);$i++){
+        for($j=0;$j<sizeof($calender[$i]);$j++){
             
+             /**incrementing values  */
             $calender[$i][$j] = $dateinc++;
         }
     }
+
+     /**week name rows */
     for($k=0;$k<sizeof($week);$k++){
-        echo "\t".$week[$k]." ";
+        echo "\t".$week[$k]." "; 
     }
     echo "\n";
-    for($i=0;$i<6;$i++){
-        for($j=0;$j<7;$j++){
-            if(($calender[$i][$j]<0)||($calender[$i][$j]>$days[$m-1])){
+    for($i=0;$i<sizeof($calender);$i++){
+        for($j=0;$j<sizeof($calender[$i]);$j++){
+
+            /** adding spaces at starting and after 31 days  */
+            if(($calender[$i][$j]<0)||($calender[$i][$j]>$days[$m-1])){ 
                 echo "\t";
+
+                /**printing the calender  */
             }else if($calender[$i][$j]>0){
-                echo "\t".$calender[$i][$j]." ";
+                echo "\t".$calender[$i][$j]." "; 
             }
          }
         echo "\n";
     }
-
+    
+}else{
+        echo "enter valid year and month \n";
+    }
     return $calender;
 //     print_r($calender);
-
-
 }
 
 
@@ -214,24 +233,34 @@ public static function printCalender(){
         // for ($k = 0; $k < sizeof($primeAnagram); $k++) { //printing the anagram array
         //     echo $primeAnagram[$k] . "  ";
         // }
-       $temp = array_unique($primeAnagram);
-       $new_array = array_values($temp);
+       $temp = array_unique($primeAnagram);/**removes duplicate values  */
+       $new_array = array_values($temp); /**moving value to new array */
        
         return $new_array;
     }
 /**function to check two string are prime anagram in array */
     public static function isPrimeAnagram($str1, $str2)
     {
-        $tempStr1 = str_split($str1);
+
+        /**split the string */
+        $tempStr1 = str_split($str1); 
         $tempStr2 = str_split($str2);
-        asort($tempStr1);
+
+        /**sort the string  */
+        asort($tempStr1); 
         asort($tempStr2);
-        if (sizeof($tempStr1) == sizeof($tempStr2)) {
-            $anaStr1 = implode("", $tempStr1);
+
+        /**check size of two array are equal */
+        if (sizeof($tempStr1) == sizeof($tempStr2)) { 
+
+            /**converting to string */
+            $anaStr1 = implode("", $tempStr1); 
             $anaStr2 = implode("", $tempStr2);
             // echo $anaStr1;
             // echo $anaStr2;
-            if ($anaStr1 == $anaStr2) {
+
+            /** if both are equal then anagram */
+            if ($anaStr1 == $anaStr2) { 
                 return true;
             }
         } else {
@@ -244,24 +273,70 @@ public static function printCalender(){
         $palindrome = array();
         $count = 0;
         for ($i = 0; $i < sizeof($arr); $i++) {
-            if (Utility::isPalindrome("$arr[$i]")) {/**check each array value is palindrome */
-                $palindrome[$count] = $arr[$i]; //it is palidnrome then addd to array
+
+            /**check each array value is palindrome */
+            if (Utility::isPalindrome("$arr[$i]")) {
+
+                //it is palidnrome then addd to array
+                $palindrome[$count] = $arr[$i]; 
                 $count++;
             }
         }
         echo "\n prime palindrome number are \n";
-        for ($k = 0; $k < sizeof($palindrome); $k++) { /**print prime palindrome */
+
+        /**print prime palindrome */
+        for ($k = 0; $k < sizeof($palindrome); $k++) { 
             echo $palindrome[$k] . " ";
         }
     }
 
     public static function isPalindrome($arr1)
     {
-        $arr2 = strrev($arr1);/**reverse number is equal to original then palindrome */
+        /**reverse number is equal to original then palindrome */
+        $arr2 = strrev($arr1);
         if ($arr1 == $arr2) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public static function queWeek(){
+
+        /**create new queue */
+        $que = new Queue; 
+        //$calender = Utility::printCalender();
+        //  $subQueue = new Queue;
+        echo "enter month \n";
+
+         /**enter month */
+        $m = Utility::readInt();
+        echo " enter year \n";
+
+         /**enter year */
+        $y = Utility::readInt();
+        $months = array('31', '28', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31');
+        $monthname = array('jan', 'feb', 'march', 'april', 'may', 'june', 'july', 'aug', 'sep', 'oct', 'nov', 'dev');
+        $week = array('Sun', 'M', 'T', 'Wed', 'Th', 'F', 'Sat');
+
+         /** return day for year and moth */
+        $startDay = Utility::calculateDay(1, $m, $y);
+        
+        echo $startDay . "\n";
+
+        /**if itis leapyear then update array with feb 29 */
+        if (Utility::checkLeapYear($y)) { 
+            $months[1] = 29;
+        }
+
+        /**validate year and month */
+        if (($m <= 12 && $m >= 1) && ($y >= 1000 && $y <= 9999)) { 
+            
+             /** add element to queue within month range */
+            for ($i = 1; $i <= $months[$m - 1]; $i++) {
+                $que->enqueue($i);
+            }
+            return $que;
         }
     }
 

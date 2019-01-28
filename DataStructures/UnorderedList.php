@@ -11,18 +11,32 @@
  */ 
 include('utility.php');
 require('LinkedList.php');
-$linkedList = new LinkedList;
-$path = "wordString.txt";
+
+/**create new linked list */
+$linkedList = new LinkedList; 
+
+/** set file name */
+$path = "wordString.txt"; 
+
+/** open file with read operation */
 $file = fopen($path,"r") or die("file not found\n");
-$fileString = fgets($file);
+
+/**store data present in file */
+$fileString = fgets($file); 
 $strArr = explode(" ",$fileString);
+
+/** add data to linked list from array */
 for($i=0;$i<sizeof($strArr);$i++){
-    $linkedList->add($strArr[$i]);
+    $linkedList->add($strArr[$i]); 
 }
 
 $linkedList->display();
+
+/**enter element to search */
 echo "\nenter the word to search\n";
-$word = Utility::readString();
+$word = Utility::readString(); 
+
+/**if it is present in linked list then remove the element else add to linkedlist */
 if($linkedList->search($word)){
     $linkedList->remove($word);
     echo $word ." removed\n";
@@ -31,7 +45,10 @@ if($linkedList->search($word)){
     echo "file updated\n";
 }
 $linkedList->display();
+
 $lListData= $linkedList->getData();
+
+/** open file with write operation  */
 $file1 = fopen($path,"w");
 fwrite($file1,$lListData);
 fclose($file1);

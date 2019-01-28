@@ -9,13 +9,16 @@
      * @since 21-01-2019
  */ 
 require('utility.php');
+/** enter the input number of nodes  */
 echo "enter the number of nodes \n";
 $num = Utility::readInt();
+
+/**call to function factorial  */
 $fact = Utility::factorial($num);
 $numerator = Utility::factorial(2*$num);
 $denomirator = Utility::factorial($num+1)* Utility::factorial($num);
 
+/** calculate bst  */
 $Bst = floor($numerator/$denomirator);
-
 echo "number of Bst are possible are ".$Bst."\n";
 ?>

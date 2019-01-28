@@ -3,7 +3,8 @@ class Node{
     public $next;
     public $data;
 
-    function __construct($d){
+    /**create new node with data */
+    function __construct($d){ 
         $this->data = $d;
         $this->next = null;
     }
@@ -11,49 +12,82 @@ class Node{
 class Stack{
     public $top;
     private static $size =0;
-    public function push($item){
+
+    /**add the elements to stack */
+    public function push($item){ 
+
+        /**create newnode with data */
         $new_node = new Node($item);
-        if($this->top == null){
+        
+        /**if top is null then newnode is top */
+        if($this->top == null){ 
             $this->top = $new_node;
         }else{
-            $new_node->next = $this->top;
+
+        /**else add at starting  */
+            $new_node->next = $this->top; 
             $this->top = $new_node;
         }
-        self::$size++;
+
+        /**inc size */
+        self::$size++; 
     }
 
 
+     /**
+      *  removing elements at starting 
+     */
     public function pop(){
-        if($this->top == null){
+
+        /**if top is null stack underflow */
+        if($this->top == null){ 
             echo "stack underflow \n";
             exit;
         }
         $val = $this->top->data;
-        $this->top = $this->top->next;
+
+        /** move top to next node */
+        $this->top = $this->top->next; 
         self::$size--;
-        return $val;
+        
+        /**return value of removed node */
+        return $val; 
     }
 
-    public function display(){
+    /** 
+     *  display the elements 
+    */
+    public function display(){ 
+
+        /**assign current as top */
         $current = $this->top;
-        if($current == null){
+        
+        /**top is null then stack is empty */
+        if($current == null){ 
             echo "stack is empty\n";
             exit;
         }
-        while($current!=null){
+
+        /**traverse the elements unti it is null */
+        while($current!=null){ 
             echo $current->data ." ";
             $current = $current->next;
         }
     }
 
+
+     /**return size */
     public function size(){
         return self::$size;
     }
-    public function isEmpty(){
+
+    /**return true if itis empty */
+    public function isEmpty(){ 
         return $this->top == null;
     }
 
-    public function peek(){
+    /**retunr top data */
+    public function peek(){ 
         if(!$this->isEmpty()){
             return $this->top->data;
         }

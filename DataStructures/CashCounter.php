@@ -7,63 +7,74 @@
      * @version 1.0   
      * @since 23-01-2019
  */ 
-require('utility.php');
+require ('utility.php');
 require ('Queue.php');
-// require('Queue.php');
-$queue = new Queue;
-$queue1 = new Queue; 
 
+/**create object queue */
+$queue = new Queue; 
 
 echo "enter the number of people to add \n";
-$people = Utility::readInt();
-$str ="";
-$amount = 100000;
+
+/**read number of people to add */
+$people = Utility::readInt(); 
+$str = "";
+$amount = 10000;
 echo "enter the name \n";
-for($i=0;$i<$people;$i++){
-    
-    $name = Utility::readString();
-    $queue->enqueue($name);
+for($i=0;$i<$people;$i++){    
+
+    /** read names */
+    $name = Utility::readString(); 
+
+    /**add to the queue */
+    $queue->enqueue($name); 
 }
 $queue->display();
-for($i=0;$i<$queue->size();$i++){
+echo "are added to queue \n";
+
+/** traverse queue */
+for($i=0;$i<$queue->size();$i++){ 
     $qname = $queue->dequeue();
     // $queue1->enqueue($queue->dequeue());
     echo ($i+1)."  ".$qname."\n";
-    echo "1: deposit  2: withdrawal\n";
+
+    /** enter the option  */
+    echo "1: deposit  2: withdrawal 3: quit\n"; 
     $j = Utility::readInt();
     switch($j){
-        case 1: echo "enter the amount\n";
-                $damount = Utility::readInt();
+
+        /**read the amount to add */
+        case 1: echo "enter the amount to deposit\n";
+                $damount = Utility::readInt(); 
                 if($amount >=$damount){
                     $amount +=$damount;
-
+                    echo "balance update ".$amount."\n";
                     // $queue1->enqueue($damount);
                 }else{
                     echo "amount should greater than ".$amount;
                 }
+                break;
+
+        case 2: echo "enter the amount to withdraw \n";
+                $wamount = Utility::readInt(); 
+                $amount -=$wamount;
                 
-                break;
-        case 2: echo "enter the amount \n";
-                $wamount = Utility::readInt();
-                if($amount>=$wamount){
-                    $amount -=$wamount;
                     // $queue1->enqueue($wamount*-1);
-                    
-                    echo " amount withdrwaled\n";
-                }else{
-                    echo "enter amount less amount\n";    
+                while($amount<0){
+                    echo "enter lesser amount\n";
+                    $wamount = Utility::readInt();
                 }
+                echo $wamount." withdrawled \n";
                 break;
-        case 3: break;                        
+        case 3: break;
+        default : echo "enter valid option\n";                                
     }
-
-
+    echo $qname." dequed "." \n";
 }
 
-for($i=0;$i<$queue1->size();$i++){
-    echo $queue1->dequeue();
+// for($i=0;$i<$queue1->size();$i++){
+//     echo $queue1->dequeue();
 
-}
+// }
 
 // $def= new SplQueue;
 

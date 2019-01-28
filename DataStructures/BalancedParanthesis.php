@@ -9,14 +9,19 @@
  */ 
 require ('utility.php');
 require ('Stack.php');
+/** input string  */
+$string = "(5+6)∗(7+8)/((4+35+6)∗(7+8/4+3))";
 
-$string = "(5+6)∗(7+8)/((4+35+6)∗7+8/4+3))";
+/** create stack  */
 $stack = new Stack;
 
+/**split the string into arry */
 $strArr = str_split($string);
 $flag = true;
 for($i=0;$i<sizeof($strArr);$i++){
     $exp = $strArr{$i};
+
+/**if exp is '(' then push else exp is ')' then pop */  
     if($exp =='('){
         $stack->push($exp);
     }else if($exp ==')'){
@@ -28,6 +33,7 @@ for($i=0;$i<sizeof($strArr);$i++){
 
     }
 }
+/**if flag is true then string is balanced else not balanced  */
 if($flag){
     echo "true\n";
 }else{

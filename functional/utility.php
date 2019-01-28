@@ -418,12 +418,12 @@ class Utility
     }
 }
 
-public static function permuation($perm,$word){
+public static function permuation($output,$word){
     if(empty($word)){
-        echo $perm.$word."\n"; /** */
+        echo $ouput.$word."\n"; /** */
     }else{
         for($i=0;$i<strlen($word);$i++){
-            Utility::permuation($perm.$word{$i},substr($word,0,$i).substr($word,$i+1,strlen($word)));
+            Utility::permuation($output.$word{$i},substr($word,0,$i).substr($word,$i+1,strlen($word)));
         }
     }
 }

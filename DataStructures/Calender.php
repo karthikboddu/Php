@@ -8,5 +8,7 @@
      * @since 23-01-2019
  */ 
 require('utility.php');
-Utility::printCalender();
+
+/**function that prints calender */
+Utility::printCalender(); 
 ?>

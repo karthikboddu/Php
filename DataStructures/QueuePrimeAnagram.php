@@ -10,14 +10,25 @@
 require ('utility.php');
 require ('Queue.php');
 echo "enter the number \n";
-$num = Utility::readInt();
+
+/**enter number  */
+$num = Utility::readInt(); 
+
+/**function to get prime number in arrays */
 $primeArr = Utility::primeNumberArr($num);
-$primeAna = Utility::printPrimeAnagram($primeArr);
 
-$queue = new Queue;
+/** function to get primes that are anagram */
+$primeAna = Utility::printPrimeAnagram($primeArr); 
 
-for($i=0;$i<sizeof($primeAna);$i++){
-    $queue->enqueue($primeAna[$i]);
+/**create new queue */
+$queue = new Queue; 
+
+/**add prime anagram array to queue  */
+for($i=0;$i<sizeof($primeAna);$i++){ 
+    $queue->enqueue($primeAna[$i]); 
 }
 echo "Queue prime Anagram\n";
 $queue->display();
+
+
+?>
