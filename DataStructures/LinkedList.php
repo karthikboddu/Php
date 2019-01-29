@@ -173,6 +173,45 @@ class LinkedList{
         return $arr;
     }
 
+public function add_Of_Ordered_data($data)
+{
+if (!$this->first)
+{
+$node = new Node($data);
+$this->head = $node;
+$this->last = $node;
+$this->size++;
+}
+else
+{
+if ($data < $this->head->data)
+{
+$node = new Node($data,$this->first);
+$this->first = $node;
+$this->size++;
+return;
+}
+$current = $this->first;
+while ($current)
+{
+if ($current->data < $data && isset($current->next) && $current->next->data > $data)
+{
+$node = new Node($data,$current->next);
+$current->next = $node;
+$this->size++;
+}
+if ($current->data < $data && !isset($current->next))
+{
+$node = new Node($data,$current->next);
+$current->next = $node;
+$this->size++;
+}
+$current = $current->next;
+
+}
+}
+}
+
     /**fuction to insert at any positon  */
     public function insertAt($position,$data){
 

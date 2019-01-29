@@ -9,6 +9,7 @@
 include 'utility.php';
 echo "enter the choice 1:celcuis to farenheit 2:Fahrenheit to Celsius \n";
 $c = Utility::readInt();
-Utility::tempConverstation($c);
 
+/**function convert tempeature from farentoheit-><-celcuis */
+Utility::tempConverstation($c);
 ?>

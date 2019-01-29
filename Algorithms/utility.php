@@ -1,91 +1,97 @@
 <?php
 class Utility
 {
- 
+
 /**function to read string
  *@return String value */
-public static function readString()
-{
-    $var = readline("");
-    while (is_numeric($var)) { /**if input is numeric then throw error */
-        echo "enter valid input ";
-        fscanf(STDIN, "%s", $var);
-    }
-    return $var;
-}
-/**function to read integer
-* @return integer value */
-public static function readInt()
-{
-    fscanf(STDIN, "%s", $i);
-// if(is_string($i)){
-    //     echo "enter valid  ";
-    // }else if(is_numeric($i)){
-    //     return $i;
-    // }
+    public static function readString()
+    {
+        $var = readline("");
 
-// while(!is_numeric($i)){
-    //     echo "enter valid input"."\n";
-    //     fscanf(STDIN,"%d",$i);
-    // }
-    while (!is_numeric($i) || $i > (int) $i) { /**if input is numeric or decimal  */
-        echo "enter valid input";
+        /**if input is numeric then throw error */
+        while (is_numeric($var)) {
+            echo "enter valid input ";
+            fscanf(STDIN, "%s", $var);
+        }
+        return $var;
+    }
+/**function to read integer
+ * @return integer value */
+    public static function readInt()
+    {
         fscanf(STDIN, "%s", $i);
+
+        /**if input is numeric or decimal  */
+        while (!is_numeric($i) || $i > (int) $i) {
+            echo "enter valid input";
+            fscanf(STDIN, "%s", $i);
+        }
+        return $i;
     }
-    return $i;
-}
 /**  to read float values
-*@return double value
-*/
-public static function readDouble()
-{
-    fscanf(STDIN, "%s\n", $val);
-    while (!is_float($val)) {
-        echo "ivalid input try again\n";
-        fscanf(STDIN, " %f\n ", $val);
+ *@return :double value
+ */
+    public static function readDouble()
+    {
+        fscanf(STDIN, "%s\n", $val);
+        while (!is_float($val)) {
+            echo "ivalid input try again\n";
+            fscanf(STDIN, " %f\n ", $val);
+        }
+        return $val;
     }
-    return $val;
-}
 /**read flaot values
-* @return float value
-*/
-public static function readFloat()
-{
-    fscanf(STDIN, "%s\n", $val);
-    while (!is_float($val)) {
-        echo "ivalid input try again\n";
-        fscanf(STDIN, " %f\n ", $val);
+ * @return : float value
+ */
+    public static function readFloat()
+    {
+        fscanf(STDIN, "%f\n", $val);
+        while (!is_float($val)) {
+            echo "ivalid input try again\n";
+            fscanf(STDIN, " %f\n ", $val);
+        }
+        return $val;
     }
-    return $val;
-}
-/**To get Strings array */
-public static function getStringArray(){
-return trim(fgets(STDIN));
-}     
-/**function to find prime factors of n */
+/**
+ * To get Strings array
+ */
+    public static function getStringArray()
+    {
+        return trim(fgets(STDIN));
+    }
+/**
+ * function to find prime factors of n
+ */
     public static function primeFactors($n)
     {
         echo "prime factors are : \n";
-        for ($num = 2; $num <= $n; $num++) { // prime num start from 2
+
+        /** prime num start from 2 */
+        for ($num = 2; $num <= $n; $num++) {
             $flag = true;
+
+            /**it it is divided by zero it's not a prime */
             for ($j = 2; $j <= $num / 2; $j++) {
-                if ($num % $j == 0) { // it it is divided by zero it's not a prime
+                if ($num % $j == 0) {
                     $flag = false;
                     break;
                 }
             }
             if ($flag == true) {
                 echo $num . "prime \n";
-                while ($n % $num == 0) {
 
-                    echo $num . " \n"; // prime numbers divided by inputs
+                /** prime numbers divided by inputs */
+                while ($n % $num == 0) {
+                    echo $num . " \n";
                     $n = $n / $num;
                 }
 
             }
         }
     }
-/**function to find prime number upto n */
+/**
+ * function to find prime number upto n
+ */
     public static function primeNumberUpto($n)
     {
         for ($i = 2; $i < $n; $i++) {
@@ -99,37 +105,42 @@ return trim(fgets(STDIN));
                 }
             }
 
-            if ($flag == true) { //prime numbers
-                array_push($primeno, $i); //storing in a array
-                // echo $i;
+            /**prime numbers */
+            if ($flag == true) {
 
+                /**storing in a array */
+                array_push($primeno, $i);
+                // echo $i;
             }
         }
         echo "\n prime upto " . $n . "are\n";
-        for ($k = 0; $k < sizeof($primeno); $k++) { //printing the prime array
+
+        /**printing the prime array */
+        for ($k = 0; $k < sizeof($primeno); $k++) {
             echo $primeno[$k];
         }
     }
 /**function to check anagram */
     public static function checkAnagram($str1, $str2)
     {
-        if (count($str1) == count($str2)) { //check length of two string are equal
-            $str1Arr = str_split($str1); // split to array
-            $str2Arr = str_split($str2); //split to array
-            asort($str1Arr); //sort array by values
-            asort($str2Arr); //sort array by values
-            // foreach($str1Arr as $val){
-            //     echo $val." ";
-            // }
-            // unset($val);
-            // foreach($str2Arr as $val){
-            //     echo $val." ";
-            // }
-            // unset($val);//unsetting the value stored in foreach last element
-            $str3 = implode("", $str1Arr); //array to string by ""
-            $str4 = implode("", $str2Arr); //array to string by ""
-            if ($str3 == $str4) //check both string are equal
-            {
+
+        /**check length of two string are equal */
+        if (count($str1) == count($str2)) {
+
+            /** split to array*/
+            $str1Arr = str_split($str1);
+            $str2Arr = str_split($str2);
+
+            /** sort array by values */
+            asort($str1Arr);
+            asort($str2Arr);
+
+            /**array to string by "" */
+            $str3 = implode("", $str1Arr);
+            $str4 = implode("", $str2Arr);
+
+            /**check both string are equal */
+            if ($str3 == $str4) {
                 echo "Anagram \n";
             } else {
                 echo "Not Anagram";
@@ -137,7 +148,9 @@ return trim(fgets(STDIN));
 
         }
     }
-/**function to print prime number of size n */
+/**
+ * function to print prime number of size n
+ */
     public static function primeNumberArr($n)
     {
         $prime = 2;
@@ -162,26 +175,37 @@ return trim(fgets(STDIN));
 
         return $primeArr;
     }
-/**function to print prime anagram of prime array */
+/**
+ * function to print prime anagram of prime array
+ */
     public static function printPrimeAnagram($prime)
     {
-        $primeAnagram = array(); // intit array
+
+        /** init array */
+        $primeAnagram = array();
         $count = 0;
         for ($i = 0; $i < sizeof($prime); $i++) {
             for ($j = $i + 1; $j < sizeof($prime); $j++) {
-                if (Utility::isPrimeAnagram("$prime[$i]", "$prime[$j]") == true) { //check two index are anagram
-                    $primeAnagram[$count] = $prime[$i]; // if true then add to array
+
+                /** check two index are anagram */
+                if (Utility::isPrimeAnagram("$prime[$i]", "$prime[$j]") == true) {
+                    /**if true then add to array */
+                    $primeAnagram[$count] = $prime[$i];
                     $count++;
                     $primeAnagram[$count++] = $prime[$j];
                 }
             }
         }
         echo "\n prime anagram number are \n";
-        for ($k = 0; $k < sizeof($primeAnagram); $k++) { //printing the anagram array
+
+        /** printing the anagram array */
+        for ($k = 0; $k < sizeof($primeAnagram); $k++) {
             echo $primeAnagram[$k] . "  ";
         }
     }
-/**function to check two string are prime anagram in array */
+/**
+ * function to check two string are prime anagram in array
+ */
     public static function isPrimeAnagram($str1, $str2)
     {
         $tempStr1 = str_split($str1);
@@ -200,26 +224,38 @@ return trim(fgets(STDIN));
             return false;
         }
     }
-/**function check whether prime numbers are palindrome */
+/**
+ * function check whether prime numbers are palindrome
+ */
     public static function printPrimePalindrome($arr)
     {
         $palindrome = array();
         $count = 0;
         for ($i = 0; $i < sizeof($arr); $i++) {
-            if (Utility::isPalindrome("$arr[$i]")) {/**check each array value is palindrome */
-                $palindrome[$count] = $arr[$i]; //it is palidnrome then addd to array
+
+            /**check each array value is palindrome */
+            if (Utility::isPalindrome("$arr[$i]")) {
+
+                /**it is palidnrome then addd to array */
+                $palindrome[$count] = $arr[$i];
                 $count++;
             }
         }
         echo "\n prime palindrome number are \n";
-        for ($k = 0; $k < sizeof($palindrome); $k++) { /**print prime palindrome */
+
+        /**print prime palindrome */
+        for ($k = 0; $k < sizeof($palindrome); $k++) {
             echo $palindrome[$k] . " ";
         }
     }
-
+/**
+ * function to check it is a palindrome
+ */
     public static function isPalindrome($arr1)
     {
-        $arr2 = strrev($arr1);/**reverse number is equal to original then palindrome */
+
+        /**reverse number is equal to original then palindrome */
+        $arr2 = strrev($arr1);
         if ($arr1 == $arr2) {
             return true;
         } else {
@@ -227,12 +263,43 @@ return trim(fgets(STDIN));
         }
     }
 
-/**function to find element in using binarysearch 
+ /**function to check the year is leap yr or not
+ * @param : input the year to check leap year
+ */
+public static function checkLeapYear($yr)
+{
+
+    /**year must 4 digits */
+    while ($yr < 999 && $yr < 10000) { 
+        echo "enter valid year must be 4 digit \n";
+        $yr = Utility::readInt();
+        Utility::checkLeapYear($yr);
+    }
+    $flag = false;
+
+    if ($yr % 400 == 0) { 
+        $flag = true;
+    } else if ($yr % 100 == 0) {
+        $flag = false;
+    } else if ($yr % 4 == 0) {
+        $flag = true;
+    }
+
+    if ($flag) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+/**
+ * function to find element in using binarysearch
  * @param : input length
-*/
+ */
     public static function binarySearch($n)
-    {   
-        echo "              1 : Binaray search\n";
+    {
+        echo "\t1 : Binaray search\n";
         $start = Utility::startTime();
         $arr = array();
         echo "enter element \n";
@@ -243,84 +310,115 @@ return trim(fgets(STDIN));
         print_r($arr);
         echo "enter element to search\n ";
         $key = Utility::readInt();
-        $beg = 0; /**intial size of array */
-        $end = count($arr) - 1; /**length of array */
+
+        /**intial size of array */
+        $beg = 0;
+
+        /**length of array */
+        $end = count($arr) - 1;
 
         while ($beg <= $end) {
-            $mid = floor(($beg + $end) / 2); /**calculate mid and round */
-            if ($arr[$mid] == $key) { /**if mid of array is key then key is found */
+
+            /**calculate mid  */
+            $mid = floor(($beg + $end) / 2);
+
+            /**if mid of array is key then key is found */
+            if ($arr[$mid] == $key) {
                 echo "key found at " . $mid . "\n";
                 break;
-            } else if ($key < $arr[$mid]) { /**if key is less than mid of array then array moves forward*/
-                $end = $mid - 1;
-            } else {
-                $beg = $mid + 1; /**if key>arry of mid then mid+1 */
             }
-
+            /**if key is less than mid of array then array moves forward*/
+            else if ($key < $arr[$mid]) {
+                $end = $mid - 1;
+            }
+            /**if key>arry of mid then mid+1 */
+            else {
+                $beg = $mid + 1;
+            }
         }
         if ($beg > $end) {
             echo "element not found\n";
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        $sec = $elapsed/1000;
-        $min = $sec/60;
-        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
+        $sec = $elapsed / 1000;
+        $min = $sec / 60;
+        echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
         return $elapsed;
     }
-/**function to find element in using binarysearch with string */
+/**
+ * function to find element in using binarysearch with string
+ * @param : $input length
+ */
     public static function binarySearchString($n)
     {
-        echo "                  2 : binarysearch string \n";
+        echo "\t2 : binarysearch string \n";
         $start = Utility::startTime();
         $arr = array();
         echo "enter element in string\n";
+
+        /**enter elements into array */
         for ($i = 0; $i < $n; $i++) {
-            $arr[$i] = Utility::getStringArray(); /**enter elements into array */
+            $arr[$i] = Utility::getStringArray();
         }
         sort($arr);
         print_r($arr);
         echo "enter element to search \n";
-        $key = Utility::readString();/**read string */
+
+        /**read string */
+        $key = Utility::readString();
         $beg = 0;
         $end = count($arr) - 1;
         while ($beg <= $end) {
             $mid = floor(($beg + $end) / 2);
-            if (strcmp($arr[$mid], $key) == 0) {  /**strccmp of two string is 0 then elemnet is mid */
+
+            /**strccmp of two string is 0 then elemnet is mid */
+            if (strcmp($arr[$mid], $key) == 0) {
                 echo "found at " . $mid;
                 break;
-            } else if (strcmp($arr[$mid], $key) < 0) {/*strcmp of two string is lessthan 0 then mid+1 */
+            }
+            /*strcmp of two string is lessthan 0 then mid+1 */
+            else if (strcmp($arr[$mid], $key) < 0) {
                 $beg = $mid + 1;
-            } else if (strcmp($arr[$mid], $key) > 0) {/**strcmp of two string is greater than 0 then mid-1 */
+            }
+            /**strcmp of two string is greater than 0 then mid-1 */
+            else if (strcmp($arr[$mid], $key) > 0) {
                 $end = $mid - 1;
             }
         }
+
+        /**beg is greater than end not found */
         if ($beg > $end) {
-            echo "element not found\n";/**beg is greater than end not found */
+            echo "element not found\n";
         }
 
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        $sec = $elapsed/1000;
-        $min = $sec/60;
-        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
+        $sec = $elapsed / 1000;
+        $min = $sec / 60;
+        echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
         return $elapsed;
     }
-/**function to sort integers using insertion sort 
+/**
+ * function to sort integers using insertion sort
  * @param : input length
-*/
+ */
     public static function insertionSort($n)
     {
         echo "                3: insertion sort \n";
         $start = Utility::startTime();
         $arr = array();
         echo "enter element \n";
+
+        /**read integer */
         for ($i = 0; $i < $n; $i++) {
-            $arr[$i] = Utility::readInt();/**read integer */
+            $arr[$i] = Utility::readInt();
         }
         $len = sizeof($arr);
+
+        /**taking next element as key and comparing with cother in every loop */
         for ($i = 1; $i < $len; $i++) {
-            $key = $arr[$i];/**taking next element as key and comparing with cother in every loop */
+            $key = $arr[$i];
             $j = $i - 1;
             while ($j >= 0 && $arr[$j] > $key) {
                 $arr[$j + 1] = $arr[$j];
@@ -329,32 +427,37 @@ return trim(fgets(STDIN));
             $arr[$j + 1] = $key;
         }
 
+        /**printing array */
         for ($i = 0; $i < $len; $i++) {
-            echo $arr[$i] . " ";/**printing array */
+            echo $arr[$i] . " ";
         }
         echo "\n";
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        $sec = $elapsed/1000;
-        $min = $sec/60;
-        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
+        $sec = $elapsed / 1000;
+        $min = $sec / 60;
+        echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
         return $elapsed;
     }
-/**function to sort integers using insertion sort for strings 
+/**
+ * function to sort integers using insertion sort for strings
  * @param :input length
-*/
+ */
     public static function insertionSortString($n)
     {
         echo "                   4 : insertion sort string \n";
         $start = Utility::startTime();
         $arr = array();
         echo "enter element in string\n";
-        for ($i = 0; $i < $n; $i++) {
-            $arr[$i] = Utility::readString();/**read String */
-        }
 
+        /**read String */
+        for ($i = 0; $i < $n; $i++) {
+            $arr[$i] = Utility::readString();
+        }
         $len = sizeof($arr);
-        for ($i = 1; $i < $len; $i++) {/**taking next element as key and comparing with cother in every loop */
+
+        /**taking next element as key and comparing with cother in every loop */
+        for ($i = 1; $i < $len; $i++) {
             $key = $arr[$i];
             $j = $i - 1;
             while ($j >= 0) {
@@ -363,7 +466,6 @@ return trim(fgets(STDIN));
                 }
                 $arr[$j + 1] = $arr[$j];
                 $j--;
-
             }
             $arr[$j + 1] = $key;
         }
@@ -373,12 +475,13 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        $sec = $elapsed/1000;
-        $min = $sec/60;
-        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
+        $sec = $elapsed / 1000;
+        $min = $sec / 60;
+        echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
         return $elapsed;
     }
-/**function to sort using bubblesort
+/**
+ * function to sort using bubblesort
  * @param : input length
  */
     public static function bubbleSort($n)
@@ -391,9 +494,13 @@ return trim(fgets(STDIN));
             $arr[$i] = Utility::readInt();
         }
         $len = sizeof($arr);
-        for ($i = 0; $i < $len; $i++) {/**comparing with adjacent elements  */
+
+        /**comparing with adjacent elements  */
+        for ($i = 0; $i < $len; $i++) {
             for ($j = $i + 1; $j < $len; $j++) {
-                if ($arr[$i] > $arr[$j]) {/**if it is greater than other then swap */
+
+                /**if it is greater than other then swap */
+                if ($arr[$i] > $arr[$j]) {
                     $temp = $arr[$i];
                     $arr[$i] = $arr[$j];
                     $arr[$j] = $temp;
@@ -406,14 +513,15 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        $sec = $elapsed/1000;
-        $min = $sec/60;
-        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
+        $sec = $elapsed / 1000;
+        $min = $sec / 60;
+        echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
         return $elapsed;
     }
-/**function to sort using bubblesort for strings 
- * @parma input length
-*/
+/**
+ * function to sort using bubblesort for strings
+ * @param: input length
+ */
     public static function bubbleSortString($n)
     {
         echo "6 : bubble sort string\n";
@@ -424,9 +532,13 @@ return trim(fgets(STDIN));
             $arr[$i] = Utility::getStringArray();
         }
         $len = sizeof($arr);
-        for ($i = 0; $i < $len; $i++) {/**comparing with adjacent elements  */
+
+        /**comparing with adjacent elements  */
+        for ($i = 0; $i < $len; $i++) {
             for ($j = $i + 1; $j < $len; $j++) {
-                if (strcmp($arr[$i], $arr[$j]) > 0) {/**if it is greater than other then swap */
+
+                /**if it is greater than other then swap */
+                if (strcmp($arr[$i], $arr[$j]) > 0) {
                     $temp = $arr[$i];
                     $arr[$i] = $arr[$j];
                     $arr[$j] = $temp;
@@ -438,61 +550,85 @@ return trim(fgets(STDIN));
         }
         $stop = Utility::stopTime();
         $elapsed = Utility::elapsedTime($start, $stop);
-        $sec = $elapsed/1000;
-        $min = $sec/60;
-        echo "\n".($sec) . " sec elasped  ".$min."  minutes\n";
+        $sec = $elapsed / 1000;
+        $min = $sec / 60;
+        echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
         return $elapsed;
     }
-
+/**
+ * function to start stopwatch
+ */
     public static function startTime()
     {
-        $start = round(microtime(true) * 1000);   /**microtime calculate time in milisec */
+
+        /**microtime calculate time in milisec */
+        $start = round(microtime(true) * 1000);
         return $start;
     }
+/**
+ * function to stop stopwatch
+ */
     public static function stopTime()
     {
+        /**microtime calculate time in milisec */
         $stop = round(microtime(true) * 1000);
         return $stop;
     }
+
+    /**
+     * function to return total of  stopwatch
+     */
     public static function elapsedTime($start, $stop)
     {
         return $elapsed = $stop - $start;
         unset($start);
         unset($stop);
     }
-/**binarysearch of string from file
+/**
+ * binarysearch of string from file
  * @param : input array
  */
     public static function binarySearchFile($arr)
     {
 
-        sort($arr);
-        echo "enter element to search ";
+        
+        echo "\nenter element to search \n";
         $key = Utility::readString();
         $beg = 0;
         $end = count($arr) - 1;
         while ($beg <= $end) {
             $mid = floor(($beg + $end) / 2);
-            if (strcmp($arr[$mid], $key) == 0) {  /**strccmp of two string is 0 then elemnet is mid */
-                echo "found at " . $mid;
+
+            /**strccmp of two string is 0 then elemnet is mid */
+            if (strcmp($arr[$mid], $key) == 0) {
+                echo "found at " . $mid."\n";
                 break;
-            } else if (strcmp($arr[$mid], $key) < 0) { /*strcmp of two string is lessthan 0 then mid+1 */
+            }
+            /*strcmp of two string is lessthan 0 then mid+1 */
+            else if (strcmp($arr[$mid], $key) < 0) {
                 $beg = $mid + 1;
-            } else if (strcmp($arr[$mid], $key) > 0) {/**strcmp of two string is greater than 0 then mid-1 */
+            }
+            /**strcmp of two string is greater than 0 then mid-1 */
+            else if (strcmp($arr[$mid], $key) > 0) {
                 $end = $mid - 1;
             }
         }
+
+        /**beg is greater than end not found */
         if ($beg > $end) {
-            echo "element not found";/**beg is greater than end not found */
+            echo "element not found";
         }
     }
-/**insrtion sort of string from file
+/**
+ * insertion sort of string from file
  * @param : input array
  */
     public static function insertionSortFile($arr)
     {
+
+        /**taking next element as key and comparing with cother in every loop */
         for ($i = 1; $i < sizeof($arr); $i++) {
-            $key = $arr[$i];/**taking next element as key and comparing with cother in every loop */
+            $key = $arr[$i];
             $j = $i - 1;
             while ($j >= 0) {
                 if (strcmp($arr[$j], $key) < 0) {
@@ -504,18 +640,25 @@ return trim(fgets(STDIN));
             $arr[$j + 1] = $key;
         }
         echo "after sorting \n";
-        for ($i = 0; $i < sizeof($arr); $i++) {/**print array */
+
+        /**print array */
+        for ($i = 0; $i < sizeof($arr); $i++) {
             echo $arr[$i] . " ";
         }
     }
-/**perform bubble sort from the file
+/**
+ * perform bubble sort from the file
  * @param : input array
  */
     public static function bubbleSortFile($arr)
     {
-        for ($i = 0; $i < sizeof($arr); $i++) {/**comparing with adjacent elements  */
+
+        /**comparing with adjacent elements  */
+        for ($i = 0; $i < sizeof($arr); $i++) {
             for ($j = $i + 1; $j < sizeof($arr); $j++) {
-                if ($arr[$i] > $arr[$j]) {/**if it is greater than other then swap */
+
+                /**if it is greater than other then swap */
+                if ($arr[$i] > $arr[$j]) {
                     $temp = $arr[$i];
                     $arr[$i] = $arr[$j];
                     $arr[$j] = $temp;
@@ -526,202 +669,278 @@ return trim(fgets(STDIN));
         for ($k = 0; $k < sizeof($arr); $k++) {
             echo $arr[$k] . " ";
         }
+        echo "\n";
     }
-/**Program to calculate the minimum number
-of Notes as well as the Notes to be returned by the Vending Machine as a
-Change 
-* @param : input notes array nand amount
-*/
+/**
+ * function to calculate the minimum number of Notes as well as the Notes to be returned by the Vending Machine as a Change
+ * @param : input notes array nand amount
+ */
     public static function vendingMachine($notes, $amount)
     {
         $tempamount = $amount;
         $totalNotes = 0;
         $flag = false;
         for ($i = 0; $i < sizeof($notes); $i++) {
-            if (floor($tempamount / $notes[$i]) > 0) {/**checking each array is greater than 0 */
-                $Nonotes = floor($tempamount / $notes[$i]);/**dividing given amount with array of notes */
+            if (floor($tempamount / $notes[$i]) > 0) {
+
+                /**checking each array is greater than 0 */
+                $Nonotes = floor($tempamount / $notes[$i]);
+
+                /**dividing given amount with array of notes */
                 $tempamount = floor($tempamount % $notes[$i]);
-                echo $Nonotes ." ". $notes[$i]."rs\n";/**printing notes until less than 0 */
+
+                /**printing notes until less than 0 */
+                echo $Nonotes . " " . $notes[$i] . "rs\n";
                 $totalNotes++;
                 $flag = true;
                 break;
             }
         }
-        
-        if ($flag) { /**recursively checking  */
+
+        /**recursively checking  */
+        if ($flag) {
             Utility::vendingMachine($notes, $tempamount);
         }
         return $totalNotes;
     }
-/**function to calculate day for year and date 
+
+/**
+ * function to calculate day for year and date
  * @param month year date
- * @return d0
-*/
+ * @return : d0
+ */
     public static function calculateDay($d, $m, $y)
     {
-        $y0 = floor($y - (14 - $m) / 12) +1 ;
-        $x = floor($y0 + $y0/4 - $y0/100 + $y0/400);
+        $y0 = floor($y - (14 - $m) / 12) + 1;
+        $x = floor($y0 + $y0 / 4 - $y0 / 100 + $y0 / 400);
         $m0 = ($m + 12 * floor(((14 - $m) / 12)) - 2);
-        $d0 = floor(($d + $x + floor((31*$m0) / 12)) % 7) ;
+        $d0 = floor(($d + $x + floor((31 * $m0) / 12)) % 7);
         return $d0;
     }
 
-/**function to convert number to binary
- * @param : input number 
+/**
+ * function to convert number to binary
+ * @param : input number
  */
     public static function toBinary($num)
     {
         $str = array();
         $i = 0;
-        echo "Binary representation of "."$num\n";
+        echo "Binary representation of " . "$num\n";
         while ($num > 0) {
-            $rem = floor($num % 2);/**binary number by dividing by 2 */
+
+            /**binary number by dividing by 2 */
+            $rem = floor($num % 2);
             // array_push($str, $i);
             $num = floor($num / 2);
-            $str[$i] = $rem;/**add to array */
+
+            /**add to array */
+            $str[$i] = $rem;
             $i++;
         }
-        
-       $new = array_reverse($str);
-        for($i=0;$i<sizeof($new);$i++){
-            echo $new[$i]." ";
+
+        $new = array_reverse($str);
+        for ($i = 0; $i < sizeof($new); $i++) {
+            echo $new[$i] . " ";
         }
 
         return $new;
     }
-    /**convert binary to decimal 
-     * @param : input binary string
-    */
-    public static function toDecimal($strBin){
-        $newStr= strrev($strBin);
-        $strBinArr= str_split($newStr);
+/**
+ *  convert binary to decimal
+ * @param : input binary string
+ */
+    public static function toDecimal($strBin)
+    {
+        $strBinArr = array_reverse($strBin);
+        
         $res = 0;
-        for($i=0;$i<sizeof($strBinArr);$i++){
-            $res = $res + $strBinArr[$i]*pow(2,$i);
+        for ($i = 0; $i < sizeof($strBinArr); $i++) {
+            $res = $res + $strBinArr[$i] * pow(2, $i);
         }
         echo "\ndecimal value\n";
-        echo $res."\n";
+        echo $res . "\n";
     }
 
-  /**binary nibbles
-   * @param : input binary array */  
-public static function binaryNibbles($binaryArr){
-    $strBinary = implode("",$binaryArr);/**convert array to string */
-        $len = 8 - count($strBinary) ;
-        for($i=0;$i<$len;$i++){/**adding 8 bit format  */
-            $strBinary = "0".$strBinary;
+/**
+ * binary nibbles
+ * @param : input binary array */
+    public static function binaryNibbles($binaryArr)
+    {
+
+        /**convert array to string */
+        $strBinary = implode("", $binaryArr);
+        $len = 8 - strlen($strBinary);
+
+        /**adding 8 bit format  */
+        for ($i = 0; $i < $len; $i++) {
+            $strBinary = "0" . $strBinary;
         }
-    
-    echo "\nconverting to 8 bits \n".$strBinary."\n";
-    
 
-    $str1 = substr($strBinary,0,4);/**dividing to two subarray string */
-    $str2 = substr($strBinary,4,8);
-    $str3 = $str2.$str1;//swapping two strings
-    echo "after swapping and converting to decimal ";
-    echo $str3;
-    Utility::toDecimal($str3);    
-}
-/**to compute the square root of a nonnegative number c 
- * @param input value
-*/
-public static function sqrt($c){
-    $t = $c ;
-    $epsilon = 1e-15 ;/**calculate by applying formula */
-    while(abs($t-($c/$t))>$epsilon*$t){
-        $t = ($c/$t + $t)/2 ;
+        echo "\nconverting to 8 bits \n" . $strBinary . "\n";
+
+        /**dividing to two subarray string */
+        $str1 = substr($strBinary, 0, 4);
+        $str2 = substr($strBinary, 4, 8);
+
+        //swapping two strings
+        $str3 = $str2 . $str1;
+        echo "after swapping and converting to decimal ";
+        echo $str3;
+        $str4 = str_split($str3);
+        Utility::toDecimal($str4);
     }
-    echo $t ;
-}
-/**convert temperature to celcuis and celcuis to tempearture */
-public static function tempConverstation($c){
-    switch($c){
-        case 1: echo "enter the value of celcuis\n";/**celcuis to farenheit */
+/**
+ * to compute the square root of a nonnegative number c
+ * @param: input value
+ */
+    public static function sqrt($c)
+    {
+        $t = $c;
+
+        /**calculate by applying formula */
+        $epsilon = 1e-15;
+        while (abs($t - ($c / $t)) > $epsilon * $t) {
+            $t = ($c / $t + $t) / 2;
+        }
+        echo $t;
+    }
+/**
+ * convert temperature to celcuis and celcuis to tempearture
+ */
+    public static function tempConverstation($c)
+    {
+        switch ($c) {
+
+            /**celcuis to farenheit */
+            case 1:echo "enter the value of celcuis\n";
                 $celcius = Utility::readFloat();
-                $faren = ($celcius*9)/5+32;
-                echo "celcius to farenheit  ".$faren ."\n";
+                $faren = ($celcius * 9) / 5 + 32;
+                echo "celcius to farenheit  " . $faren . "\n";
                 break;
-        case 2: echo "enter the value of farenheit\n";/**farenheit to celcius */
+
+            /**farenheit to celcius */
+            case 2:echo "enter the value of farenheit\n";
                 $farenheit = Utility::readFloat();
-                $celci = (($farenheit-32) *5) /9;
-                echo "farenheit to celcuis  ".$celci ."\n";
-                break;  
-        default :
-                echo "invalid choice\n";              
+                $celci = (($farenheit - 32) * 5) / 9;
+                echo "farenheit to celcuis  " . $celci . "\n";
+                break;
+            default:
+                echo "invalid choice\n";
+        }
     }
-}
-/**monthy payment */
-public static function paymentMonthly($p,$y,$R){
-    $r = $R/(12*100);/**calculate by applying formula */
-    $n = 12*$y;
-    $payment = ($p*$r)/(1-pow(1+$r,-$n));
-    echo "monthly payment :". $payment."\n";
-}
-/**program to perform mergersort on strings 
+/**
+ * function to calculate monthy payment for amount
+ * @param : year , rate, principal
+ */
+    public static function paymentMonthly($p, $y, $R)
+    {
+
+        /**calculate by applying formula */
+        $r = $R / (12 * 100);
+        $n = 12 * $y;
+        $payment = ($p * $r) / (1 - pow(1 + $r, -$n));
+        echo "monthly payment :" . $payment . "\n";
+    }
+
+/**
+ * program to perform mergersort on strings
  * @param : input array
  * @return : output array
+ */
+
+/**
+* function to perform merge sort
+*@param : input string
 */
+    public static function mergeSort($input)
+    {
+     
+        
+        $len = count($input);
+        if (count($input) == 1) {
+            return $input;
+        }
 
-public static function mergeSort($input){
-    $len = count($input);
-    if(count($input) == 1 ) return $input; /**if input size is 1 then return  */
-	$mid = floor(count($input) / 2);/**calcukate mid */
-    $left = array_slice($input, 0, $mid); /**divide array into two halves until is size is 1 */
-    $right = array_slice($input, $mid,$len-1);
-	$left = Utility::mergeSort($left);
-	$right = Utility::mergeSort($right);
-	return Utility::merge($left, $right);/**merge sort the subarrays */
-}
-/**to perform merge operation */
-public static function merge($left,$right){
-    $res = array();
-	while (count($left) > 0 && count($right) > 0){/**sorting the elements of subarray */
-		if($left[0] > $right[0]){
-			$res[] = $right[0];
-			$right = array_slice($right , 1);/**after adding to array remove element */
-		}else{
-			$res[] = $left[0];
-			$left = array_slice($left, 1);
-		}
-	}
-	while (count($left) > 0){/**adding remaining elements into array */
-		$res[] = $left[0];
-		$left = array_slice($left, 1);
-	}
-	while (count($right) > 0){
-		$res[] = $right[0];
-		$right = array_slice($right, 1);
-	}
-	return $res; /**return the sorted array */
-}
-/**program to guess the number  */
-public static function findNumber($arr,$start,$end){
-  
-    if($start-$end==0){
-        return $arr[$start];
-    }else{
-        $mid =floor(($start + $end )/2);
-        echo "your number is ".$mid."\n";
-        if($arr[$start]==$mid){
-            echo "number is ".$start."\n";
-        }else{
-            echo "your number is between".$start." and ".$mid."\n";
+        /**calculate mid */
+        $mid = floor(count($input) / 2);
 
-            $ans = Utility::readString();
-            trim($ans);
-            strtolower($ans);
-            if($ans == "no"||$ans=="n"){
-                Utility::findNumber($arr,$mid,$end);
-            }else if($ans =="yes"||$ans=="y"){
-                Utility::findNumber($arr,$start,$mid);
+        /**divide array into two halves until is size is 1 */
+        $left = array_slice($input, 0, $mid);
+        $right = array_slice($input, $mid, $len - 1);
+        $left = Utility::mergeSort($left);
+        $right = Utility::mergeSort($right);
+
+        /**merge sort the subarrays */
+        return Utility::merge($left, $right);
+    }
+    /**to perform merge operation */
+    public static function merge($left, $right)
+    {
+        $res = array();
+
+        /**sorting the elements of subarray */
+        while (count($left) > 0 && count($right) > 0) {
+            if ($left[0] > $right[0]) {
+                $res[] = $right[0];
+
+                /**after adding to array remove element */
+                $right = array_slice($right, 1);
+            } else {
+                $res[] = $left[0];
+                $left = array_slice($left, 1);
             }
         }
+
+        /**adding remaining elements into array */
+        while (count($left) > 0) {
+            $res[] = $left[0];
+            $left = array_slice($left, 1);
+        }
+        while (count($right) > 0) {
+            $res[] = $right[0];
+            $right = array_slice($right, 1);
+        }
+
+        /**return the sorted array */
+        return $res;
     }
+/**
+ * program to guess the number
+ * @param : array,startlength,end length
+ */
+    public static function findNumber($arr, $start, $end)
+    {
 
-}
+        if ($start - $end == 0) {
+            return $arr[$start];
+        } else {
 
+            /**calculate mid  */
+            $mid = floor(($start + $end) / 2);
 
+            /**if your number is mid  */
+            // echo "your number is " . $mid . "\n";
+            if ($arr[$start] == $mid) {
+                echo "number is " . $start . "\n";
+            } else {
 
+                /**if your number lies between start and mid type true or false */
+                echo "your number is between" . $start . " and " . $mid . "\n";
+                $ans = Utility::readString();
+                trim($ans);
+                strtolower($ans);
+                if ($ans == "no" || $ans == "n") {
+                    Utility::findNumber($arr, $mid, $end);
+                } else if ($ans == "yes" || $ans == "y") {
+                    Utility::findNumber($arr, $start, $mid);
+                }else{
+                    echo "invalid input\n";
+                }
+            }
+        }
+
+    }
 
 }
 ?>

@@ -1,41 +1,40 @@
 <?php
 class Utility
 {
-/**function to read string
- *@return String value */
+/**
+ * function to read string
+ *@return :String value 
+ */
     public static function readString()
     {
         $var = readline("");
-        while (is_numeric($var)) { /**if input is numeric then throw error */
+
+        /**if input is numeric then throw error */
+        while (is_numeric($var)) {
             echo "enter valid input ";
             fscanf(STDIN, "%s", $var);
         }
         return $var;
     }
-/**function to read integer
- * @return integer value */
+
+/**
+ * function to read integer
+ * @return :integer value 
+ * */
     public static function readInt()
     {
         fscanf(STDIN, "%s", $i);
-// if(is_string($i)){
-        //     echo "enter valid  ";
-        // }else if(is_numeric($i)){
-        //     return $i;
-        // }
 
-// while(!is_numeric($i)){
-        //     echo "enter valid input"."\n";
-        //     fscanf(STDIN,"%d",$i);
-        // }
-
-        while (!is_numeric($i) || $i > (int) $i) { /**if input is numeric or decimal  */
+        /**if input is numeric or decimal  */
+        while (!is_numeric($i) || $i > (int) $i) {
             echo "enter valid input";
             fscanf(STDIN, "%s", $i);
         }
         return $i;
     }
-/**  to read float values
- *@return double value
+
+/** To read float values
+ *@return: double value
  */
     public static function readDouble()
     {
@@ -46,9 +45,11 @@ class Utility
         }
         return $val;
     }
-/**read flaot values
- * @return float value
- */
+
+/**
+*read flaot values
+* @return: float value
+*/
     public static function readFloat()
     {
         fscanf(STDIN, "%s\n", $val);
@@ -58,7 +59,10 @@ class Utility
         }
         return $val;
     }
-/**To get Strings array */
+
+/**
+ * To get Strings array 
+ * */
     public static function getStringArray()
     {
         return trim(fgets(STDIN));
@@ -73,18 +77,23 @@ class Utility
         return $val;
     }
 
-/**function to replace string with given string
+/**
+ * function to replace string with given string
  * @param : input string
  */
     public static function stringReplace($str)
     {
         trim($str);
+
+        /**replace the username with the given string */
         $inputStr = "Hello <<UserName>>, How are you?";
         $str1 = "<<UserName>>";
-        $str2 = str_replace($str1, $str, $inputStr); /**replace the username with the given string */
+        $str2 = str_replace($str1, $str, $inputStr);
         echo $str2;
     }
-/**function to take number of time to flip coin and print percentage of heads and tails
+
+/**
+ * function to take number of time to flip coin and print percentage of heads and tails
  * @param : number of times to flip
  */
     public static function coinFlip($flipNo)
@@ -92,8 +101,12 @@ class Utility
         $tails = 0;
         $heads = 0;
         for ($i = 0; $i < $flipNo; $i++) {
-            $random = rand(0, 1); /**generate random upto given range */
-            if ($random < 0.5) { /**if random less than 0.5 inc tails else heads */
+
+            /**generate random upto given range */
+            $random = rand(0, 1);
+
+            /**if random less than 0.5 inc tails else heads */
+            if ($random < 0.5) {
                 $tails++;
             } else {
                 $heads++;
@@ -105,18 +118,23 @@ class Utility
         print "tails percentage  " . $tailPercent . "  %\n";
         print "heads percentage  " . $headsPercent . "  %\n";
     }
-/**function to check the year is leap yr or not
+
+/**
+ * function to check the year is leap yr or not
  * @param : input the year to check leap year
  */
     public static function checkLeapYear($yr)
     {
-        while ($yr < 999 && $yr < 10000) { /**year must 4 digits */
+        /**year must 4 digits */
+        while ($yr < 999 && $yr < 10000) {
             echo "enter valid year must be 4 digit \n";
             $yr = Utility::readInt();
             Utility::checkLeapYear($yr);
         }
         $flag = false;
-        if ($yr % 400 == 0) { /**divided by 400 or 4 then it is leap year else not  */
+
+        /**divided by 400 or 4 then it is leap year else not  */
+        if ($yr % 400 == 0) {
             $flag = true;
         } else if ($yr % 100 == 0) {
             $flag = false;
@@ -130,7 +148,10 @@ class Utility
             echo "not a leap year \n";
         }
     }
-/**coupon number  */
+
+/**
+ * function to generate coupon number
+*/
     public static function generateCoupon($range)
     {
         $alpha = array();
@@ -141,35 +162,39 @@ class Utility
         $couponletters = array('1', '2', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k', 'l');
         $couponNo = array();
         $totalDistinct = 0;
+        $j=0;
         for ($i = 0; $i < $range; $i++) {
-            $j = $i + 1;
+            
             $random = rand(1, $range);
-            $couponNo[$i] = $random;
+            
             $couponNo[$j++] = $couponletters[$random];
         }
         $uni = array_unique($couponNo);
-        $uni1 = array_values($uni);
-        $total = sizeof($uni1);
-        for ($i = 0; $i < sizeof($uni1); $i++) {
-            echo "$uni1[$i] ";
+        $uniOne = array_values($uni);
+        $total = sizeof($uniOne);
+        for ($i = 0; $i < sizeof($uniOne); $i++) {
+            echo "$uniOne[$i] ";
         }
         echo "\n" . "total distinct number " . $total . "\n";
     }
+
 /** prints a table of the
  *powers of 2 that are less than or equal to 2^N
- *param : input the number to print table
+ *@param : input the number to print table
  */
     public static function powerOfTwo($num)
     {
         $pow = pow(2, $num);
         $res = 0;
         echo "powers of 2 are \n";
-        for ($i = 0; $i <= $num; $i++) { /**power's of 2 upto  given input */
+
+        /**power's of 2 upto  given input */
+        for ($i = 0; $i <= $num; $i++) {
             echo pow(2, $i) . "\n";
         }
 
     }
-/** PRINT Nth Harmonic value
+/** print Nth Harmonic value
  * @param : input the number to print harmonic value
  */
     public static function harmonicValue($num)
@@ -177,47 +202,56 @@ class Utility
         if (!$num == 0) {
             $res = 0;
             echo "Nth harmonic value \n";
-            for ($i = 1; $i <= $num; $i++) {/** nth harmonic upto guven input */
-                $res = $res + 1 / $i;
-                echo "1"."/" .$i;
 
-                if($i>=$num){
+            for ($i = 1; $i <= $num; $i++) {
+                $res = $res + 1 / $i;
+                echo "1" . "/" . $i;
+
+                if ($i >= $num) {
                     echo "";
-                }else{
-                    echo "+";
+                } else {
+                    echo " + ";
                 }
-                
             }
             echo " = ";
-            echo $res."\n";
+            echo $res . "\n";
         } else {
             echo "enter n value > 0";
         }
     }
-/**function to prime factos of n
+/**
+ * function to prime factos of n
  * @param : input the number to print prim factors
  */
     public static function primeFactor($n)
     {
         echo "prime factors are : \n";
-        for ($num = 2; $num <= $n; $num++) { // prime num start from 2
+
+        // prime num start from 2
+        for ($num = 2; $num <= $n; $num++) {
             $flag = true;
             for ($j = 2; $j <= $num / 2; $j++) {
-                if ($num % $j == 0) { // it it is divided by zero it's not a prime
+
+                // it it is divided by zero it's not a prime
+                if ($num % $j == 0) {
                     $flag = false;
                     break;
                 }
             }
             if ($flag == true) {
+
+                // prime numbers divided by inputs
                 while ($n % $num == 0) {
-                    echo $num . " \n"; // prime numbers divided by inputs
+                    echo $num . " \n";
                     $n = $n / $num;
                 }
 
             }
         }
     }
-/** gambleer
+
+/** 
+ * Gambler play
  * @param : input stack,goal, no of times to play
  */
     public static function gamblerPlay($stack, $goal, $times)
@@ -227,14 +261,15 @@ class Utility
         }
         $bets = 0;
         $wins = 0;
+
 /** loop to PLAY no of time given by user*/
         for ($i = 0; $i < $times; $i++) {
             $cash = $stack;
+
             /** lopp till player got broke or win*/
             while ($cash > 0 && $cash < $goal) {
                 $bets++;
                 $rand = rand(0, 1);
-                echo $rand . " \n";
                 if ($rand < 0.5) {
                     $cash++;
                 } else {
@@ -245,47 +280,61 @@ class Utility
                 }
             }
         }
+
 // display results of gamble
         echo $wins . " wins out of " . $times;
         echo "\ntotal bets : " . $bets . "\n";
         echo "wins% is " . ($wins / $times * 100) . "%\n";
 
     }
-/**function to print 2 Dimensional Array.
+
+/**
+ * function to print 2 Dimensional Array.
  * @param : input rows, columns ,array
  */
     public static function printTwoDArray($rows, $cols, $arr)
     {
+        // echo "enter 1 :Integer 2: string";
         echo "enter the " . $rows * $cols . " elements";
-        for ($i = 0; $i < $rows; $i++) {/** enter the values into an array */
+
+        /** enter the values into an array */
+        for ($i = 0; $i < $rows; $i++) {
             for ($j = 0; $j < $cols; $j++) {
                 $twoDArr[$i][$j] = Utility::readInt();
             }
         }
-        for ($i = 0; $i < $rows; $i++) { /**print the array */
+
+        /**print the array */
+        for ($i = 0; $i < $rows; $i++) {
             for ($j = 0; $j < $cols; $j++) {
-                print $twoDArr[$i][$j] . "    ";
+                print $twoDArr[$i][$j] . "     ";
             }
             echo "\n";
         }
 // print_r($twoDArr);
     }
-/**number of triples that sum to exactly 0.
+
+/**
+ * number of triples that sum to exactly 0.
  * @param : input number of elements in array
  */
     public static function distinctTriplets($n)
     {
         $arr = array();
         echo "enter the elements \n";
+
+        //enter the elements to array
         for ($i = 0; $i < $n; $i++) {
-            $arr[$i] = Utility::readInt(); //enter the elements to array
+            $arr[$i] = Utility::readInt();
         }
         $totalDistinct = 0;
 
         for ($i = 0; $i < sizeof($arr); $i++) {
             for ($j = $i + 1; $j < sizeof($arr); $j++) {
                 for ($k = $j + 1; $k < sizeof($arr); $k++) {
-                    if (($arr[$i] + $arr[$j] + $arr[$k]) == 0) { //sum of three values of arry is equal to 0
+
+                    //sum of three values of arry is equal to 0
+                    if (($arr[$i] + $arr[$j] + $arr[$k]) == 0) {
                         echo $arr[$i] . " ", $arr[$j] . " " . $arr[$k] . " ";
                         $totalDistinct++;
                     }
@@ -310,16 +359,22 @@ class Utility
             }
         }
     }
-/**prints the Euclidean distance
+/**
+ * prints the Euclidean distance
  * @param : enter x and y value for distance
  */
     public static function distance($x, $y)
     {
-        $squareX = pow($x, $x); /**power of x,x */
-        $squareY = pow($y, $y); /**power of y,y */
-        $distance = sqrt($squareX + $squareY); // calculate distance
+        /**power of x,x */
+        $squareX = pow($x, $x);
+
+        /**power of y,y */
+        $squareY = pow($y, $y);
+
+        /** calculate distancec*/
+        $distance = sqrt($squareX + $squareY);
         echo "Euclidean distance \n";
-        echo $distance;
+        echo $distance."\n";
     }
 /**
  * calcualte roots from expression
@@ -328,12 +383,17 @@ class Utility
     public static function quadratic($a, $b, $c)
     {
         $delta = pow($b, $b) - 4 * $a * $c;
-        $root1 = -($b + sqrt($delta)) / 2 * $a; // calculate root1
-        $root2 = -($b - sqrt($delta)) / 2 * $a; // calculate root2
+
+        /**calculate root1 */
+        $root1 = -($b + sqrt($delta)) / 2 * $a;
+
+        /** calculate root2 */
+        $root2 = -($b - sqrt($delta)) / 2 * $a;
         echo "Root 1 is " . $root1 . "\n";
         echo "Root 2 is " . $root2 . "\n";
     }
-/**calcualte windchill
+/**
+ * calcualte windchill
  * @param : enter temperature and speed for windchill
  */
     public static function windChill($t, $v)
@@ -356,50 +416,45 @@ class Utility
         fgets(STDIN);
         $stop = Utility::stop();
         $elapsed = $stop - $strt;
-        echo ($elapsed / 1000) . "\n";
-// switch($c){
-        //     case 1: Utility::start();
-        //             break;
-        //     case 2: Utility::stop();
-        //             break;
-        //     default:
-        //             echo "invalid choice \n";
-        //             break;
-        // }
+        echo "elapsed time ".($elapsed / 1000) . "\n";
 
     }
+    /**function to start time */
     public static function start()
     {
         $start = round(microtime(true) * 1000);
         echo $start . "\n";
         return $start;
     }
+
+    /**function to stop time */
     public static function stop()
     {
         $stop = round(microtime(true) * 1000);
         echo $stop . "\n";
         return $stop;
     }
+
 /**function to check anagram of prime numbers */
     public static function checkAnagram($str1, $str2)
     {
-        if (strlen($str1) == strlen($str2)) { //check length of two string are equal
-            $str1Arr = str_split($str1); // split to array
-            $str2Arr = str_split($str2); //split to array
-            asort($str1Arr); //sort array by values
-            asort($str2Arr); //sort array by values
-            // foreach($str1Arr as $val){
-            //     echo $val." ";
-            // }
-            // unset($val);
-            // foreach($str2Arr as $val){
-            //     echo $val." ";
-            // }
-            // unset($val);//unsetting the value stored in foreach last element
-            $str3 = implode("", $str1Arr); //array to string by ""
-            $str4 = implode("", $str2Arr); //array to string by ""
-            if ($str3 == $str4) //check both string are equal
-            {
+        //check length of two string are equal
+        if (strlen($str1) == strlen($str2)) {
+
+            // split to array
+            $str1Arr = str_split($str1);
+            $str2Arr = str_split($str2);
+
+            /**sort array by values */
+            asort($str1Arr);
+            asort($str2Arr);
+
+            /** array to string by ""*/
+            $str3 = implode("", $str1Arr);
+            $str4 = implode("", $str2Arr);
+
+            /**check both string are equal*/
+            if ($str3 == $str4) {
                 echo "Anagram \n";
             } else {
                 echo "Not Anagram";
@@ -407,27 +462,28 @@ class Utility
         }
     }
 
- /**string permutation */
- public static function stringPermutation($str){
-    echo "permution words are \n";
-    $str1=trim($str);
-    if(!empty($str)){
-        Utility::permuation("",$str1);  
-    }else{
-        echo "enter alteast one character \n";
-    }
-}
-
-public static function permuation($output,$word){
-    if(empty($word)){
-        echo $ouput.$word."\n"; /** */
-    }else{
-        for($i=0;$i<strlen($word);$i++){
-            Utility::permuation($output.$word{$i},substr($word,0,$i).substr($word,$i+1,strlen($word)));
+    /**find string permutation */
+    public static function stringPermutation($str)
+    {
+        echo "permution words are \n";
+        $str1 = trim($str);
+        if (!empty($str)) {
+            Utility::permuation("", $str1);
+        } else {
+            echo "enter alteast one character \n";
         }
     }
+/**implement string permutation */
+    public static function permuation($output, $word)
+    {
+        if (empty($word)) {
+            echo $output . $word . "\n"; /** */
+        } else {
+            for ($i = 0; $i < strlen($word); $i++) {
+                Utility::permuation($output . $word{$i}, substr($word, 0, $i) . substr($word, $i + 1, strlen($word)));
+            }
+        }
+    }
+
 }
-
-
-
-}
+?>

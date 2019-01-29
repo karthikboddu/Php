@@ -9,6 +9,7 @@
  */ 
 require ('utility.php');
 require ('Stack.php');
+
 /** input string  */
 $string = "(5+6)∗(7+8)/((4+35+6)∗(7+8/4+3))";
 

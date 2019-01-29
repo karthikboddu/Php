@@ -105,5 +105,137 @@ echo $arr2D[$i][$j]." ";
 echo "\n";
 }
 ?>
-Wed, 13:25
+
+
+
+
+<?php
+class Node
+{
+public $data;
+public $next;
+public function __construct($data,$next)
+{
+$this->data = $data;
+$this->next = $next;
+}
+}
+?>
+<?php
+/**
+* Ordered linked list with its methods
+* */
+require 'Node.php'; 
+class LinkedList
+{
+public $front = null;
+public $last = null;
+public $size = 0;
+public function __construct()
+{
+$this->front = null;
+$this->last = null;
+}
+/**
+* Function to add the data in parameter at the start of linked list in order
+* 
+* @param data the data to be added
+*/
+public function add($data)
+{
+//check if list is empty
+if (!$this->front) 
+{
+//add at first;
+$node = new Node($data, null);
+$this->front = $node;
+$this->last = $node;
+$this->size++;
+} 
+else 
+{
+//check if data is less than the data in front
+if ($data < $this->front->data) 
+{
+$node = new Node($data,$this->front);
+$this->front = $node;
+$this->size++;
+return;
+}
+//stores in desired position
+$current = $this->front;
+while ($current) 
+{
+if ($current->data < $data && isset($current->next) && $current->next->data > $data) 
+{
+$node = new Node($data,$current->next);
+$current->next = $node;
+$this->size++;
+}
+if ($current->data < $data && !isset($current->next)) 
+{
+$node = new Node($data,$current->next);
+$current->next = $node;
+$this->size++;
+}
+$current = $current->next;
+}
+}
+}
+/**
+* function to remove the data given as argument removes only if data is there 
+*/
+public function remove($data)
+{
+$current = null;
+$temp = null;
+if($this->size==0)
+{
+echo "list is empty\n";
+}
+else if($this->front->data == $data && $this->front->next == null)
+{
+$this->front =null;
+$this->last = null;
+echo "$data removed from list\n";
+$this->size--;
+}
+else if($this->front->data == $data && $this->front->next != null)
+{
+$temp = $this->front;
+$this->front = $this->front->next;
+$temp = null;
+echo "$data removed from list\n";
+$this->size--;
+}
+else
+{
+$temp = $this->front;
+$current = $this->front->next;
+while($current!=null)
+{
+if($current->data == $data)
+{
+$temp->next = $current->next;
+$current->next = null;
+echo "$data removed from list\n";
+$this->size--;
+break;
+}
+else
+{
+$temp = $current;
+$current = $current->next;
+}
+}
+}
+}
+/**
+* function to get the elements of list as string
+*/
+public function getString()
+{
+$s = "";
+$node = $this->front;
+while ($node != null) {
 
