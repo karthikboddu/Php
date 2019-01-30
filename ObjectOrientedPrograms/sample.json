@@ -1,22 +1,23 @@
-[
-    {
-        
-            "name": "Biryani rice",
-            "weight": "5",
-            "price": "80"
-        
-    },
-    {
-        
-            "name": "pulseType",
-            "weight": "5",
-            "price": "30"
-        
-    },
-    {
-	
-		"name":"wheats type ",
-		"weight":"6",
-		"price":"50"
-    }	
-]
+{
+        "Rice": [
+                {
+                        "name": "rice type",
+                        "weight": 25,
+                        "price": 30
+                }
+        ],
+        "Wheat": [
+                {
+                        "name": "Wheat type",
+                        "weight": 55,
+                        "price": 60
+                }
+        ],
+        "Pulses": [
+                {
+                        "name": "pulses type",
+                        "weight": 35,
+                        "price": 20
+                }
+        ]
+}
