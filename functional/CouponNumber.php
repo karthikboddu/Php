@@ -1,5 +1,5 @@
 <?php
-/******************************************************************************
+/**
  *  overview : Take User Name as Input and replace the string template
  *  Purpose: Program to generate random number and to process number of distinct coupons.
  *  @file : CouponNumber.php
@@ -12,6 +12,8 @@ include 'utility.php';
 echo "enter the number\n";
 $range = Utility::readInt();
 
-/**function to generate coupon */
+/**
+ * function to generate coupon 
+*/
 Utility::generateCoupon($range);
 ?>

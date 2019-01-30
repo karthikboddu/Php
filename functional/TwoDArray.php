@@ -1,5 +1,5 @@
 <?php
-/************************************************************************************
+/**
  * purpose : Print function to print 2 Dimensional Array
  * @file : TwoDArray.php
  * @author karthik

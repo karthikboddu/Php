@@ -1,5 +1,5 @@
 <?php
-/*********************************************************************************
+/**
  * overview : Print the year is a Leap Year or not.
  * purpose : Determine if it is a Leap Year.
  * @file : LeapYear.php 
@@ -11,6 +11,8 @@ include 'utility.php';
 echo "enter year";
 $yr = Utility::readInt();
 
-/**function to checkleap year */
+/**
+ * function to checkleap year 
+*/
 $flag = Utility::checkLeapYear($yr);
 ?>

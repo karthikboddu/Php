@@ -1,10 +1,10 @@
 <?php
 /**
- * Create Utility Class having following static methods binary search and string,inserion sort with string,bubble sort and string
+ * overview : Create Utility Class having following static methods binary search and string,inserion sort with string,bubble sort and string
  * Purpose: Print sorted list from the file
- * @author karthik
- * @version 1.0
- * @since 17-01-2019
+ * @author : karthik
+ * @version : 1.0
+ * @since : 17-01-2019
  */
 include 'utility.php';
 echo "enter the size of array";
@@ -66,6 +66,7 @@ while ($c < 7) {
 }
 
 asort($time);
+echo "[bs,bs string,insertionsort,insertionString,bubblesort,bubblesortstring\n";
 for ($i = 1; $i < sizeof($time); $i++) {
     echo $time[$i] . " ";
 }

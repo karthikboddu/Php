@@ -159,18 +159,25 @@ public static function printCalender(){
              /**incrementing values  */
             $calender[$i][$j] = $dateinc++;
         }
-    }
+    } 
 
      /**week name rows */
     for($k=0;$k<sizeof($week);$k++){
         echo "\t".$week[$k]." "; 
     }
+
     echo "\n";
+
+    /**adding spaces */
+    for($i=0;$i<$d0;$i++){
+        echo "\t";
+    }
+
     for($i=0;$i<sizeof($calender);$i++){
         for($j=0;$j<sizeof($calender[$i]);$j++){
 
-            /** adding spaces at starting and after 31 days  */
-            if(($calender[$i][$j]<0)||($calender[$i][$j]>$days[$m-1])){ 
+            /** adding spaces after 31 days  */
+            if(($calender[$i][$j]>$days[$m-1])){ 
                 echo "\t";
 
                 /**printing the calender  */

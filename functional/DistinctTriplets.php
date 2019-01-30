@@ -1,6 +1,6 @@
 <?php
-/********************************************************************************
- * overviw : Read in N integers and counts the number of triples that sum to exactly 0
+/**
+ * overview : Read in N integers and counts the number of triples that sum to exactly 0
  * purpose : Sum of three Integer adds to ZERO
  * @file : DistinctTriplets.php 
  * @author : karthik
@@ -10,7 +10,9 @@
 
 include 'utility.php';
 echo "enter the number of elements ";
-/**read int */
+/**
+ * read int 
+*/
 $n = Utility::readInt(); 
 Utility::distinctTriplets($n);
 ?>

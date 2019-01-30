@@ -11,8 +11,8 @@
 require 'SingleLinkedList.php';
 
 $file = fopen("wordInt.txt", "r");
-$integers = fread($file, filesize("wordInt.txt"));
-$arr = explode(" ", $integers);
+$fileString = fread($file, filesize("wordInt.txt"));
+$arr = explode(" ", $fileString);
 print_r($arr);
 $hash = array();
 for ($i = 0; $i < 11; $i++) {
@@ -24,7 +24,7 @@ for ($i = 0; $i < sizeof($arr); $i++) {
     $hash[$n]->add((int) $arr[$i]);
 
 }
-
+print_r($hash);
 function listarr($hash)
 {
     $s = "";
@@ -34,22 +34,21 @@ function listarr($hash)
         }
         return substr($s, 0, -1) . "\n";
     }
-}   
-    echo "list is" . listarr($arr);
-    echo "enter the no to search \n";
-    $num = Utility::readInt();
-    $y = (int) $num % 11;
-    if ($hash[$y]->search($num)) {
-        echo "number found \n";
-        $hash[$y]->remove($num);
-    } else {
-        echo "number not found \n";
-        $hash[$y]->add($Num);
-        echo "added to the list \n";
-    }
-
+}
+echo "list is" . listarr($arr);
+echo "enter the no to search \n";
+$num = Utility::readInt();
+$y = (int) $num % 11;
+if ($hash[$y]->search($num)) {
+    echo "number found \n";
+    $hash[$y]->remove($num);
+} else {
+    echo "number not found \n";
+    $hash[$y]->add($Num);
+    echo "added to the list \n";
+}
 
 $myfile = fopen("wordInt.txt", "w");
 fwrite($myfile, listarr($hash));
-
+fclose();
 ?>

@@ -121,26 +121,26 @@ class Utility
         }
     }
 /**function to check anagram */
-    public static function checkAnagram($str1, $str2)
+    public static function checkAnagram($strOne, $strTwo)
     {
 
         /**check length of two string are equal */
-        if (count($str1) == count($str2)) {
+        if (strlen($strOne) == strlen($strTwo)) {
 
             /** split to array*/
-            $str1Arr = str_split($str1);
-            $str2Arr = str_split($str2);
+            $strOneArr = str_split($strOne);
+            $strTwoArr = str_split($strTwo);
 
             /** sort array by values */
-            asort($str1Arr);
-            asort($str2Arr);
+            asort($strOneArr);
+            asort($strTwoArr);
 
             /**array to string by "" */
-            $str3 = implode("", $str1Arr);
-            $str4 = implode("", $str2Arr);
+            $stringThree = implode("", $strOneArr);
+            $stringFour = implode("", $strTwoArr);
 
             /**check both string are equal */
-            if ($str3 == $str4) {
+            if ($stringThree == $stringFour) {
                 echo "Anagram \n";
             } else {
                 echo "Not Anagram";
@@ -344,7 +344,7 @@ public static function checkLeapYear($yr)
         $sec = $elapsed / 1000;
         $min = $sec / 60;
         echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
-        return $elapsed;
+        return $sec;
     }
 /**
  * function to find element in using binarysearch with string
@@ -397,7 +397,7 @@ public static function checkLeapYear($yr)
         $sec = $elapsed / 1000;
         $min = $sec / 60;
         echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
-        return $elapsed;
+        return $sec;
     }
 /**
  * function to sort integers using insertion sort
@@ -437,7 +437,7 @@ public static function checkLeapYear($yr)
         $sec = $elapsed / 1000;
         $min = $sec / 60;
         echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
-        return $elapsed;
+        return $sec;
     }
 /**
  * function to sort integers using insertion sort for strings
@@ -478,7 +478,7 @@ public static function checkLeapYear($yr)
         $sec = $elapsed / 1000;
         $min = $sec / 60;
         echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
-        return $elapsed;
+        return $sec;
     }
 /**
  * function to sort using bubblesort
@@ -516,7 +516,7 @@ public static function checkLeapYear($yr)
         $sec = $elapsed / 1000;
         $min = $sec / 60;
         echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
-        return $elapsed;
+        return $sec;
     }
 /**
  * function to sort using bubblesort for strings
@@ -553,7 +553,7 @@ public static function checkLeapYear($yr)
         $sec = $elapsed / 1000;
         $min = $sec / 60;
         echo "\n" . ($sec) . " sec elasped  " . $min . "  minutes\n";
-        return $elapsed;
+        return $sec;
     }
 /**
  * function to start stopwatch
@@ -683,14 +683,14 @@ public static function checkLeapYear($yr)
         for ($i = 0; $i < sizeof($notes); $i++) {
             if (floor($tempamount / $notes[$i]) > 0) {
 
-                /**checking each array is greater than 0 */
+                /**checking each array value is greater than 0 */
                 $Nonotes = floor($tempamount / $notes[$i]);
 
                 /**dividing given amount with array of notes */
                 $tempamount = floor($tempamount % $notes[$i]);
 
                 /**printing notes until less than 0 */
-                echo $Nonotes . " " . $notes[$i] . "rs\n";
+                echo $Nonotes ." *" . "" . $notes[$i] ." = ".$Nonotes*$notes[$i]."rs\n";
                 $totalNotes++;
                 $flag = true;
                 break;
@@ -795,15 +795,25 @@ public static function checkLeapYear($yr)
  * @param: input value
  */
     public static function sqrt($c)
-    {
-        $t = $c;
+    {   
+    try{
+        if($c>0){
+            $t = $c;
 
-        /**calculate by applying formula */
-        $epsilon = 1e-15;
-        while (abs($t - ($c / $t)) > $epsilon * $t) {
-            $t = ($c / $t + $t) / 2;
+            /**calculate by applying formula */
+            $epsilon = 1e-15;
+            while (abs($t - ($c / $t)) > $epsilon * $t) {
+                $t = ($c / $t + $t) / 2;
+            }
+            echo $t."\n";
+        }else{
+            throw new Exception( "invalid number \n");
         }
-        echo $t;
+    }        
+        catch(Exception $e){
+            echo "ERROR - ".$e->getMessage();
+        }
+
     }
 /**
  * convert temperature to celcuis and celcuis to tempearture

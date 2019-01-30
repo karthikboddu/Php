@@ -1,14 +1,14 @@
-<?php 
+<?php
 /**
-     * Take an Arithmetic Expression such as (5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3) where parentheses are used to order the
-     *   performance of operations. Ensure parentheses must appear in a balanced fashion.
-     * Purpose: check it is a valid expression using stack.
-     * @author karthik
-     * @version 1.0   
-     * @since 21-01-2019
- */ 
-require ('utility.php');
-require ('Stack.php');
+ * overview : Take an Arithmetic Expression such as (5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3) where parentheses are used to order the
+ *   performance of operations. Ensure parentheses must appear in a balanced fashion.
+ * Purpose: check it is a valid expression using stack.
+ * @author : karthik
+ * @version : 1.0
+ * @since : 21-01-2019
+ */
+require 'utility.php';
+require 'Stack.php';
 
 /** input string  */
 $string = "(5+6)∗(7+8)/((4+35+6)∗(7+8/4+3))";
@@ -19,25 +19,25 @@ $stack = new Stack;
 /**split the string into arry */
 $strArr = str_split($string);
 $flag = true;
-for($i=0;$i<sizeof($strArr);$i++){
+for ($i = 0; $i < sizeof($strArr); $i++) {
     $exp = $strArr{$i};
 
-/**if exp is '(' then push else exp is ')' then pop */  
-    if($exp =='('){
+/**if exp is '(' then push else exp is ')' then pop */
+    if ($exp == '(') {
         $stack->push($exp);
-    }else if($exp ==')'){
-        if($stack->isEmpty()){
+    } else if ($exp == ')') {
+        if ($stack->isEmpty()) {
             $flag = false;
-        }else{
+        } else {
             $stack->pop();
         }
 
     }
 }
 /**if flag is true then string is balanced else not balanced  */
-if($flag){
+if ($flag) {
     echo "true\n";
-}else{
+} else {
     echo "false";
 }
 ?>

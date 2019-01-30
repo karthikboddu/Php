@@ -1,5 +1,5 @@
 <?php
-/************************************************************************************
+/**
 * overview : WindChill.java that takes two double command­line arguments t
 *               and v and prints the wind chil
 * purpose : prints the wind chill.

@@ -1,7 +1,8 @@
 <?php
 /**
- * Program to calculate the minimum number of Notes as well as the Notes to be returned by the Vending
+ * overview : Program to calculate the minimum number of Notes as well as the Notes to be returned by the Vending
  * purpose : to calcualte number of notes for an amount.
+ * @file : VendingMachine.php
  * @author karthik
  * @version 1.0
  * @since 18-01-2019

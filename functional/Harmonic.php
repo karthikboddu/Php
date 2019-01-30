@@ -1,5 +1,5 @@
 <?php
-/*********************************************************************************
+/**
  * overview : Prints the Nth harmonic number: 1/1 + 1/2 + ... + 1/N
  * purpose : compute 1/1 + 1/2 + 1/3 + ... + 1/N
  * @file : Harmonic.php
@@ -11,6 +11,8 @@ include 'utility.php';
 echo "enter the value of n \n";
 $n = Utility::readInt();
 
-/**function to calculate harmonic */
+/**
+ * function to calculate harmonic 
+*/
 Utility::harmonicValue($n);
 ?>

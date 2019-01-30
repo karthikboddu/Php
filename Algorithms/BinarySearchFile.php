@@ -1,7 +1,7 @@
 <?php
 /**
- * Read in a list of words from File. Then prompt the user to enter a word to
- *  search the list. The program reports if the search word is found in the list.
+ * overview  : Read in a list of words from File. Then prompt the user to enter a word to
+ *              search the list. The program reports if the search word is found in the list.
  * Purpose: Print the result if the word is found or not
  * @author karthik
  * @version 1.0
