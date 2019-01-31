@@ -1,18 +1,12 @@
-{
-    "Rice": [
-        {
-            "name": "biryani",
-            "weight": "23",
-            "price": "60"
-        }
-    ],
-
-
-    "pulses ": [
-        {
-            "name": "red",
-            "weight": "21",
-            "price": "15"
-        }
-    ]
-}
+[
+    {
+        "name": "biryani",
+        "weight": "25",
+        "price": "30"
+    },
+    {
+        "name": "red",
+        "weight": "25",
+        "price": "30"
+    }
+]
