@@ -1,1 +1,18 @@
-{"Rice":[{"name":"bi","weight":"35","price":"21"}]}
+{
+    "Rice": [
+        {
+            "name": "biryani",
+            "weight": "23",
+            "price": "60"
+        }
+    ],
+
+
+    "pulses ": [
+        {
+            "name": "red",
+            "weight": "21",
+            "price": "15"
+        }
+    ]
+}

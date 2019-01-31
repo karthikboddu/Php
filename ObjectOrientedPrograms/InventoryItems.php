@@ -3,12 +3,18 @@ class Items{
     var $name;
     var $weight;
     var $price;
-    
+    var $cate;
+    function __construct($cate,$name,$weight,$price){
+        $this->cate = $cate;
+        $this->name = $name;
+        $this->weight = $weight;
+        $this->price = $price;
+    }
     function setName($Iname){
         $this->name = $Iname;
     }
     function getName(){
-        return $name;
+        return $this->name;
     }
 
     function setWeight($IWeight){
@@ -16,7 +22,7 @@ class Items{
     }
 
     function getWeight(){
-        return $weight;
+        return $this->weight;
     }
 
     function setPrice($IPrice){
@@ -24,7 +30,7 @@ class Items{
     }
 
     function getPrice(){
-        return $price;
+        return $this->price;
     }
 
 }
