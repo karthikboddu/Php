@@ -75,6 +75,67 @@ public static function getBoolean()
     }
     return $val;
 }
+public static function readChar(){
+    fscanf(STDIN ,"%c",$val);
+    while(is_string){
+        
+    }
+}
+
+public static function readJson($fileName){
+    $fileStr = file_get_contents($fileName);
+    $jsonData = json_decode($fileStr, true);
+    return $jsonData;
+}
+
+public static function printJson($data){
+    print_r($data);
+    echo "STOCK REPORT\n\n";
+    foreach ($data as $stock) {
+        $name = $stock['symbol'];
+        $noShares = $stock['share'];
+        $price = $stock['date'];
+
+        printf('symbol : %s ' . "\t" .PHP_EOL. 'number of shares : %d' .PHP_EOL . 'date : %d ' . "\t"  . PHP_EOL, $name, $noShares, $price);
+    }
+}
+
+public static function storeCards($cards,$suits,$rank){
+    
+    for($i=0;$i<sizeof($suits);$i++){
+        for($j=0;$j<sizeof($rank);$j++){
+            $cards[$i][$j] =$rank[$j]."".$suits[$i];
+        }
+    }
+    return $cards;
+}
+
+public static function suffleCards($cards,$suits,$rank){
+    for($i=0;$i<sizeof($cards);$i++){
+        for($j=0;$j<sizeof($cards[$i]);$j++){
+            $rand1 = rand(0,3);
+            $rand2 = rand(0,11);
+           
+            $temp = $cards[$rand1][$rand2];
+            $cards[$rand1][$rand2]= $cards[$i][$j];
+            $cards[$i][$j]= $temp;
+        }
+    }
+    return $cards;
+}
+
+public static function printCards($cards){
+    echo "after suffling \n";
+    
+    for($i=0;$i<sizeof($cards);$i++){
+        echo "Player ".($i+1)." : [";
+        for($j=0;$j<sizeof($cards[$i]);$j++){
+            echo $cards[$i][$j]." ";
+        }
+        echo "]\n\n";
+    }
+}
+
 
 
 }

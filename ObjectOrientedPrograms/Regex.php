@@ -1,12 +1,12 @@
 <?php
 include ('utility.php');
 $str = 'Hello <<name>>, We have your full
-name as <<full name>> in our system. your contact number is 91xxxxxxxxxx .
+name as <<full name>> in our system. your contact number is 91-xxxxxxxxxx.
 Please,let us know in case of any clarification Thank you BridgeLabz 01/01/2016.';
 
-$regex = array("/<{2}\w+>{2}/ ","/<{2}\w+\s\w+>{2}/ ","/x{10}/","/\d+[/]\d+[/]\d+/");
+$regex = array("/<{2}\w+>{2}/ ","/<{2}\w+\s\w+>{2}/ ","/\d{2}\-x{10}+/ ","/\d+.\d+.\d+/ ");
 $pattern = '${2}';
-   
+// array("/<{2}\w+>{2}/ ","/<{2}\w+\s\w+>{2}/ ","/\d{2}\-x{10}+/ ","/x*\/x*\/x*/ ");
 echo "enter the name \n";
 $name = Oops::readString();
 $str = preg_replace($regex[0], $name, $str);
@@ -16,10 +16,10 @@ $str = preg_replace($regex[1],$fName,$str);
 echo "enter phone number \n";
 $phNo = Oops::readInt();
 
-$str = preg_replace("/\d{2}x{10}+/",$phNo,$str); 
+$str = preg_replace($regex[2],$phNo,$str); 
 //$str = preg_replace("xxxxxxxxxx",$phNo,$str);     
 $date = date("d/m/y");
-$str = preg_replace("/\d+.\d+.\d+/",$date,$str);
+$str = preg_replace($regex[3],$date,$str);
 echo "\n";
 try{
     if(strlen($phNo)<10||strlen($phNo)>10){

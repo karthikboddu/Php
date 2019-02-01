@@ -15,7 +15,7 @@ class Inventory extends Items{
         echo "enter no of inventories\n";
         $no = Oops::readInt();
         for($i=0;$i<$no;$i++){
-            // echo "enter category\n";
+            // echo "enter category\n"; 
             // $cat = Oops::readString();
             
             echo "enter name\n";
