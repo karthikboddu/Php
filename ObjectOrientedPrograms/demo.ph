@@ -218,6 +218,58 @@ menu($account);
 
 
 
+ * creating an array of players
+ */
+$rrr = array("player1", "player2", "player3", "player4");
+for ($i = 0; $i < 4; $i++) {
+    /**
+     * used to call the enqueue method to store
+     */
+    $object->enqueue($rrr[$i]);
+}
+for ($i = 0; $i < sizeof($cardspack); $i++) {
+    $array1 = array();
+    for ($j = 0; $j < sizeof($cardspack[$i]); $j++) {
+        /**
+         * function used to store the elements in an array
+         */
+        $array1[$j] = $cardspack[$i][$j];
+    }
+    /**
+     * sorting the elements in an array
+     */
+    array_multisort($array1);
+    for ($k = 0; $k < sizeof($array1); $k++) {
+     /**
+      * used to call and store in a queue a  set of array elements
+      */
+        $obj->enqueue($array1[$k]);
+    }
+}
+for ($i = 0; $i < 4; $i++) {
+    /**
+     * calling the dequeue method
+     */
+    $value = $object->dequeue();
+    /**
+     * printing the value of it
+     */
+    echo $value . "::";
+    for ($j = 0; $j < 9; $j++) {
+        /**
+         * calling the dequeue method and storing in the address variable
+         */
+        $address = $obj->dequeue();
+        /**
+         * printing the value of a variable
+         */
+        echo $address . "  ";
+    }
+    echo "\n";
+
+
+
+
 
 
 

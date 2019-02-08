@@ -3,12 +3,15 @@ require 'utility.php';
 require 'Stock.php';
 class StockReport extends Stock
 {
+    /**
+     * function to write json data into file 
+    */
     function writeJson($file) {
         $stck = new Stock();
         echo "enter number of stocks\n";
         $no = Oops::readInt();
         for ($i = 0; $i < $no; $i++) {
-            echo "Enter the Stock " . ($i + 1) . " details\n";
+            echo "Enter the Stock " . ($i + 1) . " details\n\n";
             echo "enter the stock name\n";
             $stName = Oops::readString();
             $stck->setStockName($stName);
@@ -19,13 +22,15 @@ class StockReport extends Stock
             $sharePrice = Oops::readInt();
             $stck->setPrice($sharePrice);
             $obj[] = array('stock name' => $stName, 'no of shares' => $noShares, 'share price' => $sharePrice);
-
             $jData = json_encode($obj);
             $jStr = file_put_contents($file, $jData);
-
             // $stck->writeJson($file);
         }
     }
+
+    /**
+     * function to read json data from a file
+     */
     public function readJson($file)
     {
         $fileStr = file_get_contents($file);
@@ -33,10 +38,11 @@ class StockReport extends Stock
         return $jsonData;
     }
 
+    /**function to print report each inventory */
     public function printReport($jsondata)
     {
         $toalValue = 0;
-        echo "STOCK REPORT\n\n";
+        echo "STOCK REPORT \n\n";
         foreach ($jsondata as $stock) {
             $name = $stock['stock name'];
             $noShares = $stock['no of shares'];
@@ -56,3 +62,4 @@ $stckReport->writeJson($file);
 $data = $stckReport->readJson($file);
 echo "\n";
 $stckReport->printReport($data);
+?>

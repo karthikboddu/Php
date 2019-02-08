@@ -1,12 +1,1 @@
-[
-    {
-        "name": "biryani",
-        "weight": "25",
-        "price": "30"
-    },
-    {
-        "name": "red",
-        "weight": "25",
-        "price": "30"
-    }
-]
+[{"name":"inv1","weight":"34","price":"600"}]

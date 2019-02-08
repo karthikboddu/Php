@@ -9,9 +9,32 @@ class stockAccount implements comData{
 //    public function __construct($fileName){
 //         $this->$fileName = $fileName;
 //     }
-    private $symbol;
-    private $share;
+    public $stName;
+    private $numOfShare;
+    private $stckPrice;
     private $date;
+
+     function setStockName($stName){
+        $this->stockName = $stName;
+    }
+     function getStockName(){
+        return $this->stockName;
+    }
+
+    public function setNoShare($numOfShare){
+        $this->numberOfShare = $numOfShare;
+    }
+    public function getShare(){
+        return $this->numberOfShare;
+    }
+
+    public function setPrice($stckPrice){
+        $this->stockPrice = $stckPrice;
+    }
+
+    public function getPrice(){
+        return $this->stockPrice;
+    }
     function __construct($stckSymbol,$stNoShare,$date){
         $this->symbol = $stckSymbol;
         $this->share = $stNoShare;
@@ -81,7 +104,7 @@ class stockAccount implements comData{
                 $name = $stock['symbol'];
                 if($name==$symbol){
                     $stock['date'] =$amount; 
-                    $queue->enq  date(d\m\y);
+                     date(d\m\y);
                     echo "buyed\n";  
                 }else{
                     echo "invalid file\n";

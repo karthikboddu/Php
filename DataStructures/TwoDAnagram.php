@@ -44,7 +44,7 @@ $arr = $linkedList1->llToArr();
 /**add primes that anagram in row 1 */
 for ($i = 0; $i < sizeof($primeAna); $i++) {
     $twoDArr[0][$i] = $primeAna[$i];
-}
+} 
 
 /**adding not anagram in row 2 */
 for ($j = 0; $j < sizeof($arr); $j++) {
