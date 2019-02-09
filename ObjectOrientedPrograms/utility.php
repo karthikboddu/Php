@@ -104,7 +104,7 @@ public static function storeCards($cards,$suits,$rank){
     
     for($i=0;$i<sizeof($suits);$i++){
         for($j=0;$j<sizeof($rank);$j++){
-            $cards[$i][$j] =$rank[$j]."".$suits[$i];
+            $cards[$i][$j] =$rank[$j]." ".$suits[$i];
         }
     }
     return $cards;

@@ -1,54 +1,51 @@
 <?php
 /**
  * Purpose: Design of simple Address Book.
- * @author Nishithkumar
+ * @author karthik
  * @version 1.0
  * @since 30-01-2019
  ******************************************************************************/
-include 'Outility.php';
-class Person
+include 'utility.php';
+require 'AddressDetails.php';
+class Person extends Contact
 {
     /**
      * declaring the variables
      */
-    public $fname;
-    public $lname;
-    public $address;
-    public $city;
-    public $state;
-    public $zip;
-    public $phone;
 }
 
 /**
  * function to create the person object asked by the user.
  * @parameter indicates to store the object in the addressbook array
  */
-function createPerson(&$addressBook)
+function createContact(&$addressBook)
 {
     /**
      * creating the object.
      */
-    $person = new Person();
+  
     //asking user for input for person object
     echo "Enter Firstname \n";
-    $person->fname = Outility::getString();
+    $fname = Oops::readString();
     echo "Enter Lastname \n";
-    $person->lname = Outility::getString();
+    $lname = Oops::readString();
     echo "Enter State\n";
-    $person->state = Outility::getString();
+    $state = Oops::readString();
     echo "Enter City\n";
-    $person->city = Outility::getString();
-    echo "Enter Zip of $person->city\n";
-    $person->zip = Outility::getInt();
+    $city = Oops::readString();
+    echo "Enter Zip of $city\n";
+    $zip = Oops::readInt();
     echo "Enter Address\n";
-    $person->address = Outility::getString();
+    $address = Oops::readString();
     echo "Enter Mobile Number \n";
-    $person->phone = Outility::getInt();
+    $phone = Oops::readInt();
     /**
      * storing the newly created object in to addressbook array
      */
+    $person = new Contact($fname,$lname,$state,$city,$zip,$address,$phone);
+    
     $addressBook[] = $person;
+    print_r($addressBook);
 }
 
 /**
@@ -58,20 +55,20 @@ function createPerson(&$addressBook)
 function edit(&$person)
 {
     echo "Enter 1 to change Address ";
-    $choice = Outility::getInt();
+    $choice = Oops::readInt();
     switch ($choice) {
         case '1':
             echo "Enter State\n";
-            $person->state = Outility::getString();
+            $person->state = Oops::readString();
             echo "Enter City\n";
-            $person->city = Outility::getString();
+            $person->city = Oops::readString();
             echo "Enter Zip \n";
-            $person->zip = Outility::getInt();
+            $person->zip = Oops::readInt();
             echo "Enter Address\n";
-            $person->address = Outility::getString();
+            $person->address = Oops::readString();
             echo "Address changes succesfully \n";
             echo "Enter Mobile Number \n";
-            $person->phone = Outility::getInt();
+            $person->phone = Oops::readInt();
             echo "Moble no changed succesfully\n";
             break;
     }
@@ -83,12 +80,17 @@ function edit(&$person)
 function delete(&$arr)
 {
     $i = search($arr);
-    if ($i > -1) {
-        array_splice($arr, $i, 1);
-        echo "Entry Deleted\n";
-    } else {
-        echo "Entry Not Found\n";
+    try{
+        if ($i > -1) {
+            array_splice($arr, $i, 1);
+            echo "Contact Deleted\n";
+        } else {
+            throw new Exception ("Contact not found\n");
+        }
+    }catch(Exception $e){
+        echo $e->getMessage();
     }
+    
     fscanf(STDIN, "%s\n");
 }
 
@@ -100,9 +102,9 @@ function delete(&$arr)
 function search($arr)
 {
     echo "Enter firstaname to search\n";
-    $fname = Outility::getString();
+    $fName = Oops::readString();
     for ($i = 0; $i < count($arr); $i++) {
-        if ($arr[$i]->fname == $fname) {
+        if ($arr[$i]->fName == $fname) {
             return $i;
         }
     }
@@ -115,7 +117,8 @@ function search($arr)
 function printBook($arr)
 {
     foreach ($arr as $person) {
-        echo sprintf("%s %s\n%s\n%s, %s\nZip - %u\nMobile- %u\n\n", $person->fname, $person->lname, $person->address, $person->city, $person->state, $person->zip, $person->phone);
+        $i = 1;
+        echo sprintf($i.": Name : %s %s\n  City : %s\n  Address : %s\n  state : %s\n  Zip - %u\n  Mobile- %u\n\n", $person->fName, $person->lName, $person->address, $person->city, $person->state, $person->zip, $person->phone);
     }
 }
 
@@ -148,18 +151,19 @@ function sortBook(&$arr, $val)
  */
 function save($addressBook)
 {
-    file_put_contents("AddressBook.json", json_encode($addressBook));
+    file_put_contents("addressBook.json", json_encode($addressBook));
+    echo "contact saved successfully\n";
 }
 /**
  * function act as a default menu for the program
  */
-function menu($addressBook)
+function menu($addressBook) 
 {
-    echo "\nEnter 1 to add person\nEnter 2 to Edit a person\nEnter 3 to Delete a person\nEnter 4 to Sort and Display\n\nEnter anything to exit\n";
-    $ch = Outility::getInt();
+    echo "\nEnter 1 to add contact\n 2 Edit Contact\n3 Delete Contact\n 4 Sort and Display\n\nEnter anything to exit\n";
+    $ch = Oops::readInt();
     switch ($ch) {
         case '1':
-            createPerson($addressBook);
+            createContact($addressBook);
             save($addressBook);
             menu($addressBook);
             break;
@@ -178,6 +182,7 @@ function menu($addressBook)
             } else {
                 $addressbook[$i] = edit($addressBook[$i]);
                 save($addressBook);
+
             }
             menu($addressBook);
             break;
@@ -187,10 +192,10 @@ function menu($addressBook)
             menu($addressBook);
             break;
         case '4':
-            echo "Enter 1 to sort by NamenElse to Menu";
-            $c = Outility::getInt();
+            echo "Enter 1 to sort by Name Else to Menu";
+            $c = Oops::readInt();
             if ($c == 1) {
-                sortBook($addressBook, "fname");
+                sortBook($addressBook, "fName");
                 save($addressBook);
                 printBook($addressBook);
             } else {
@@ -202,5 +207,5 @@ function menu($addressBook)
     }
 
 }
-$arr = json_decode(file_get_contents("AddressBook.json"));
+$arr = json_decode(file_get_contents("addressBook.json"));
 menu($arr);

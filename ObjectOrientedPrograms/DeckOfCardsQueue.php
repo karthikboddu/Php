@@ -10,7 +10,9 @@ require 'utility.php';
 require_once '../DataStructures/Queue.php';
 
 $queue = new Queue;
-
+$queue1 = new Queue;
+$queue2= new Queue;
+$queue3 = new Queue;
 
 /**
  * intialize the suits card array
@@ -37,7 +39,6 @@ for($i=0;$i<sizeof($suffledCards);$i++){
     }
     
 }
-
 /** adding array elements into queue */
 for($k=0;$k<sizeof($newArr);$k++){
     $queue->enqueue($newArr[$k]);
