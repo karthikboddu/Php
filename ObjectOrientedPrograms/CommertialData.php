@@ -11,10 +11,10 @@ require ('utility.php');
 require ('StockAccount.php');
 interface comData{
     function stockAcc($file);
-    function buy($amount,$symbol);
-    function sell($amount,$symbol);
+    function buy($symbol);
+    function sell($symbol);
     function save($file);
-    function printReport();
+    // function printReport();
 }
 class CommertialData  {
     function Commertial(){

@@ -9,15 +9,15 @@ class stockAccount implements comData{
 //    public function __construct($fileName){
 //         $this->$fileName = $fileName;
 //     }
-    public $stName;
-    private $numOfShare;
-    private $stckPrice;
-    private $date;
+    // private $stName;
+    // private $numOfShare;
+    // private $stckPrice;
+    // private $date;
 
-     function setStockName($stName){
+    public function setStockName($stName){
         $this->stockName = $stName;
     }
-     function getStockName(){
+    public function getStockName(){
         return $this->stockName;
     }
 
@@ -35,23 +35,23 @@ class stockAccount implements comData{
     public function getPrice(){
         return $this->stockPrice;
     }
-    function __construct($stckSymbol,$stNoShare,$date){
-        $this->symbol = $stckSymbol;
-        $this->share = $stNoShare;
-        $this->date = $date;
+    function __construct($stckSymbol,$stNoShare,$price){
+        $this->stockName = $stckSymbol;
+        $this->stockShare = $stNoShare;
+        $this->pric= $price;
     }
 
-    function stockAcc($fileName){
+    public function stockAcc($fileName){
         try{           
              $fileName = $fileName.".json";
              if(!file_exists($fileName)){
-                 echo "enter the stock symbol\n";
-                 $stckSymbol = Oops::readString();
+                 echo "enter the stock name\n";
+                 $stName = Oops::readString();
                  echo "enter number of shares \n";
                  $noShare = Oops::readInt();
                  echo "enter share price\n";
                  $Price = Oops::readInt();
-                 $st[] = new stockAccount($stckSymbol,$noShare,$Price);   
+                 $st[] = new stockAccount($stName,$noShare,$Price);   
                  $jdata = json_encode($st);   
                  if(file_put_contents($fileName,$jdata)){
                      echo "Account created\n";
@@ -59,18 +59,18 @@ class stockAccount implements comData{
                      $ch = Oops::readInt();
                      switch($ch){
                          case 1: 
-                                echo "enter symbol to buy\n";
-                                $symbol = Oops::readString();
-                                echo "enter the amount to buy\n";
-                                $amount = Oops::readInt();
-                                buy($amount,$symbol);
+                                // echo "enter symbol to buy\n";
+                                // $symbol = Oops::readString();
+                                // echo "enter the amount to buy\n";
+                                // $amount = Oops::readInt();
+                                stockAccount::buy($st);
                                 break;
                          case 2:
-                                echo "enter symol to sell\n";
-                                $symbol = Oops::readString();
-                                echo "enter the amount to sell\n";
-                                $amount = Oops::readInt();
-                                sell($amount,$symbol);  
+                                // echo "enter symol to sell\n";
+                                // $symbol = Oops::readString();
+                                // echo "enter the amount to sell\n";
+                                // $amount = Oops::readInt();
+                                stockAccount::sell($st);  
                                 break;
 
                      }
@@ -88,20 +88,88 @@ class stockAccount implements comData{
          
      }
 
-    function sell($amount,$symbol){
+    public function sell($st){
+        Oops::printAccount($st);
+        echo "enter the stock to sell \n";
+        $stNa = Oops::readInt();
+        echo $st[$stNa]['stockName'] ." selected \n enter the no shares to sell of ".$st[$stNa]['stockName'];
+        $amnt = Oops::readInt();
 
+        $st[$stNa]['stockShare'] -=$amnt;
+        $list = Oops::printStockList();
+        $list[$stNa]->stockShare +=$amnt;
+        Oops::saveList($list);
+        Oops::saveAccount($st);
+        echo "sold $amnt shares\n";
     }
 
-    function buy($amount,$symbol){
-        echo "enter file name\n";
-        $fileName = Oops::readString();
-        $fileName = $fileName.".json";
-        if(file_exists($fileName)){
-            $jData = Oops::readJson($fileName);
-            Oops::printJson($jData);
+    // public static function sell1($account)
+    // {
+    //     //show the stock from the list to the user
+    //     Utility::printAccount($account);
+    //     //taking the user input
+    //     echo "Enter No with Stock To Sell : ";
+    //     //validating the input
+    //     $ch = Utility::validInt(Utility::integer_Input(), 1, count($account));
+    //     echo $account[$ch]->name . " selected!\nEnter No Of Shares To Sell of " . $account[$ch]->name . " : ";
+    //     $qt = Utility::validInt(Utility::integer_Input(), 1, $account[$ch]->quantity);
+    //     //removing the stock
+    //     $account[$ch]->quantity -= $qt;
+    //     $list = Utility::printStockList(1);
+    //     $list[$ch-1]->Quantity += $qt ;
+    //     $account[0]->account += ($qt*$list[$ch-1]->price);
+    //     Utility::saveList($list);
+    //     Utility::saveAccount($account);
+    //     echo "sold $qt shares successfully";
+    //     //check if the shares are empty to delete the entry completely
+    //     if ($account[$ch]->quantity == 0) 
+    //     {
+    //         array_splice($account, ($ch), 1);
+    //     }
+    //     return $account;
+    // }
+
+    function buy($st){
+
             echo "STOCK REPORT\n\n";
-            foreach ($jData as $stock) {
-                $name = $stock['symbol'];
+            $list = Oops::printStockList($st);
+            echo "enter no with stock to buy\n";
+            $ch = Oops::readInt();
+            echo $list[$ch]['stockName']."selected";
+            echo "Enter No Of Shares To Buy of " . $list[$ch]['stockName']. " : ";
+            $amnt = Oops::readInt();
+
+            if($st[0]->st<($list[$ch]->price*$amnt))
+            {
+                echo " Insufficient fund\n";
+                return;
+            }
+            $list[$ch-1]->Quantity -= $amnt;
+            Oops::saveList($list);
+            //getting the stock from the list
+            $stock = $list[$ch - 1];
+            //creating new stock
+            $stock = new StockData($stock->name, $stock->price, $amnt);
+            //adding the stock to the account if already in the list and return
+            $account[0]->account-= $amnt;
+            for ($i = 1; $i < count($account); $i++) 
+            {
+                if ($account[$i]->name == $stock->name) 
+                {
+                    $account[$i]->quantity += $stock->quantity;
+                    echo "Bought $stock->quantity " . "$stock->name shares successfully";
+                    Oops::saveAccount($account);
+                    return $account;
+                }
+            }
+            //or else adds the new stack the end pf the list
+            $account[] = $stock;
+            echo "Bought $stock->quantity " . "$stock->name shares successfully";
+            //waiting for user to see the result
+            Oops::saveAccount($account);
+            return $account;
+            foreach ($jData as $st) {
+                $name = $st['stockName'];
                 if($name==$symbol){
                     $stock['date'] =$amount; 
                      date(d\m\y);
@@ -117,11 +185,35 @@ class stockAccount implements comData{
         }
     }
 
-    function save($file){
+    public function save($file){
 
     }
-    function printReport(){
+    function printReport($account){
 
+                    echo "No | Stock Name | Share Price | No. Of Shares | Stock Price \n";
+                   
+                    //looping over and printing the account details
+                    for ($i=1; $i < count($account) ; $i++) 
+                    {
+                        $key = $account[$i];
+                        echo sprintf("%-2u | %-10s | rs %-8u | %-13u | rs %u", $i, $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
+                    }
+            
+    }
+
+    public static function report($account)
+    {
+        $total = 0;
+        echo "Stock Name | Per Share Price | No. Of Shares | Stock Price\n";
+        //looping over and printing the account details and the account balance
+        for ($i=1; $i < count($account) ; $i++) 
+        {
+            $key = $account[$i];
+            echo sprintf("%-10s | rs %-12u | %-13u | rs %u", $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
+            $total += ($key->quantity * $key->price);
+        }
+        echo "\n";
+        echo "Total Value Of Stocks is : " . $total . " rs\namount left in account : ".$account[0]->account."\n\n";;
     }
 
 
@@ -136,18 +228,18 @@ function display($stFileName){
                      $ch = Oops::readInt();
                      switch($ch){
                          case 1: 
-                                echo "enter symbol to buy\n";
-                                $symbol = Oops::readString();
-                                echo "enter the amount to buy\n";
-                                $amount = Oops::readInt();
-                               stockAccount:: buy($amount,$symbol);
-                               break;
+                                // echo "enter symbol to buy\n";
+                                // $symbol = Oops::readString();
+                                // echo "enter the amount to buy\n";
+                                // $amount = Oops::readInt();
+                                stockAccount:: buy($jData);
+                                break;
                          case 2:
-                                echo "enter symol to sell\n";
-                                $symbol = Oops::readString();
-                                echo "enter the amount to sell\n";
-                                $amount = Oops::readInt();
-                                sell($amount,$symbol);  
+                                // echo "enter symol to sell\n";
+                                // $symbol = Oops::readString();
+                                // echo "enter the amount to sell\n";
+                                // $amount = Oops::readInt();
+                                stockAccount::sell($jData);  
                                 break;
                      }
 

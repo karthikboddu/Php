@@ -1,7 +1,1 @@
-[
-    {
-        "symbol": "*",
-        "share": "23",
-        "date": "6000"
-    }
-]
+[{"stockName":"nokia7","stockShare":2540,"pric":"504"},{"stockName":"nokiaXl","stockShare":"2340","pric":"504"},{"stockName":"nokia","stockShare":"2340","pric":"504"}]
