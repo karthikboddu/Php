@@ -9,7 +9,11 @@ class StockReport extends Stock
     function writeJson($file) {
         $stck = new Stock();
         echo "enter number of stocks\n";
+
+        //enter no of stocks
         $no = Oops::readInt();
+        
+        //enter the stock details
         for ($i = 0; $i < $no; $i++) {
             echo "Enter the Stock " . ($i + 1) . " details\n\n";
             echo "enter the stock name\n";
@@ -33,7 +37,10 @@ class StockReport extends Stock
      */
     public function readJson($file)
     {
+        //gets contents present in file and store it in a string
         $fileStr = file_get_contents($file);
+
+        //decods the string 
         $jsonData = json_decode($fileStr, true);
         return $jsonData;
     }
@@ -43,6 +50,8 @@ class StockReport extends Stock
     {
         $toalValue = 0;
         echo "STOCK REPORT \n\n";
+
+        //traversing every object elements and printing
         foreach ($jsondata as $stock) {
             $name = $stock['stock name'];
             $noShares = $stock['no of shares'];
@@ -58,8 +67,14 @@ class StockReport extends Stock
 }
 $stckReport = new StockReport();
 $file = "stock.json";
+
+//function to write json to a file
 $stckReport->writeJson($file);
+
+//function to read json 
 $data = $stckReport->readJson($file);
 echo "\n";
+
+//function to print report
 $stckReport->printReport($data);
 ?>

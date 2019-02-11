@@ -23,7 +23,7 @@ class Fruit implements Items
      */
     public function accept(CartVisitor $visitor)
     {
-        $visitor->visitFruit($this);
+       return $visitor->visitFruit($this);
     }
 
 

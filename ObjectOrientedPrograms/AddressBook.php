@@ -1,9 +1,10 @@
 <?php
 /**
- * Purpose: Design of simple Address Book.
- * @author karthik
- * @version 1.0
- * @since 30-01-2019
+ * Purpose  : Design of simple Address Book.
+ * @file    : AddressBook.php
+ * @author  : karthik
+ * @version : 1.0
+ * @since   : 03-01-2019
  ******************************************************************************/
 include 'utility.php';
 require 'AddressDetails.php';
@@ -16,41 +17,48 @@ class Person extends Contact
 
 /**
  * function to create the person object asked by the user.
- * @parameter indicates to store the object in the addressbook array
+ * @param : indicates to store the object in the addressbook array
  */
 function createContact(&$addressBook)
 {
     /**
      * creating the object.
      */
-  
+
     //asking user for input for person object
+    $person = new Contact();
     echo "Enter Firstname \n";
     $fname = Oops::readString();
+    $person->setFName($fname);
     echo "Enter Lastname \n";
     $lname = Oops::readString();
+    $person->setLName($lname);
     echo "Enter State\n";
     $state = Oops::readString();
+    $person->setState($state);
     echo "Enter City\n";
     $city = Oops::readString();
+    $person->setCity($city);
     echo "Enter Zip of $city\n";
     $zip = Oops::readInt();
+    $person->setZip($zip);
     echo "Enter Address\n";
     $address = Oops::readString();
+    $person->setAddress($address);
     echo "Enter Mobile Number \n";
     $phone = Oops::readInt();
+    $person->setPhone($phone);
     /**
      * storing the newly created object in to addressbook array
      */
-    $person = new Contact($fname,$lname,$state,$city,$zip,$address,$phone);
-    
+    $person = new Contact($fname, $lname, $state, $city, $zip, $address, $phone);
+
     $addressBook[] = $person;
-    print_r($addressBook);
 }
 
 /**
  * function to edit the details of a person
- * @param the person object to edit the details
+ * @param : person object to edit the details
  */
 function edit(&$person)
 {
@@ -80,31 +88,31 @@ function edit(&$person)
 function delete(&$arr)
 {
     $i = search($arr);
-    try{
+    try {
         if ($i > -1) {
             array_splice($arr, $i, 1);
             echo "Contact Deleted\n";
         } else {
-            throw new Exception ("Contact not found\n");
+            throw new Exception("Contact not found\n");
         }
-    }catch(Exception $e){
+    } catch (Exception $e) {
         echo $e->getMessage();
     }
-    
+
     fscanf(STDIN, "%s\n");
 }
 
 /**
  * function developed to indicate to search the index based given by the user
- * @param arr the array containig person from which to search
- * @return index of the searched item or -1 it indicates  search element is not found
+ * @param : arr the array containig person from which to search
+ * @return : index of the searched item or -1 it indicates  search element is not found
  */
 function search($arr)
 {
     echo "Enter firstaname to search\n";
     $fName = Oops::readString();
     for ($i = 0; $i < count($arr); $i++) {
-        if ($arr[$i]->fName == $fname) {
+        if ($arr[$i]->fName == $fName) {
             return $i;
         }
     }
@@ -116,17 +124,26 @@ function search($arr)
  */
 function printBook($arr)
 {
-    foreach ($arr as $person) {
-        $i = 1;
-        echo sprintf($i.": Name : %s %s\n  City : %s\n  Address : %s\n  state : %s\n  Zip - %u\n  Mobile- %u\n\n", $person->fName, $person->lName, $person->address, $person->city, $person->state, $person->zip, $person->phone);
+    try{
+        if($arr == null){
+            throw new Exception("Book is empty\n");
+        }
+        else{
+            foreach ($arr as $person) {
+                $i = 1;
+                echo sprintf(" \tName : %s %s\n\tCity : %s\n\tAddress : %s\n\tstate : %s\n\tZip - %u\n\tMobile- %u\n\n", $person->fName, $person->lName, $person->address, $person->city, $person->state, $person->zip, $person->phone);
+            }
+        }
+    }catch(Exception $e){
+        echo $e->getMessage();
     }
+ 
+
 }
 
 /**
  * function to sort the array by person object property
- *
- * @param arr the array containig person object to sort
- * @param  prop the property for which to sort
+ * @param : arr the array containig person object to sort
  */
 function sortBook(&$arr, $val)
 {
@@ -146,8 +163,7 @@ function sortBook(&$arr, $val)
 
 /**
  * function to save the address book
- *
- * the parameter indicates an array to what to save in the json file
+ * @param : an array to what to save in the json file
  */
 function save($addressBook)
 {
@@ -157,9 +173,9 @@ function save($addressBook)
 /**
  * function act as a default menu for the program
  */
-function menu($addressBook) 
+function menu($addressBook)
 {
-    echo "\nEnter 1 to add contact\n 2 Edit Contact\n3 Delete Contact\n 4 Sort and Display\n\nEnter anything to exit\n";
+    echo "\nEnter\t1 to add contact\n\t2 Edit Contact\n\t3 Delete Contact\n\t4 sort\n\t5 Display\n";
     $ch = Oops::readInt();
     switch ($ch) {
         case '1':
@@ -168,6 +184,7 @@ function menu($addressBook)
             menu($addressBook);
             break;
         case '2':
+            printBook($addressBook);
             $k = 2;
             while (($i = search($addressBook)) === -1) {
                 var_dump($i);
@@ -187,13 +204,14 @@ function menu($addressBook)
             menu($addressBook);
             break;
         case '3':
+            printBook($addressBook);
             delete($addressBook);
             save($addressBook);
             menu($addressBook);
             break;
         case '4':
-            echo "Enter 1 to sort by Name Else to Menu";
-            $c = Oops::readInt();
+
+            $c = 1;
             if ($c == 1) {
                 sortBook($addressBook, "fName");
                 save($addressBook);
@@ -204,6 +222,8 @@ function menu($addressBook)
             fscanf(STDIN, "%s\n");
             menu($addressBook);
             break;
+        case 5 :printBook($addressBook);
+                break;    
     }
 
 }

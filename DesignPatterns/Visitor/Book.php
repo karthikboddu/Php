@@ -33,7 +33,7 @@ class Book implements Items
 
     public function accept(CartVisitor $visitor)
     {
-        $visitor->visitBook($this);
+       return $visitor->visitBook($this);
     }
 
     /**

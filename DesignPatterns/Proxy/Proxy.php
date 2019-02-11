@@ -1,6 +1,17 @@
 <?php
+/**
+ * purpose   : Create a Command Executor Program that will execute certain system commands based on the user type is admin or otherwise. 
+ * @author   : karthik
+ * @version  : 1.0
+ * @since    : 08-02-2019
+ * ****************************************************/
 require_once ('TerminalExec.php');
 require ('../utility.php');
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
 class pattern{ 
 
    public function main(){
@@ -15,9 +26,7 @@ class pattern{
         }catch(Exception $e){
             echo $e->getMessage();
         }
-
     }
-    
 }
 
 $fds = new pattern();

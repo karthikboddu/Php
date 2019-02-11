@@ -1,27 +1,34 @@
 <?php
+/**
+ * purpose   : Shopping cart where we can add different type of items (Elements). When we click on checkout button, it calculates the total amount to be paid. Now we can have the calculation logic in item classes or we can move out this logic to another class using visitor pattern
+ * @author   : karthik
+ * @version  : 1.0
+ * @since    : 09-02-2019
+ * ****************************************************/
 require_once ('Items.php');
-require_once ('Electronics.php');
-require_once ('Grocery.php');
+require_once ('Fruit.php');
+require_once ('Book.php');
 require_once 'CartImp.php';
 
-
-function clientCode(array $components, CartVisitor $visitor)
+function start(array $components, CartVisitor $visitor)
 {
+    $sum = 0;
     // ...
     foreach ($components as $component) {
-        $component->accept($visitor);
+        
+        $sum = $sum + $component->accept($visitor);
     }
+    return $sum;
+   
     // ...
 }
-
 $components = [
     new Book("breaking bad",2000,2),
-    new Fruit(2000,"sony"),
+    new Fruit(2000,"Dragon"),
 ];
-
-
 $visitor1 = new CartImp;
-clientCode($components, $visitor1);
+$total = start($components, $visitor1);
+echo "\nEstimated Price in cart : $total";
 echo "\n";
 
 

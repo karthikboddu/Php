@@ -1,20 +1,26 @@
 <?php
 require_once 'Cart.php';
-require_once 'Electronics.php';
-require_once 'Grocery.php';
+require_once 'Fruit.php';
+require_once 'Book.php';
 require_once 'Visitor.php';
 class CartImp implements CartVisitor
 {
     public function visitBook(Book $element)
     {
         echo "BOOK\n";
-        echo "Book : ".$element->getName()."\nPrice : ".$element->getPrice()."\nQuantity: ".$element->getQuantity()."\n";
+        $cost = $element->getPrice()*$element->getQuantity();
+        echo "Book : ".$element->getName()."\tPrice : ".$element->getPrice()."\tQuantity: ".$element->getQuantity()."\n";
+        echo "Book Cost :".$element->getPrice()*$element->getQuantity()."\n";
+        return $cost;
     }
 
     public function visitFruit(Fruit $element)
     {   
-        echo "FRUIT \n";
-        echo "price : ".$element->getPrice()."\nmodel : ".$element->getModel()."\n";
+        echo "\nFRUIT \n";
+        $cost = $element->getPrice();
+        echo "price : ".$element->getPrice()."\tmodelNo : ".$element->getModel()."\n";
+        echo "Fruit Cost : ".$element->getPrice()."\n";
+        return $cost;
     }
 }
 

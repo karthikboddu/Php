@@ -1,6 +1,9 @@
 <?php
 require 'utility.php';
 
+/**
+ * abstract class computer with functions to be implemented
+ */
 abstract class Computer
 {
     abstract public function enterDetails();
@@ -9,12 +12,17 @@ abstract class Computer
     // abstract function ServerDetails();
 }
 
+
 class Pc extends Computer
 {
     public function __construct()
     {
         $this->enterDetails();
     }
+
+    /**
+    * function to enter input 
+    */
     public function enterDetails()
     {
         echo "enter pc name\n";
@@ -25,12 +33,17 @@ class Pc extends Computer
     }
 }
 
+
 class Server extends Computer
 {
     public function __construct()
     {
         $this->enterDetails();
     }
+
+    /**
+    * function to take input
+    */
     public function enterDetails()
     {
         echo "enter server name \n";
@@ -40,3 +53,5 @@ class Server extends Computer
         printDetails($sName, $sDetails);
     }
 }
+
+?>

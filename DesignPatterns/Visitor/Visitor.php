@@ -1,6 +1,6 @@
 <?php
-require_once ('Grocery.php');
-require_once ('Electronics.php');
+require_once ('Book.php');
+require_once ('Fruit.php');
 interface CartVisitor
 {
     public function visitBook(Book $element);

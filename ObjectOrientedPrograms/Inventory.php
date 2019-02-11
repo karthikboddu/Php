@@ -9,9 +9,12 @@
  ***********************************************************************************/
 require ('utility.php');
 require ('InventoryItems.php');
+
+set_error_handler(function($e){
+    echo "ERROR!!--";
+    echo $e->getMessage();
+});
 class Inventory extends Items{
-
-
     /**
      * function to json from a file
     */
@@ -27,10 +30,12 @@ class Inventory extends Items{
     function writeJson($file){
         $inventory = new Inventory();
         echo "enter no of inventories\n";
+
+        //enter no of inventories
         $no = Oops::readInt();
+
+        //enter the stock details
         for($i=0;$i<$no;$i++){
-            // echo "enter category\n"; 
-            // $cat = Oops::readString();
             echo "Enter the Stock " . ($i + 1) . " details\n";
             echo "enter name\n";
             $name = Oops::readString();
@@ -57,6 +62,8 @@ class Inventory extends Items{
      */
     function print($jsonData){
         $str = array('Rice','Pulses');
+
+        //taking every object in json array and printing
             foreach($jsonData as $groc){
                 $name = $groc['name'];
                 $weight = $groc['weight'];
@@ -68,26 +75,10 @@ class Inventory extends Items{
 }
 $file = "sample1.json";
 $inventory = new Inventory();
+
+//calling the writejson function 
 $inventory->writeJson($file);
 $jData = $inventory->readJson($file);
-
-
-
-
-
-// $rice = $data['Rice'];
-
-// foreach ($rice as $r) {
-//     $name = $r['name'];
-//     $weight = $r['weight'];
-//     $price = $r['price'];
-//     printf('%s weight value %d  '.PHP_EOL, $name, $weight*$price);
-   
-// }
-
-
-// print_r($data);
-
 
 ?>
 
