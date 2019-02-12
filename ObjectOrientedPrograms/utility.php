@@ -253,54 +253,102 @@ public static function buy($account)
         {
             file_put_contents("nokia.json", json_encode($account));
         }
-        /**
+//         /**
+//         * function to print the list the stocks available to buy
+//         */
+//         public static function printStockList(int $s=0)
+//         {
+//             $list = json_decode(file_get_contents("karthik.json"));
+//             print_r($list);
+//             if($s===0)
+//             {
+//                 echo "No | Stock Name | Share Price | Available\n";
+//                 $i = 0;
+//                 for ($i=0; $i < count($list) ; $i++) 
+//                 {
+//                     $key = $list[$i];
+//                     echo sprintf("%-1u. | %-10s | Rs %-12u | %-9u", ++$i, $key->stockName, $key->stockShare , $key->pric) . "\n";
+//                 }
+//             }
+//             return $list;
+//         }
+
+
+// public static function printAccount($account){
+
+//     echo "No | Stock Name | Share Price | No. Of Shares | Stock Price \n";
+   
+//     //looping over and printing the account details
+//     for ($i=0; $i < count($account) ; $i++) 
+//     {
+//         $key = $account[$i];
+//         echo sprintf("%-2u | %-10s | rs %-8u | %-13u | rs %u", $i, $key['stockName'], $key['stockShare'], $key['pric'], ($key['pric'] * $key['stockShare'])) . "\n";
+//     }
+
+// }
+
+// public static function report($account)
+// {
+//     $total = 0;
+//     echo "Stock Name | Per Share Price | No. Of Shares | Stock Price\n";
+//     //looping over and printing the account details and the account balance
+//     for ($i=1; $i < count($account) ; $i++) 
+//     {
+//     $key = $account[$i];
+//     echo sprintf("%-10s | rs %-12u | %-13u | rs %u", $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
+//     $total += ($key->quantity * $key->price);
+//     }
+//     echo "\n";
+//     echo "Total Value Of Stocks is : " . $total . " rs\namount left in account : ".$account[0]->account."\n\n";;
+// }
+
+
+       /**
         * function to print the list the stocks available to buy
         */
         public static function printStockList(int $s=0)
         {
-            $list = json_decode(file_get_contents("karthik.json"));
-            print_r($list);
+            $list = json_decode(file_get_contents("StockList.json"));
             if($s===0)
             {
                 echo "No | Stock Name | Share Price | Available\n";
                 $i = 0;
-                for ($i=0; $i < count($list) ; $i++) 
+                foreach ($list as $key) 
                 {
-                    $key = $list[$i];
-                    echo sprintf("%-1u. | %-10s | Rs %-12u | %-9u", ++$i, $key->stockName, $key->stockShare , $key->pric) . "\n";
+                    echo sprintf("%-1u. | %-10s | Rs %-12u | %-9u", ++$i, $key->name, $key->price , $key->Quantity) . "\n";
                 }
             }
             return $list;
         }
-
-
-public static function printAccount($account){
-
-    echo "No | Stock Name | Share Price | No. Of Shares | Stock Price \n";
-   
-    //looping over and printing the account details
-    for ($i=0; $i < count($account) ; $i++) 
-    {
-        $key = $account[$i];
-        echo sprintf("%-2u | %-10s | rs %-8u | %-13u | rs %u", $i, $key['stockName'], $key['stockShare'], $key['pric'], ($key['pric'] * $key['stockShare'])) . "\n";
-    }
-
-}
-
-public static function report($account)
-{
-    $total = 0;
-    echo "Stock Name | Per Share Price | No. Of Shares | Stock Price\n";
-    //looping over and printing the account details and the account balance
-    for ($i=1; $i < count($account) ; $i++) 
-    {
-    $key = $account[$i];
-    echo sprintf("%-10s | rs %-12u | %-13u | rs %u", $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
-    $total += ($key->quantity * $key->price);
-    }
-    echo "\n";
-    echo "Total Value Of Stocks is : " . $total . " rs\namount left in account : ".$account[0]->account."\n\n";;
-}
+        //function to print the stock currently in the customer account
+        public static function printAccount($account)
+        {
+            echo "No | Stock Name | Share Price | No. Of Shares | Stock Price \n";
+            $i = 0;
+            //looping over and printing the account details
+            for ($i=1; $i < count($account) ; $i++) 
+            {
+                $key = $account[$i];
+                echo sprintf("%-2u | %-10s | rs %-8u | %-13u | rs %u", $i, $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
+            }
+        }
+        /**
+        * function to display the report of the stocks in account
+        */
+        public static function report($account)
+        {
+            $total = 0;
+            echo "Stock Name | Per Share Price | No. Of Shares | Stock Price\n";
+            //looping over and printing the account details and the account balance
+            for ($i=1; $i < count($account) ; $i++) 
+            {
+                $key = $account[$i];
+                echo sprintf("%-10s | rs %-12u | %-13u | rs %u", $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
+                $total += ($key->quantity * $key->price);
+            }
+            echo "\n";
+            echo "Total Value Of Stocks is : " . $total . " rs\namount left in account : ".$account[0]->account."\n\n";;
+        }
 
 
 

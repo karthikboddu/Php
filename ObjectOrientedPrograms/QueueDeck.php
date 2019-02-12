@@ -1,14 +1,19 @@
 <?php
 /**
- *overview  :program to create a Player Object having Deck of Cards, and having ability to Sort by Rank and
- *purpose   :maintain the cards in a Queue implemented using Linked List.
- *@file     :queueDeckCards.php
+ *overview  : program to create a Player Object having Deck of Cards, and having ability to Sort by Rank and
+ *purpose   : maintain the cards in a Queue implemented using Linked List.
+ *@file     : queueDeck.php
  *@author   : karthik
  *@version  : 2.0
- *Date      : 05/02/2019
+ *@since    : 05/02/2019
  *********************************************************************************************/
 require 'utility.php';
 require '../DataStructures/Queue.php';
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
 class card
 {
     /**

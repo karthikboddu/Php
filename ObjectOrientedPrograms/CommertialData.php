@@ -9,6 +9,12 @@
  ***********************************************************************************/
 require_once 'utility.php';
 require_once 'StockAccount.php';
+
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
 interface comData
 {
     public function stockAcc($file);

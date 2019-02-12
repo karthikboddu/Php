@@ -4,10 +4,16 @@
  * @file    : AddressBook.php
  * @author  : karthik
  * @version : 1.0
- * @since   : 03-01-2019
+ * @since   : 08-01-2019
  ******************************************************************************/
 include 'utility.php';
 require 'AddressDetails.php';
+
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
 class Person extends Contact
 {
     /**
@@ -25,7 +31,7 @@ function createContact(&$addressBook)
      * creating the object.
      */
 
-    //asking user for input for person object
+    //taking user for input for person object
     $person = new Contact();
     echo "Enter Firstname \n";
     $fname = Oops::readString();
@@ -137,8 +143,6 @@ function printBook($arr)
     }catch(Exception $e){
         echo $e->getMessage();
     }
- 
-
 }
 
 /**

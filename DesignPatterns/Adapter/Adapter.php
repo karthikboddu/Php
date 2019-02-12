@@ -7,17 +7,36 @@
  * @since    : 08-02-2019
  ***********************************************************************************/
 require ('SocketAdapter.php');
+require ('../utility.php');
 require ('Socket.php');
 require_once ('Volt.php');
 require_once ('SocketClassImp.php');
 class Adapter{
-    function main(){
-        $voltClass = new SocketClassImp();
 
-        $voltClass->get12Volts();
-        // $v3 = getVolt(3);
-        // $v12 = getVolt(12);
-        // $v120 = getVolt(120);
+    /**
+     * function read input voltage and check it's charging or not
+     */
+    function main(){
+
+        //creating socketclass imp 
+        $voltClass = new SocketClassImp();
+        $voltsA = $voltClass->get12Volt();
+        $voltB = $voltClass->get3Volt();
+        echo "12 volts ".$voltsA."\n";
+        echo "3 volts " .$voltB."\n";
+
+        //check whether mobile is charging or not
+        try{
+            echo "enter the voltage\n";
+            $v = Dp::readInt(); 
+            if($v == $voltClass->get3Volt()){
+                echo "Mobile charging\n";
+            }else{
+                throw new Exception ("Mobile not charging");
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 }
 

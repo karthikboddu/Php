@@ -17,8 +17,11 @@ class Product {
     return $this->sku;
   }
 }
+$ref = new ReflectionClass(StockItem);
 
-$prod = new Product("qua",new StockItem("quality","status","price"));
+print_r($ref);
+
+$prod = new Product("qua",new StockItem("quality","status","price","model"));
 
 
 ?>

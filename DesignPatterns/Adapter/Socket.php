@@ -5,6 +5,9 @@ class Socket{
 
     }
 
+    /**
+     * function to get default voltage
+     */
     public function getVolt(){
         return new Volt(240);
     }

@@ -1,6 +1,7 @@
 <?php
+require_once 'Subject.php';
 interface Observer{
-    function update();
+    function update(Subject $subject);
     function setSubject(Subject $subj);
 }
 

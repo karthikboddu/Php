@@ -9,6 +9,12 @@
  ***********************************************************************************/
 require ('utility.php');
 
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
+
 /*
  * intialize suits card in an array
  */

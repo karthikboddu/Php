@@ -10,6 +10,12 @@
 
 include 'utility.php';
 
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
+
 //input string
 $str = 'Hello <<name>>, We have your full name as <<full name>> in our system. your contact number is 91-xxxxxxxxxx.
 Please,let us know in case of any clarification Thank you BridgeLabz xx/xx/xxxx.';

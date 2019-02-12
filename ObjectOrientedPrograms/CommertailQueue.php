@@ -1,14 +1,20 @@
 <?php
 /**
- * overview     : program to also maintains a list of CompanyShares object which has Stock Symbol and
- * purpose      : Number of Shares as well as DateTime of the transaction.
- * @author      : karthik
- * @version     : 1.0
- * @since       : 09/02/2019
+ *@Overview     : program to also maintains a list of CompanyShares object which has Stock Symbol and
+ *@purpose      : Number of Shares as well as DateTime of the transaction.
+ *@author       : karthik
+ *@version      : 1.0
+ *@since        : 4/02/2019
  *********************************************************************************************/
 require 'utility.php';
 require '../DataStructures/Queue.php';
 require '../DataStructures/Stack.php';
+// set_error_handler(function($e){
+//     echo "EROOR !!--";
+//     echo $e->getMessage();
+// }
+// );
+
 /**
  * function to get valid integer from the console
  */
@@ -17,7 +23,7 @@ function validInt($int, $min, $max)
     while (filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" => $min, "max_range" => $max))) === false) {
         echo ("Variable value is not within the legal range\n");
         echo "enter again : ";
-        $int = Oops::getIn();
+        $int = Oops::readInt();
     }
     return $int;
 }
@@ -25,12 +31,14 @@ class Stock
 {
     //var to store the data of stock
     public $name;
+
     //price of stack
     public $price;
+
     //quantity of share in the stock
     public $quantity;
 
-    //constructor to initialize the variables and create objects 
+    //constructor to initialize the variables in the class
     public function __construct($name, $price, $quantity)
     {
         $this->name = $name;
@@ -85,11 +93,12 @@ function buy($stockacc)
     $account = $stockacc->account;
     $stack = $stockacc->stack;
     $queue = $stockacc->queue;
+    //var_dump($account);
 
     //list var to store the list the stock to purachase from
     $list = printStockList();
 
-    //askins use rfor input
+    //taking user input
     echo "Enter slNo of Stock To Buy : ";
 
     //var ch to store stock to buy
@@ -118,7 +127,6 @@ function buy($stockacc)
             return $stockacc;
         }
     }
-
     //or else adds the new stack the end pf the list
     $account[] = $stock;
 
@@ -142,7 +150,6 @@ function sell($stockacc)
     $account = $stockacc->account;
     $stack = $stockacc->stack;
     $queue = $stockacc->queue;
-
     //show the stock from the list to the user
     printAccount($account);
 
@@ -150,21 +157,21 @@ function sell($stockacc)
     echo "Enter slNo with Stock To Sell : ";
 
     //validating the input
-    $ch = validInt(Oops::getIn(), 1, count($account));
-
-    echo $account[$ch - 1]->name . " selected!\nEnter Number Of Shares To Sell of " . $account[$ch - 1]->name . " : ";
-    $qt = validInt(Oops::getIn(), 1, $account[$ch - 1]->quantity);
+    $ch = validInt(Oops::readInt(), 1, count($account));
+    echo $account[$ch - 1]['name'] . " selected!\nEnter Number Of Shares To Sell of " . $account[$ch - 1]['name'] . " : ";
+    $qt = validInt(Oops::readInt(), 1, $account[$ch - 1]['quantity']);
 
     //removing the stock
-    $account[$ch - 1]->quantity -= $qt;
-    $stack[] = ($account[ch - 1]->name . " sold");
-    $queue[] = ($account[ch - 1]->name . " shares sold at " . date("h:i:s D d/m/y"));
+    $account[$ch - 1]['quantity'] -= $qt;
+
+    $stack[] = ($account[$ch - 1]['name'] . " sold");
+    $queue[] = ($account[$ch - 1]['name'] . " shares sold at " . date("h:i:s D d/m/y"));
     print_r($stack);
     print_r($queue);
     echo "sold $qt shares successfully";
-
+    
     //check if the shares are empty to delete the entry completely
-    if ($account[$ch - 1]->quantity == 0) {
+    if ($account[$ch - 1]['quantity'] == 0) {
         array_splice($account, ($ch - 1), 1);
     }
     fscanf(STDIN, "%s\n");
@@ -191,7 +198,7 @@ function menu($stockacc)
     echo "Press 1 to Enter To Buy New Stock \nPress 2 to Sell Stocks\n";
     echo "Enter 3 to Print Stock Report\nEnter 4 to see Transaction History\nEnter anything else to exit\n";
     $choice = Oops::readInt();
-
+    //switch case to run according to condition
     switch ($choice) {
         case '1':
             $stockacc = buy($stockacc);
@@ -229,17 +236,21 @@ function menu($stockacc)
 function report($stockacc)
 {
     $account = $stockacc->account;
+    // /    var_dump($portfolio);
     $total = 0;
     echo "Stock Name | Per Share Price | No. Of Shares | Stock Price\n";
     foreach ($account as $key) {
-        echo sprintf("%-10s | rs %-12u | %-13u | rs %u", $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
-        $total += ($key->quantity * $key->price);
+        echo sprintf("%-10s | rs %-12u | %-13u | rs %u", $key['name'], $key['price'], $key['quantity'], ($key['quantity'] * $key['price'])) . "\n";
+        $total += ($key['quantity'] * $key['price']);
     }
     echo "Total Value Of Stocks is : " . $total . " rs\n";
     echo "enter to menu ";
     fscanf(STDIN, "%s\n");
 }
 
+/**
+ * function to print transactions
+ */
 function transactions($queue)
 {
     echo "Transaction History :\n";
@@ -248,6 +259,7 @@ function transactions($queue)
     }
     echo "\n enter to Menu\n";
     fscanf(STDIN, "%s\n");
+
 }
 
 /**
@@ -255,11 +267,12 @@ function transactions($queue)
  */
 function printAccount($stockacc)
 {
-    $account = $stockacc->account;
+    // print_r($stockacc);
+    // $account = $stockacc['account'];
     echo "No | Stock Name | Share Price | No. Of Shares | Stock Price \n";
     $i = 0;
-    foreach ($account as $key) {
-        echo sprintf("%-2u | %-10s | rs %-8u | %-13u | rs %u", ++$i, $key->name, $key->price, $key->quantity, ($key->quantity * $key->price)) . "\n";
+    foreach ($stockacc as $key) {
+        echo sprintf("%-2u | %-10s | rs %-8u | %-13u | rs %u", ++$i, $key['name'], $key['price'], $key['quantity'], ($key['quantity'] * $key['price'])) . "\n";
     }
 }
 
@@ -277,7 +290,9 @@ function printStockList()
     return $list;
 }
 
-//checking the user account
+/**
+ * checking the user account
+ */
 $stockacc = json_decode(file_get_contents("Account2.json"), true);
 
 if ($stockacc == null) {
@@ -285,8 +300,6 @@ if ($stockacc == null) {
 } else {
     $stockacc = new StockAccount($stockacc["account"], $stockacc["stack"], $stockacc["queue"]);
 }
-
+// var_dump($stack);
 //transactions($stockacc->queue);
 menu($stockacc);
-
-?>

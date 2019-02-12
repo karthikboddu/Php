@@ -1,6 +1,18 @@
 <?php
+/**
+ * overview   : Write a program to read in Stock Names, Number of Share, Share Price. Print a Stock Report with total value of each Stock and the total value of Stock.
+ * purpose    : Calculate the value of each stock and the total value
+ * @author    : karthik
+ * @version   : 1.0
+ * @since     : 31-01-2019
+ ***********************************************************************************/
 require 'utility.php';
 require 'Stock.php';
+set_error_handler(function($e){
+    echo "EROOR !!--";
+    echo $e->getMessage();
+}
+);
 class StockReport extends Stock
 {
     /**

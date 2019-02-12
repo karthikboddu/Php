@@ -6,11 +6,11 @@ class Volt{
         $this->volts = $v;
     }
 
-    function getVolts(){
+    function getVolt(){
         return $this->volts;
     }
 
-    function setVolts($v){
+    function setVolt($v){
         $this->volts = $v;
     }
 }

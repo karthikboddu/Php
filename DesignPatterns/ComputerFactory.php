@@ -33,11 +33,13 @@ function computerObj($name)
 function printDetails($name, $specs)
 {
     $obj = new ComputerFactory($name, $specs);
-    echo "\n" . $obj->dname . " specs are \n";
-    echo $obj->dname . "\n";
-    echo $obj->dspecs . "\n";
+    echo "\n\t" . $obj->dname . " specs are \n";
+    echo "\t".$obj->dname . "\n";
+    echo "\t".$obj->dspecs . "\n";
 }
 
 echo "enter the class name \n";
 $name = Oops::readString();
 computerObj($name);
+
+?>
