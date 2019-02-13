@@ -17,7 +17,7 @@ class Product {
     return $this->sku;
   }
 }
-$ref = new ReflectionClass(StockItem);
+$ref = new ReflectionClass('StockItem');
 
 print_r($ref);
 
