@@ -15,34 +15,22 @@ set_error_handler(function($e){
 }
 );
 
-/*
- * intialize suits card in an array
- */
+//intialize suits card in an array
 $suits = array("♣", "♦", "♥", "♠");
 
-/*
- * intialize rank cards in an array
- */
+// intialize rank cards in an array
 $rank = array("2", "3", "4", "5", "6", "7", "8", "9", "10","Jack", "Queen", "King", "Ace");
 
-/**
- * create an array
- */
+//create an array
 $cards =array();
 
-/**
- * function to add suits and rank in twodarray.
- */
+//function to add suits and rank in twodarray.
 $cardsArr = Oops::storeCards($cards,$suits,$rank);
 
-/**
- * function to sufflecards
- */
+//function to sufflecards
 $suffledCards = Oops::suffleCards($cardsArr,$suits,$rank);
 
-/**
- * function to print suffled cards
- */
+//function to print suffled cards
 Oops::printCards($suffledCards);
 
 ?>

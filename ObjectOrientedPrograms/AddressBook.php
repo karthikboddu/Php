@@ -10,7 +10,7 @@ include 'utility.php';
 require 'AddressDetails.php';
 
 set_error_handler(function($e){
-    echo "EROOR !!--";
+    echo "ERROR !!--";
     echo $e->getMessage();
 }
 );
@@ -70,6 +70,8 @@ function edit(&$person)
 {
     echo "Enter 1 to change Address ";
     $choice = Oops::readInt();
+
+    //updating the address book by taking user input
     switch ($choice) {
         case '1':
             echo "Enter State\n";
@@ -94,6 +96,8 @@ function edit(&$person)
 function delete(&$arr)
 {
     $i = search($arr);
+
+    //searching contact name and deleting the contact
     try {
         if ($i > -1) {
             array_splice($arr, $i, 1);
@@ -115,6 +119,7 @@ function delete(&$arr)
  */
 function search($arr)
 {
+    //taking user input to search the contact
     echo "Enter firstaname to search\n";
     $fName = Oops::readString();
     for ($i = 0; $i < count($arr); $i++) {
@@ -152,8 +157,10 @@ function printBook($arr)
 function sortBook(&$arr, $val)
 {
     for ($i = 1; $i < count($arr); $i++) {
+        
         // getting value for back element
         $j = ($i - 1);
+
         //saving it in temperary variable;
         $temp = $arr[$i];
         while ($j >= 0 && $arr[$j]->{$val} >= $temp->{$val}) {
@@ -174,6 +181,7 @@ function save($addressBook)
     file_put_contents("addressBook.json", json_encode($addressBook));
     echo "contact saved successfully\n";
 }
+
 /**
  * function act as a default menu for the program
  */

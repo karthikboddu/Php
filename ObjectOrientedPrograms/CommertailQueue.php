@@ -150,6 +150,7 @@ function sell($stockacc)
     $account = $stockacc->account;
     $stack = $stockacc->stack;
     $queue = $stockacc->queue;
+    
     //show the stock from the list to the user
     printAccount($account);
 
@@ -300,6 +301,7 @@ if ($stockacc == null) {
 } else {
     $stockacc = new StockAccount($stockacc["account"], $stockacc["stack"], $stockacc["queue"]);
 }
-// var_dump($stack);
-//transactions($stockacc->queue);
+
 menu($stockacc);
+
+?>
